@@ -7,18 +7,23 @@
   <meta name="description" content="Asesoramos y litigamos en procesos de reorganización y liquidación, así como en controversias concursales que exigen rapidez, negociación y resguardo de valor.">
   <meta name="theme-color" content="#f8fafc">
   
-  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
+  <script>
+    if (sessionStorage.getItem('skipLoader') === 'true') {
+      document.documentElement.classList.add('hide-preloader');
+      sessionStorage.removeItem('skipLoader'); 
+    }
+  </script>
+
   <style>
     /* ==========================================================================
        MARCHI & CÍA - HIGH-END BOUTIQUE LAW FIRM STYLES
        ========================================================================== */
     
     :root {
-      /* Paleta de Colores de Alta Gama */
       --color-bg-body: #f8fafc; 
       --color-bg-card: #ffffff;
       --color-bg-dark: #0f172a; 
@@ -29,30 +34,25 @@
       --color-text-muted: #475569; 
       --color-text-light: #f8fafc;
       
-      /* Azul corporativo legal */
       --color-accent: #1e3a8a; 
       --color-accent-light: #3b82f6;
       
       --color-border: rgba(15, 23, 42, 0.08);
       --color-border-light: rgba(255, 255, 255, 0.08);
       
-      /* Sombras Premium */
       --shadow-sm: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
       --shadow-md: 0 12px 30px -4px rgba(0, 0, 0, 0.06);
       --shadow-lg: 0 24px 50px -12px rgba(0, 0, 0, 0.1);
       --shadow-dark: 0 40px 80px -20px rgba(0, 0, 0, 0.5);
       
-      /* Radios */
       --radius-sm: 4px;
       --radius-md: 12px;
       --radius-lg: 16px;
       
-      /* Espaciado */
       --container-max: 1240px;
       --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Reset Básico */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -79,7 +79,7 @@
     a { text-decoration: none; color: inherit; }
 
     /* ==========================================================================
-       TIPOGRAFÍA DE ALTA COSTURA
+       TIPOGRAFÍA
        ========================================================================== */
     h1, h2, h3, h4 {
       color: var(--color-text-main);
@@ -142,22 +142,13 @@
       letter-spacing: 0.05em;
       transition: all 0.3s ease;
       cursor: default;
-      display: inline-block;
-    }
-    .tag--dark {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.8);
     }
     .tag:hover {
       background: var(--color-bg-dark);
       color: white;
       border-color: var(--color-bg-dark);
+      transform: translateY(-2px);
       box-shadow: var(--shadow-sm);
-    }
-    .tag--dark:hover {
-      background: white;
-      color: var(--color-text-main);
     }
 
     .btn {
@@ -180,6 +171,7 @@
     }
     .btn--primary:hover {
       background-color: var(--color-accent); 
+      transform: translateY(-3px);
       box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.4);
     }
     .btn--steel {
@@ -190,11 +182,12 @@
     .btn--steel:hover {
       background-color: white;
       border-color: var(--color-text-main);
+      transform: translateY(-3px);
       box-shadow: var(--shadow-sm);
     }
 
     /* ==========================================================================
-       LAYOUT GLOBAL Y DIVISORES
+       LAYOUT GLOBAL Y DIVISORES CON BLUR
        ========================================================================== */
     .container {
       width: 100%;
@@ -212,9 +205,17 @@
       position: relative;
     }
     .section-divider::after {
-      content: ''; position: absolute; top: 50%; left: 10%; right: 10%; height: 4px;
-      transform: translateY(-50%); background: var(--color-accent); opacity: 0.08;
-      filter: blur(8px); pointer-events: none;
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 10%;
+      right: 10%;
+      height: 4px;
+      transform: translateY(-50%);
+      background: var(--color-accent);
+      opacity: 0.08;
+      filter: blur(8px);
+      pointer-events: none;
     }
 
     .section { padding: 8rem 0; }
@@ -274,183 +275,153 @@
     .nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--color-text-main); }
 
     /* ==========================================================================
-       HERO SECTION
+       HERO SECTION SPLIT (60/40)
        ========================================================================== */
-    .hero { 
-      padding: 13rem 0 7rem; 
-      background: radial-gradient(circle at top right, #ffffff 0%, var(--color-bg-body) 70%);
-    }
-    .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 5rem; align-items: center; }
-    .hero-actions { display: flex; gap: 1rem; margin: 3rem 0; flex-wrap: wrap; }
-
-    /* Breadcrumbs */
-    .breadcrumb {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--color-text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .breadcrumb a { transition: color 0.3s; }
-    .breadcrumb a:hover { color: var(--color-accent); }
-    .breadcrumb span { opacity: 0.5; }
-
-    .hero-panel {
-      background-color: var(--color-bg-darker);
-      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 24px);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      width: 100%;
-      max-width: 480px; 
-      margin-left: auto;
-      box-shadow: var(--shadow-dark);
-      position: relative;
-      transition: transform 0.2s ease-out; /* Parallax */
-    }
-    .hero-panel-card {
-      background-color: var(--color-bg-dark);
-      border: 1px solid var(--color-border-light);
-      border-radius: var(--radius-md);
-      padding: 3rem 2.5rem; 
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-      position: relative;
-      z-index: 1;
-    }
-    
-    .panel-row {
-      display: flex; align-items: center; gap: 1.25rem; padding: 1rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-      transition: all 0.3s ease;
-      border-radius: var(--radius-sm);
-    }
-    .panel-row:hover { background: rgba(255,255,255,0.02); transform: translateX(6px); padding-left: 0.75rem; border-bottom-color: transparent;}
-    .panel-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .panel-row img { width: 52px; height: 52px; border-radius: 50%; filter: grayscale(100%); object-fit: cover; }
-    .panel-row-name { color: var(--color-text-light); font-size: 1.05rem; font-weight: 600; line-height: 1.2; margin-bottom: 2px; }
-    .panel-row-role { color: #94a3b8; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;}
-
-    /* ==========================================================================
-       SECCIÓN VISIÓN (Fondo Blanco - Original)
-       ========================================================================== */
-    .firm-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: start; }
-    @media (min-width: 992px) { .firm-grid { grid-template-columns: 1.1fr 0.9fr; gap: 6rem; } }
-
-    .metrics-grid { display: flex; flex-direction: column; gap: 2rem; }
-    
-    .metric-card {
-      background: transparent;
-      border-left: 2px solid var(--color-border);
-      padding: 0.5rem 0 0.5rem 1.5rem;
-      transition: var(--transition-smooth);
-    }
-    .metric-card:hover { border-left-color: var(--color-accent); transform: translateX(5px); }
-    .metric-label { 
-      font-size: 0.65rem; 
-      font-weight: 700; 
-      text-transform: uppercase; 
-      letter-spacing: 0.1em; 
-      color: #94a3b8; 
-      display: block; 
-      margin-bottom: 0.5rem;
-      transition: color 0.3s;
-    }
-    .metric-card:hover .metric-label { color: var(--color-accent); }
-    .metric-card p {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin: 0;
-      font-weight: 500;
-      color: var(--color-text-main);
-    }
-
-    /* ==========================================================================
-       SECCIÓN QUÉ ESTÁ EN JUEGO (Fondo Oscuro)
-       ========================================================================== */
-    .section-dark {
-      background-color: var(--color-bg-dark);
-      color: #94a3b8;
-      padding: 8rem 0;
-      position: relative;
-    }
-    .section-dark::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--color-accent); }
-    .section-dark h2 { color: var(--color-text-light); }
-    .section-dark .eyebrow { color: #64748b; }
-    .section-dark .eyebrow::before { background-color: var(--color-accent); }
-
-    .pillar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 4rem; margin-top: 5rem; }
-    .pillar-card { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; transition: transform 0.3s ease; }
-    .pillar-card:hover { transform: translateY(-4px); border-top-color: var(--color-accent); }
-    
-    .pillar-number { display: block; font-family: monospace; font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; transition: color 0.3s; }
-    .pillar-card:hover .pillar-number { color: var(--color-text-light); }
-    .pillar-card h3 { color: var(--color-text-light); font-size: 1.25rem; margin-bottom: 1rem; }
-
-    /* ==========================================================================
-       SECCIÓN EQUIPO (Grilla compacta premium)
-       ========================================================================== */
-    .team-grid-top {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2.5rem;
-      align-items: start; 
-    }
-    @media (min-width: 992px) { .team-grid-top { grid-template-columns: repeat(3, 1fr); } }
-
-    .team-card {
-      background-color: var(--color-bg-dark);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition-smooth);
+    .hero-split {
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
+      background-color: #ffffff;
+      padding-top: 80px; 
     }
-    .team-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
-
-    .team-photo-wrapper {
-      width: 100%;
-      aspect-ratio: 4/5;
-      overflow: hidden;
-      background-color: #e2e8f0;
-      position: relative;
-    }
-
-    .team-photo {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: grayscale(100%) sepia(10%);
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
-    }
-    .team-card:hover .team-photo { transform: scale(1.05); filter: grayscale(0%); }
-
-    .team-info { padding: 1.5rem; text-align: center; }
-    .team-info-name { display: inline-block; color: var(--color-text-light); font-size: 1.1rem; font-weight: 600; margin: 0; letter-spacing: -0.01em;}
-    .team-info-role { display: inline-block; color: #94a3b8; font-size: 0.9rem; font-weight: 400; margin-left: 0.25rem;}
-
-    .team-description-wrapper {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .team-card:hover .team-description-wrapper { grid-template-rows: 1fr; }
     
-    .team-description-inner { overflow: hidden; opacity: 0; transition: opacity 0.5s ease; text-align: left; }
-    .team-card:hover .team-description-inner { opacity: 1; }
-    
-    .team-description-content {
-      padding-top: 1.25rem;
-      margin-top: 1.25rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      color: #cbd5e1;
-      font-size: 0.85rem;
+    @media (min-width: 992px) {
+      .hero-split {
+        flex-direction: row;
+        padding-top: 0;
+      }
+      .hero-split-text {
+        width: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 8rem 4rem 4rem 10vw; 
+      }
+      .hero-split-text-inner {
+        width: 100%;
+        max-width: 540px; 
+        margin-right: auto;
+      }
+      .hero-split-image-container {
+        width: 40%;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-image-col {
+        position: absolute;
+        top: -20px; left: -20px; right: -20px; bottom: -20px;
+        background-image: url('assets/images/restructuring.webp');
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.2s ease-out; 
+      }
+    }
+
+    @media (max-width: 991px) {
+      .hero-split-text { padding: 6rem 2rem 3rem; }
+      .hero-split-image-container { min-height: 500px; position: relative; overflow: hidden; }
+      .hero-image-col { width: 100%; height: 100%; position: absolute; top:0; left:0; background-image: url('assets/images/restructuring.webp'); background-size: cover; background-position: center; }
+    }
+
+    .eyebrow-split {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 1.5rem;
+    }
+    .title-split {
+      font-size: clamp(2.5rem, 3.8vw, 4.2rem);
+      line-height: 1.05;
+      color: var(--color-text-main);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+    }
+    .desc-split {
+      font-size: 0.95rem;
       line-height: 1.6;
+      color: #333;
+      margin-bottom: 1.25rem;
+      max-width: 95%;
+    }
+
+    .actions-split {
+      display: flex;
+      gap: 1rem;
+      margin: 2.5rem 0 1.5rem;
+      flex-wrap: wrap;
+    }
+    .btn-split {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.85rem 2.2rem;
+      border-radius: 99px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-split--dark { background-color: #111; color: #fff; border: 1px solid #111; }
+    .btn-split--dark:hover { background-color: var(--color-accent); border-color: var(--color-accent); }
+    .btn-split--outline { background-color: transparent; color: #111; border: 1px solid #ccc; }
+    .btn-split--outline:hover { background-color: rgba(0,0,0,0.05); }
+
+    .tags-split-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .tag-split {
+      padding: 0.3rem 0.9rem;
+      border: 1px solid #d1d1d1;
+      border-radius: 99px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #666;
+    }
+
+    .hero-team-glass {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      width: calc(100% - 4rem);
+      max-width: 320px;
+      background: rgba(5, 10, 15, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      z-index: 2;
+    }
+    @media (max-width: 991px) {
+       .hero-team-glass { bottom: 0; right: 0; left: 0; width: 100%; max-width: 100%; padding: 1.5rem; }
+    }
+
+    .glass-eyebrow {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 1rem;
+    }
+    .glass-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.65rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .glass-row:last-child { border-bottom: none; padding-bottom: 0; }
+    
+    .glass-name {
+      color: #ffffff; 
+      font-size: 0.9rem; 
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .glass-role {
+      color: rgba(255,255,255,0.6); font-size: 0.5rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.15em; text-align: right;
     }
 
     /* ==========================================================================
-       SECCIÓN CAPACIDADES / ÁREAS
+       SECCIÓN ÁREAS / CAPACIDADES
        ========================================================================== */
     .area-grid { 
       display: grid; 
@@ -482,41 +453,177 @@
     .area-card:hover::before { transform: scaleX(1); }
     .area-card h3 { font-size: 1.15rem; margin-bottom: 1rem; }
 
-    .area-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-    .area-card-number { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #94a3b8; transition: color 0.3s; }
-    .area-card:hover .area-card-number { color: var(--color-text-main); }
-    
-    .area-card-arrow { font-size: 1.25rem; color: #888eb0; transition: var(--transition-smooth); }
-    .area-card:hover .area-card-arrow { color: var(--color-accent); transform: translate(4px, -4px); }
+    /* ==========================================================================
+       SECCIÓN FIRMA / VISIÓN
+       ========================================================================== */
+    .firm-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: start; }
+    @media (min-width: 992px) { .firm-grid { grid-template-columns: 1.1fr 0.9fr; gap: 6rem; } }
 
-    .area-card-content { flex-grow: 1; }
-    .area-card-link {
-      margin-top: 2rem;
-      font-size: 0.7rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--color-accent);
-      opacity: 0.5; 
+    .metrics-grid { display: flex; flex-direction: column; gap: 2rem; }
+    .metric-card {
+      background: transparent;
+      border-left: 2px solid var(--color-border);
+      padding: 0.5rem 0 0.5rem 1.5rem;
       transition: var(--transition-smooth);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
     }
-    .area-card:hover .area-card-link { opacity: 1; transform: translateX(4px); }
+    .metric-card:hover { border-left-color: var(--color-accent); transform: translateX(5px); }
+    .metric-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent); display: block; margin-bottom: 0.5rem;}
+    .metric-card p { font-size: 0.95rem; line-height: 1.6; margin: 0; color: var(--color-text-main); font-weight: 500;}
 
     /* ==========================================================================
-       SECCIÓN CONTACTO
+       SECCIÓN MODELO DE TRABAJO (Fondo Oscuro)
+       ========================================================================== */
+    .section-dark {
+      background-color: var(--color-bg-dark);
+      color: #94a3b8;
+      padding: 8rem 0;
+      position: relative;
+    }
+    .section-dark::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--color-accent); }
+    .section-dark h2 { color: var(--color-text-light); }
+    .section-dark .eyebrow { color: #64748b; }
+    .section-dark .eyebrow::before { background-color: var(--color-accent); }
+
+    .pillar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 4rem; margin-top: 5rem; }
+    .pillar-card { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; transition: transform 0.3s ease; }
+    .pillar-card:hover { transform: translateY(-4px); border-top-color: var(--color-accent); }
+    
+    .pillar-number { display: block; font-family: monospace; font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; transition: color 0.3s; }
+    .pillar-card:hover .pillar-number { color: var(--color-text-light); }
+    .pillar-card h3 { color: var(--color-text-light); font-size: 1.25rem; }
+
+    /* ==========================================================================
+       SECCIÓN EQUIPO RELACIONADO (Alineación Izq/Der y Tarjetas Modulares)
+       ========================================================================== */
+    .team-header-aligned {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+    @media (min-width: 992px) {
+      .team-header-aligned {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 4rem;
+      }
+      .team-header-aligned > div { width: 55%; }
+      .team-header-aligned .team-desc-aligned { width: 40%; margin-top: 2rem; color: #64748b; font-size: 1.05rem; line-height: 1.6; }
+    }
+
+    .team-grid-custom {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2.5rem;
+      align-items: start;
+    }
+    @media (min-width: 992px) { .team-grid-custom { grid-template-columns: repeat(3, 1fr); } }
+
+    .team-card-new {
+      background-color: var(--color-bg-dark);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.4s ease;
+    }
+    .team-card-new:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+
+    .team-photo-new {
+      width: 100%;
+      aspect-ratio: 4/5; /* Aspect ratio estándar para mantener consistencia con fotos */
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: filter 0.5s ease;
+    }
+    .team-card-new:hover .team-photo-new { filter: grayscale(0%); }
+
+    /* Tarjeta Unificada con Expansión al Hover */
+    .team-bar-new {
+      background-color: #0f172a;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .team-bar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .team-name-new { color: #ffffff; font-size: 1rem; font-weight: 700; margin: 0; }
+    .team-role-new { color: #94a3b8; font-size: 0.85rem; font-weight: 400; margin: 0; }
+
+    /* Lógica de Expansión Interactiva (Hover) */
+    .team-description-wrapper-new {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .team-card-new:hover .team-description-wrapper-new {
+      grid-template-rows: 1fr;
+    }
+    .team-description-inner-new {
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .team-card-new:hover .team-description-inner-new {
+      opacity: 1;
+    }
+    
+    .team-divider-line {
+      width: 100%;
+      height: 1px;
+      background-color: rgba(255,255,255,0.1);
+      margin: 1.25rem 0;
+    }
+    .team-description-text {
+      color: #cbd5e1;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .team-tags-outline {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+.tag-outline {
+  padding: 0.4rem 1rem;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 99px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #0c1424; /* Texto azul corporativo oscuro */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  cursor: default;
+  display: inline-block;
+}
+
+.tag-outline:hover {
+  background-color: rgba(15, 23, 42, 0.3); /* Más oscuro que el 0.08 anterior */
+  color: #ffffff;
+  border-color: transparent;
+}
+
+    /* ==========================================================================
+       SECCIÓN CONTACTO Y FOOTER
        ========================================================================== */
     #contacto {
       background-color: var(--color-steel-blue);
-      /* El background-image se controlará dinámicamente con JS para el Glow Effect */
-      background-image: radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.4), transparent 60%);
+      background-image: radial-gradient(circle at top right, rgba(30, 58, 138, 0.4), transparent 50%),
+                        radial-gradient(circle at bottom left, rgba(15, 23, 42, 0.6), transparent 50%);
       color: rgba(255, 255, 255, 0.6);
       padding: 8rem 0;
       position: relative;
       overflow: hidden;
-      transition: background-image 0.2s ease-out;
     }
     
     #contacto::after {
@@ -555,9 +662,6 @@
     .form-input:focus { outline: none; border-bottom-color: var(--color-accent); }
     .form-input:focus + .form-label, .form-group:focus-within .form-label { color: var(--color-accent); }
 
-    /* ==========================================================================
-       FOOTER
-       ========================================================================== */
     .site-footer { 
       background: var(--color-bg-darker); 
       padding: 6rem 0 4rem; 
@@ -568,11 +672,25 @@
     @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; align-items: flex-end; } }
     
     .footer-brand { 
-      font-size: 1.25rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; color: #ffffff; display: inline-block;
+      font-size: 1.25rem; 
+      font-weight: 900; 
+      text-transform: uppercase; 
+      letter-spacing: 0.1em; 
+      margin-bottom: 0.75rem; 
+      color: #ffffff; 
+      display: inline-block;
     }
     
     .footer-links { display: flex; flex-wrap: wrap; gap: 3rem; }
-    .footer-links a { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); letter-spacing: 0.12em; transition: all 0.3s ease; position: relative;}
+    .footer-links a { 
+      font-size: 0.75rem; 
+      font-weight: 700; 
+      text-transform: uppercase; 
+      color: rgba(255, 255, 255, 0.6); 
+      letter-spacing: 0.12em; 
+      transition: all 0.3s ease; 
+      position: relative;
+    }
     .footer-links a:hover { color: #ffffff; transform: translateY(-2px); }
     
     .copyright-text { font-size: 0.8rem; font-weight: 500; color: rgba(255, 255, 255, 0.3); margin-top: 0.5rem; }
@@ -580,54 +698,29 @@
     /* ==========================================================================
        ANIMACIONES DE ENTRADA AL SCROLL
        ========================================================================== */
-    .fade-in-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .fade-in-up.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
 
+    /* Responsive General Fixes */
     @media (max-width: 768px) {
       .hero-grid { grid-template-columns: 1fr; }
       .site-nav { display: none; }
       .nav-toggle { display: block; }
-      .hero-panel-card { padding: 1.5rem; }
       .form-card { padding: 2rem; }
     }
 
-    /* ==========================================================================
-       MEJORAS PREMIUM
-       ========================================================================== */
-    
     /* PRELOADER CINEMÁTICO */
     .premium-preloader {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background-color: var(--color-bg-darker);
-      z-index: 999999;
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background-color: var(--color-bg-darker); z-index: 999999;
       display: flex; justify-content: center; align-items: center;
       transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
     }
-    .premium-preloader.hide {
-      transform: translateY(-100%);
-    }
-    .preloader-brand {
-      color: white; font-size: 1.5rem; font-weight: 900; letter-spacing: 0.1em;
-      text-transform: uppercase; overflow: hidden;
-    }
-    .preloader-brand span {
-      display: block;
-      transform: translateY(100%);
-      transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-    .premium-preloader.active span {
-      transform: translateY(0);
-    }
+    .premium-preloader.hide { transform: translateY(-100%); }
+    .preloader-brand { color: white; font-size: 1.5rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; overflow: hidden; }
+    .preloader-brand span { display: block; transform: translateY(100%); transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
+    .premium-preloader.active span { transform: translateY(0); }
 
-    /* Textura de ruido sutil (Efecto Editorial/Print) */
     .premium-noise {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none; z-index: 9999; opacity: 0.04;
@@ -635,23 +728,18 @@
     }
 
     /* Barra de progreso de lectura */
-    .scroll-progress {
-      position: fixed; top: 0; left: 0; width: 0%; height: 3px;
-      background: var(--color-accent); z-index: 1001; transition: width 0.1s;
-    }
+    .scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: var(--color-accent); z-index: 1001; transition: width 0.1s; }
 
   </style>
 </head>
 <body>
 
-  <!-- ELEMENTOS PREMIUM -->
   <div class="premium-preloader">
     <div class="preloader-brand"><span>Marchi & Cía.</span></div>
   </div>
   <div class="premium-noise"></div>
   <div class="scroll-progress"></div>
 
-  <!-- CABECERA -->
   <header class="site-header" id="main-header">
     <div class="container header-inner">
       <a href="index.html" class="brand">Marchi & Cía<span class="dot">.</span></a>
@@ -665,59 +753,50 @@
   </header>
 
   <main>
-    <!-- HERO SECTION -->
-    <section class="hero fade-in-up">
-      <div class="container hero-grid">
-        <div class="hero-content">
+    <section class="hero hero-split fade-in-up">
+      <div class="hero-split-text">
+        <div class="hero-split-text-inner">
           <div class="breadcrumb">
             <a href="index.html#areas">Áreas</a> <span>·</span> <span>Insolvencia y reorganización</span>
           </div>
-          <div class="eyebrow">Crisis</div>
+          <div class="eyebrow-split">Crisis</div>
           
-          <h1>Insolvencia y reorganización<span class="dot">.</span></h1>
+          <h1 class="title-split">Insolvencia y reorganización<span class="dot">.</span></h1>
           
-          <p class="lead">Asesoramos y litigamos en procesos de reorganización y liquidación, así como en controversias concursales que exigen rapidez, negociación y resguardo de valor. Actuamos en escenarios donde la presión financiera obliga a tomar decisiones jurídicas y comerciales en tiempos acotados.</p>
+          <p class="desc-split">Asesoramos y litigamos en procesos de reorganización y liquidación, así como en controversias concursales que exigen rapidez, negociación y resguardo de valor.</p>
           
-          <div class="hero-actions">
-            <a href="index.html#contacto" class="btn btn--primary">Contactar</a>
-            <a href="index.html#areas" class="btn btn--steel">Volver a prácticas</a>
+          <p class="desc-split" style="font-size: 0.85rem; color: #555;">Actuamos en escenarios donde la presión financiera obliga a tomar decisiones jurídicas y comerciales en tiempos acotados.</p>
+          
+          <div class="actions-split">
+            <a href="index.html#contacto" class="btn-split btn-split--dark">Contactar</a>
+            <a href="index.html#areas" class="btn-split btn-split--outline">Volver a prácticas</a>
           </div>
           
-          <div class="tag-row">
-            <span class="tag">Continuidad</span>
-            <span class="tag">Acreedores</span>
-            <span class="tag">Protección de valor</span>
+          <div class="tags-split-row">
+            <span class="tag-split">Continuidad</span>
+            <span class="tag-split">Acreedores</span>
+            <span class="tag-split">Protección de valor</span>
           </div>
         </div>
+      </div>
 
-        <div class="hero-panel fade-in-up" style="transition-delay: 0.2s;">
-          <div class="hero-panel-card">
-            <div class="eyebrow" style="color: rgba(245,248,251,.55);">Conflicto concursal</div>
-            <p style="color: white; font-size: 0.95rem; margin-bottom: 2rem;">Reorganizaciones, liquidaciones y controversias concursales en contextos donde el tiempo, la continuidad y la protección de valor importan desde el inicio.</p>
-            
-            <div class="eyebrow" style="color: #94a3b8;">Equipo de referencia</div>
-            
-            <div class="panel-row">
-              <img src="assets/images/eduardo-marchi-thumb.webp" alt="Eduardo Marchi" onerror="this.src='https://ui-avatars.com/api/?name=Eduardo+Marchi&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Eduardo Marchi</div>
-                <div class="panel-row-role">Socio fundador</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <img src="assets/images/tomas-frederick-thumb.webp" alt="Tomás Frederick" onerror="this.src='https://ui-avatars.com/api/?name=Tomas+Frederick&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Tomás Frederick</div>
-                <div class="panel-row-role">Asociado</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <img src="assets/images/lorenzo-miranda-thumb.webp" alt="Lorenzo Miranda" onerror="this.src='https://ui-avatars.com/api/?name=Lorenzo+Miranda&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Lorenzo Miranda</div>
-                <div class="panel-row-role">Counsel externo</div>
-              </div>
-            </div>
+      <div class="hero-split-image-container">
+        <div class="hero-image-col" style="background-image: url('assets/images/restructuring.webp');"></div>
+        
+        <div class="hero-team-glass">
+          <div class="glass-eyebrow">Equipo de referencia</div>
+          
+          <div class="glass-row">
+            <span class="glass-name">Eduardo Marchi</span>
+            <span class="glass-role">Socio fundador</span>
+          </div>
+          <div class="glass-row">
+            <span class="glass-name">Tomás Frederick</span>
+            <span class="glass-role">Asociado</span>
+          </div>
+          <div class="glass-row">
+            <span class="glass-name">Lorenzo Miranda</span>
+            <span class="glass-role">Counsel externo</span>
           </div>
         </div>
       </div>
@@ -725,7 +804,6 @@
 
     <div class="section-divider fade-in-up"></div>
 
-    <!-- VISIÓN DE LA PRÁCTICA (Fondo Blanco) -->
     <section class="section fade-in-up">
       <div class="container firm-grid">
         <div>
@@ -738,22 +816,21 @@
         
         <div class="metrics-grid">
           <div class="metric-card">
-            <span class="metric-label">Evaluación Temprana</span>
+            <span class="metric-label">01. Evaluación Temprana</span>
             <p>Evaluamos acreedores, garantías, contratos críticos, activos y alternativas de reestructuración para definir una ruta viable.</p>
           </div>
           <div class="metric-card">
-            <span class="metric-label">Contención Operativa</span>
+            <span class="metric-label">02. Contención Operativa</span>
             <p>Nuestro trabajo busca ordenar la exposición, proteger activos y sostener la continuidad cuando es posible.</p>
           </div>
           <div class="metric-card">
-            <span class="metric-label">Ejecución y Litigación</span>
+            <span class="metric-label">03. Ejecución y Litigación</span>
             <p>Listos para ejecutar reestructuraciones eficaces y litigar con decisión cuando el conflicto concursal lo exige.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- QUÉ ESTÁ EN JUEGO SECTION (Oscura) -->
     <section class="section-dark fade-in-up">
       <div class="container">
         <div class="section-header">
@@ -784,38 +861,35 @@
       </div>
     </section>
 
-    <div class="section-divider fade-in-up"></div>
-
-    <!-- EQUIPO RELACIONADO SECTION -->
     <section class="section" id="equipo">
       <div class="container">
-        <div class="section-header fade-in-up">
+        
+        <div class="team-header-aligned fade-in-up">
           <div>
-            <div class="eyebrow">Equipo relacionado</div>
-            <h2>La práctica se apoya en un equipo corto y visible<span class="dot">.</span></h2>
+            <div class="eyebrow">- Equipo relacionado</div>
+            <h2>La práctica se apoya en un equipo corto y visible.</h2>
           </div>
-          <p class="lead">Los perfiles se muestran como parte real de la capacidad del estudio, con roles claros y un lenguaje coherente con el resto del sitio.</p>
+          <p class="team-desc-aligned">Los perfiles se muestran como parte real de la capacidad del estudio, con roles claros en la ejecución del caso.</p>
         </div>
         
-        <div class="team-grid-top">
+        <div class="team-grid-custom">
           <!-- Miembro 1 -->
-          <div class="team-card fade-in-up">
-            <div class="team-photo-wrapper">
-              <img src="assets/images/eduardo-marchi.webp" alt="Eduardo Marchi" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80'">
-            </div>
-            <div class="team-info">
-              <h3 class="team-info-name">Eduardo Marchi</h3>
-              <span class="team-info-role">Socio fundador</span>
-              <div class="team-description-wrapper">
-                <div class="team-description-inner">
-                  <div class="team-description-content">
-                    <p>Eduardo Marchi lidera la práctica de litigios y resolución de controversias de la firma. Ha representado a empresas nacionales e internacionales en litigios y arbitrajes complejos.</p>
-                    <div class="tag-row" style="margin-top: 1rem; justify-content: center;">
-                      <span class="tag">Litigios complejos</span>
-                      <span class="tag">Seguros</span>
-                      <span class="tag">Consumo</span>
-                      <span class="tag">Insolvencia</span>
-                    </div>
+          <div class="team-card-new fade-in-up">
+            <img src="assets/images/eduardo-marchi.webp" alt="Eduardo Marchi" class="team-photo-new" onerror="this.src='https://ui-avatars.com/api/?name=Eduardo+Marchi&background=1e293b&color=fff'">
+            <div class="team-bar-new">
+              <div class="team-bar-header">
+                <span class="team-name-new">Eduardo Marchi</span>
+                <span class="team-role-new">Socio fundador</span>
+              </div>
+              <div class="team-description-wrapper-new">
+                <div class="team-description-inner-new">
+                  <div class="team-divider-line"></div>
+                  <div class="team-description-text">
+                    Lidera la práctica de resolución de controversias. Representa a acreedores y deudores en procesos de reorganización y liquidación de alta complejidad.
+                  </div>
+                  <div class="team-tags-outline">
+                    <span class="tag-outline">Litigios</span>
+                    <span class="tag-outline">Reorganización</span>
                   </div>
                 </div>
               </div>
@@ -823,45 +897,45 @@
           </div>
           
           <!-- Miembro 2 -->
-          <div class="team-card fade-in-up" style="transition-delay: 0.1s;">
-            <div class="team-photo-wrapper">
-              <img src="assets/images/tomas-frederick.webp" alt="Tomás Frederick" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=400&q=80'">
-            </div>
-            <div class="team-info">
-              <h3 class="team-info-name">Tomás Frederick</h3>
-              <span class="team-info-role">Asociado</span>
-              <div class="team-description-wrapper">
-                <div class="team-description-inner">
-                  <div class="team-description-content">
-                    <p>Tomás Frederick apoya en tramitación, control de hitos, coordinación de evidencia y soporte a la estrategia del caso.</p>
-                    <div class="tag-row" style="margin-top: 1rem; justify-content: center;">
-                      <span class="tag">Tramitación</span>
-                      <span class="tag">Evidencia</span>
-                      <span class="tag">Soporte</span>
-                    </div>
+          <div class="team-card-new fade-in-up" style="transition-delay: 0.1s;">
+            <img src="assets/images/tomas-frederick.webp" alt="Tomás Frederick" class="team-photo-new" onerror="this.src='https://ui-avatars.com/api/?name=Tomas+Frederick&background=1e293b&color=fff'">
+            <div class="team-bar-new">
+              <div class="team-bar-header">
+                <span class="team-name-new">Tomás Frederick</span>
+                <span class="team-role-new">Asociado</span>
+              </div>
+              <div class="team-description-wrapper-new">
+                <div class="team-description-inner-new">
+                  <div class="team-divider-line"></div>
+                  <div class="team-description-text">
+                    Apoya en tramitación, control de hitos procesales, coordinación de evidencia y soporte directo a la estrategia del caso concursal.
+                  </div>
+                  <div class="team-tags-outline">
+                    <span class="tag-outline">Tramitación</span>
+                    <span class="tag-outline">Soporte</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Miembro 3 (Counsel Externo) -->
-          <div class="team-card fade-in-up" style="transition-delay: 0.2s; background-color: #020617; border: 1px solid rgba(255,255,255,0.05);">
-            <div class="team-photo-wrapper">
-              <img src="assets/images/lorenzo-miranda.webp" alt="Lorenzo Miranda" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80'">
-            </div>
-            <div class="team-info">
-              <h3 class="team-info-name" style="color: white;">Lorenzo Miranda</h3>
-              <span class="team-info-role" style="color: var(--color-accent-light);">Counsel externo</span>
-              <div class="team-description-wrapper">
-                <div class="team-description-inner">
-                  <div class="team-description-content">
-                    <p>Lorenzo Miranda se incorpora como counsel externo cuando el asunto requiere seniority adicional o una mirada especializada.</p>
-                    <div class="tag-row" style="margin-top: 1rem; justify-content: center;">
-                      <span class="tag tag--dark">Seniority</span>
-                      <span class="tag tag--dark">Apoyo selectivo</span>
-                      <span class="tag tag--dark">Especialidad</span>
-                    </div>
+          <!-- Miembro 3 -->
+          <div class="team-card-new fade-in-up" style="transition-delay: 0.2s;">
+            <img src="assets/images/lorenzo-miranda.webp" alt="Lorenzo Miranda" class="team-photo-new" onerror="this.src='https://ui-avatars.com/api/?name=Lorenzo+Miranda&background=1e293b&color=fff'">
+            <div class="team-bar-new">
+              <div class="team-bar-header">
+                <span class="team-name-new">Lorenzo Miranda</span>
+                <span class="team-role-new">Counsel externo</span>
+              </div>
+              <div class="team-description-wrapper-new">
+                <div class="team-description-inner-new">
+                  <div class="team-divider-line"></div>
+                  <div class="team-description-text">
+                    Se incorpora como counsel externo de apoyo cuando el asunto concursal requiere seniority adicional o una mirada altamente especializada.
+                  </div>
+                  <div class="team-tags-outline">
+                    <span class="tag-outline">Seniority</span>
+                    <span class="tag-outline">Especialidad</span>
                   </div>
                 </div>
               </div>
@@ -873,7 +947,6 @@
 
     <div class="section-divider fade-in-up"></div>
 
-    <!-- CAPACIDADES RELACIONADAS SECTION -->
     <section class="section" id="areas-relacionadas">
       <div class="container">
         <div class="section-header fade-in-up">
@@ -881,7 +954,7 @@
             <div class="eyebrow">Capacidades relacionadas</div>
             <h2>Cómo dialoga esta práctica con el resto del sitio<span class="dot">.</span></h2>
           </div>
-          <p class="lead">Las relaciones entre áreas se muestran con la misma lógica del estudio: menos brochure, más claridad estratégica y estructura.</p>
+          <p class="lead">Las relaciones entre áreas se muestran con la misma lógica del estudio: claridad estratégica y estructura enfocada en la protección del cliente.</p>
         </div>
         
         <div class="area-grid">
@@ -892,31 +965,31 @@
             </div>
             <div class="area-card-content">
               <h3>Litigios civiles y comerciales</h3>
-              <p>Representamos a demandantes y demandados en disputas civiles y comerciales complejas, con estrategia procesal clara, preparación rigurosa y foco en el resultado.</p>
+              <p>Representamos a demandantes y demandados en disputas complejas, donde la controversia concursal suele ser un componente clave.</p>
               <span class="area-card-link">Ver sección</span>
             </div>
           </a>
           
-          <a href="derecho-seguros.html" class="area-card fade-in-up" style="transition-delay: 0.1s;">
+          <a href="consumo-acciones-colectivas.html" class="area-card fade-in-up" style="transition-delay: 0.1s;">
             <div class="area-card-header">
               <span class="area-card-number">Complemento 02</span>
               <span class="area-card-arrow">↗</span>
             </div>
             <div class="area-card-content">
-              <h3>Derecho de seguros</h3>
-              <p>Intervenimos en controversias de cobertura, liquidación de siniestros, impugnaciones y litigios del mercado asegurador, con lectura técnica de póliza y estrategia procesal definida.</p>
+              <h3>Consumo y acciones colectivas</h3>
+              <p>Defensa técnica ante demandas masivas que pueden generar o verse afectadas por procesos de insolvencia y reorganización.</p>
               <span class="area-card-link">Ver sección</span>
             </div>
           </a>
 
-          <a href="consumo-acciones-colectivas.html" class="area-card fade-in-up" style="transition-delay: 0.2s;">
+          <a href="acciones-constitucionales.html" class="area-card fade-in-up" style="transition-delay: 0.2s;">
             <div class="area-card-header">
               <span class="area-card-number">Complemento 03</span>
               <span class="area-card-arrow">↗</span>
             </div>
             <div class="area-card-content">
-              <h3>Consumo y acciones colectivas</h3>
-              <p>Defendemos a empresas e instituciones financieras en procedimientos individuales y colectivos bajo la Ley N° 19.496, con atención al impacto jurídico, operativo y reputacional.</p>
+              <h3>Acciones constitucionales</h3>
+              <p>Tutela urgente orientada a resguardar derechos y detener medidas que amenacen el patrimonio de empresas bajo presión financiera.</p>
               <span class="area-card-link">Ver sección</span>
             </div>
           </a>
@@ -924,18 +997,17 @@
         
         <div style="margin-top: 4rem; display: flex; justify-content: space-between;" class="fade-in-up">
           <a href="derecho-seguros.html" style="font-weight: 700; color: var(--color-text-main); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">← Derecho de seguros</a>
-          <a href="consumo-acciones-colectivas.html" style="font-weight: 700; color: var(--color-accent); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Consumo y acciones colectivas →</a>
+          <a href="equipo.html" style="font-weight: 700; color: var(--color-accent); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Ver equipo central →</a>
         </div>
       </div>
     </section>
 
-    <!-- CONTACTO SECTION -->
     <section class="section" id="contacto">
       <div class="container contact-grid">
         <div class="fade-in-up">
           <div class="eyebrow">Contacto</div>
-          <h2>Si necesita evaluar una reorganización, una liquidación o una contingencia concursal relevante, conversemos<span class="dot">.</span></h2>
-          <p class="lead">Estamos disponibles para revisar el caso, ordenar la exposición y definir una estrategia de respuesta.</p>
+          <h2>Si necesita evaluar una reorganización o una liquidación, conversemos<span class="dot">.</span></h2>
+          <p class="lead">Estamos disponibles para revisar el caso, ordenar la exposición y definir una estrategia sólida.</p>
           
           <div class="contact-details">
             <a href="mailto:contacto@marchi.cl">contacto@marchi.cl</a>
@@ -948,34 +1020,28 @@
           <form action="mailto:contacto@marchi.cl" method="post" enctype="text/plain">
             
             <div class="form-group">
-              <label class="form-label" for="name">Nombre</label>
-              <input class="form-input" type="text" id="name" name="name" placeholder="Nombre y cargo" required>
+              <label class="form-label" for="name">Nombre y cargo</label>
+              <input class="form-input" type="text" id="name" name="name" placeholder="Ej. Juan Pérez" required>
             </div>
             
             <div class="form-group">
-              <label class="form-label" for="email">Email</label>
+              <label class="form-label" for="email">Correo corporativo</label>
               <input class="form-input" type="email" id="email" name="email" placeholder="correo@empresa.cl" required>
             </div>
             
             <div class="form-group">
-              <label class="form-label" for="subject">Asunto</label>
-              <input class="form-input" type="text" id="subject" name="subject" placeholder="Breve descripción del asunto" required>
+              <label class="form-label" for="message">Mensaje preliminar</label>
+              <textarea class="form-input" id="message" name="message" rows="4" placeholder="Breve contexto del caso (opcional). El formulario abrirá su cliente de correo." required></textarea>
             </div>
             
-            <div class="form-group">
-              <label class="form-label" for="message">Mensaje</label>
-              <textarea class="form-input" id="message" name="message" rows="4" placeholder="Cuéntenos brevemente el contexto del caso." required></textarea>
-            </div>
-            
-            <button type="submit" class="btn btn--primary" style="width: 100%; margin-top: 1rem;">Enviar consulta</button>
-            <p style="font-size: 0.65rem; color: #94a3b8; text-align: center; margin-top: 1rem;">El formulario abre su cliente de correo con el asunto y el mensaje ya preparados.</p>
+            <button type="submit" class="btn btn--primary" style="width: 100%; margin-top: 1rem;">Preparar Email Seguro</button>
+            <p style="font-size: 0.65rem; color: #94a3b8; text-align: center; margin-top: 1rem;">La información compartida será tratada con estricta confidencialidad.</p>
           </form>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER INVERTIDO (Oscuro) -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>
@@ -990,7 +1056,6 @@
     </div>
   </footer>
 
-  <!-- SCRIPTS -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       // 1. Manejo del Header Glassmorphism
@@ -1004,7 +1069,12 @@
       });
 
       // 2. Observer para revelar elementos (Fade-in-up)
-      const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+      };
+
       const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1013,16 +1083,21 @@
           }
         });
       }, observerOptions);
-      document.querySelectorAll('.fade-in-up').forEach((el) => { observer.observe(el); });
+
+      document.querySelectorAll('.fade-in-up').forEach((el) => {
+        observer.observe(el);
+      });
 
       // 3. Preloader Animación
       const preloader = document.querySelector('.premium-preloader');
-      if(preloader) {
+      if(preloader && !document.documentElement.classList.contains('hide-preloader')) {
         setTimeout(() => preloader.classList.add('active'), 100);
         setTimeout(() => {
           preloader.classList.add('hide');
           setTimeout(() => preloader.remove(), 1000); 
         }, 1200);
+      } else if (preloader) {
+        preloader.remove();
       }
 
       // 4. Barra de progreso de lectura
@@ -1034,23 +1109,22 @@
         if (progressBar) progressBar.style.width = scrolled + '%';
       });
 
-      // 5. Interacciones de Escritorio (Parallax & Glow)
+      // 5. Parallax Sensible al Mouse en Hero
       if (window.innerWidth >= 992) {
-        // Parallax Hero
-        const heroSection = document.querySelector('.hero');
-        const heroPanel = document.querySelector('.hero-panel');
-        if(heroSection && heroPanel) {
+        const heroSection = document.querySelector('.hero-split');
+        const heroImageCol = document.querySelector('.hero-image-col');
+        if(heroSection && heroImageCol) {
           heroSection.addEventListener('mousemove', (e) => {
-            const moveX = (e.clientX / window.innerWidth - 0.5) * 30; 
-            const moveY = (e.clientY / window.innerHeight - 0.5) * 30;
-            heroPanel.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
+            const moveX = (e.clientX / window.innerWidth - 0.5) * 20; 
+            const moveY = (e.clientY / window.innerHeight - 0.5) * 20;
+            // El scale(1.05) evita que se vean los bordes al moverse
+            heroImageCol.style.transform = `translate(${-moveX}px, ${-moveY}px) scale(1.05)`;
           });
           heroSection.addEventListener('mouseleave', () => {
-            heroPanel.style.transform = `translate(0px, 0px)`;
+            heroImageCol.style.transform = `translate(0px, 0px) scale(1)`;
           });
         }
-
-        // Glow Tracking Dinámico en Contacto
+        
         const contactSection = document.getElementById('contacto');
         if(contactSection) {
           contactSection.addEventListener('mousemove', (e) => {

@@ -12,6 +12,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
+  <!-- SCRIPT DE TRANSICIÓN INVISIBLE -->
+  <script>
+    if (sessionStorage.getItem('skipLoader') === 'true') {
+      document.documentElement.classList.add('hide-preloader');
+      sessionStorage.removeItem('skipLoader'); 
+    }
+  </script>
+
   <style>
     /* ==========================================================================
        MARCHI & CÍA - HIGH-END BOUTIQUE LAW FIRM STYLES
@@ -79,7 +87,7 @@
     a { text-decoration: none; color: inherit; }
 
     /* ==========================================================================
-       TIPOGRAFÍA DE ALTA COSTURA
+       TIPOGRAFÍA
        ========================================================================== */
     h1, h2, h3, h4 {
       color: var(--color-text-main);
@@ -142,7 +150,6 @@
       letter-spacing: 0.05em;
       transition: all 0.3s ease;
       cursor: default;
-      display: inline-block;
     }
     .tag:hover {
       background: var(--color-bg-dark);
@@ -173,15 +180,155 @@
       background-color: var(--color-accent); 
       box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.4);
     }
-    .btn--steel {
-      background-color: transparent;
-      border-color: #cbd5e1;
-      color: var(--color-text-main);
+
+    /* ==========================================================================
+       HERO SECTION SPLIT (60/40) - DISEÑO REFERENCIA
+       ========================================================================== */
+    .hero-split {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #ffffff; /* Fondo blanco purificado */
+      padding-top: 80px; 
     }
-    .btn--steel:hover {
-      background-color: white;
-      border-color: var(--color-text-main);
-      box-shadow: var(--shadow-sm);
+    
+    @media (min-width: 992px) {
+      .hero-split {
+        flex-direction: row;
+        padding-top: 0;
+      }
+      .hero-split-text {
+        width: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 8rem 4rem 4rem 10vw; 
+      }
+      .hero-split-text-inner {
+        width: 100%;
+        max-width: 540px; 
+        margin-right: auto;
+      }
+      .hero-split-image-container {
+        width: 40%;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-image-col {
+        position: absolute;
+        top: -20px; left: -20px; right: -20px; bottom: -20px;
+        background-image: url('assets/images/consumers.webp');
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.2s ease-out; 
+      }
+    }
+
+    @media (max-width: 991px) {
+      .hero-split-text { padding: 6rem 2rem 3rem; }
+      .hero-split-image-container { min-height: 500px; position: relative; overflow: hidden; }
+      .hero-image-col { width: 100%; height: 100%; position: absolute; top:0; left:0; background-image: url('assets/images/consumers.webp'); background-size: cover; background-position: center; }
+    }
+
+    /* Tipografía Específica del Hero */
+    .eyebrow-split {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 1.5rem;
+    }
+    .title-split {
+      font-size: clamp(2.5rem, 3.8vw, 4.2rem);
+      line-height: 1.05;
+      color: var(--color-text-main);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+    }
+    .desc-split {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 1.25rem;
+      max-width: 95%;
+    }
+
+    /* Botones de Referencia (Pills) */
+    .actions-split {
+      display: flex;
+      gap: 1rem;
+      margin: 2.5rem 0 1.5rem;
+      flex-wrap: wrap;
+    }
+    .btn-split {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.85rem 2.2rem;
+      border-radius: 99px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-split--dark { background-color: #111; color: #fff; border: 1px solid #111; }
+    .btn-split--dark:hover { background-color: var(--color-accent); border-color: var(--color-accent); }
+    .btn-split--outline { background-color: transparent; color: #111; border: 1px solid #ccc; }
+    .btn-split--outline:hover { background-color: rgba(0,0,0,0.05); }
+
+    /* Etiquetas/Tags debajo de los botones */
+    .tags-split-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .tag-split {
+      padding: 0.3rem 0.9rem;
+      border: 1px solid #d1d1d1;
+      border-radius: 99px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #666;
+    }
+
+    /* Caja Oscura de Equipo (Glassmorphism) */
+    .hero-team-glass {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      width: calc(100% - 4rem);
+      max-width: 320px;
+      background: rgba(5, 10, 15, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      z-index: 2;
+    }
+    @media (max-width: 991px) {
+       .hero-team-glass { bottom: 0; right: 0; left: 0; width: 100%; max-width: 100%; padding: 1.5rem; }
+    }
+
+    .glass-eyebrow {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 1rem;
+    }
+    .glass-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.65rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .glass-row:last-child { border-bottom: none; padding-bottom: 0; }
+    
+    .glass-name {
+      color: #ffffff; 
+      font-size: 0.9rem; 
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .glass-role {
+      color: rgba(255,255,255,0.6); font-size: 0.5rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.15em; text-align: right;
     }
 
     /* ==========================================================================
@@ -211,23 +358,7 @@
     .section { padding: 8rem 0; }
     .section--tight { padding: 5rem 0; }
 
-    .section-header {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      margin-bottom: 5rem;
-    }
-    @media (min-width: 992px) {
-      .section-header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-end;
-      }
-      .section-header > div { max-width: 50%; }
-      .section-header > p { max-width: 40%; margin-bottom: 0.5rem; }
-    }
-
-    /* Header Glassmorphism Premium */
+    /* Header */
     .site-header {
       padding: 2.5rem 0;
       position: fixed; 
@@ -252,7 +383,6 @@
       text-transform: uppercase; letter-spacing: 0.08em; 
       transition: all 0.3s ease; 
       position: relative;
-      padding-bottom: 0.25rem;
     }
     .site-nav a:hover, .site-nav a.is-active { color: var(--color-text-main); }
     .site-nav a::after {
@@ -265,375 +395,75 @@
     .nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--color-text-main); }
 
     /* ==========================================================================
-       HERO SECTION
-       ========================================================================== */
-    .hero { 
-      padding: 13rem 0 7rem; 
-      background: radial-gradient(circle at top right, #ffffff 0%, var(--color-bg-body) 70%);
-    }
-    .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 5rem; align-items: center; }
-    .hero-actions { display: flex; gap: 1rem; margin: 3rem 0; flex-wrap: wrap; }
-
-    /* Breadcrumbs */
-    .breadcrumb {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--color-text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .breadcrumb a { transition: color 0.3s; }
-    .breadcrumb a:hover { color: var(--color-accent); }
-    .breadcrumb span { opacity: 0.5; }
-
-    .hero-panel {
-      background-color: var(--color-bg-darker);
-      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 24px);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      width: 100%;
-      max-width: 480px; 
-      margin-left: auto;
-      box-shadow: var(--shadow-dark);
-      position: relative;
-      transition: transform 0.2s ease-out; /* Parallax Magnético */
-    }
-    .hero-panel-card {
-      background-color: var(--color-bg-dark);
-      border: 1px solid var(--color-border-light);
-      border-radius: var(--radius-md);
-      padding: 3rem 2.5rem; 
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-      position: relative;
-      z-index: 1;
-    }
-    
-    .panel-row {
-      display: flex; align-items: center; gap: 1.25rem; padding: 1rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-      transition: all 0.3s ease;
-      border-radius: var(--radius-sm);
-    }
-    .panel-row:hover { background: rgba(255,255,255,0.02); transform: translateX(6px); padding-left: 0.75rem; border-bottom-color: transparent;}
-    .panel-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .panel-row img { width: 52px; height: 52px; border-radius: 50%; filter: grayscale(100%); object-fit: cover; }
-    .panel-row-name { color: var(--color-text-light); font-size: 1.05rem; font-weight: 600; line-height: 1.2; margin-bottom: 2px; }
-    .panel-row-role { color: #94a3b8; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;}
-
-    /* ==========================================================================
-       SECCIÓN VISIÓN 
+       RESTO DE SECCIONES (INTACTAS)
        ========================================================================== */
     .firm-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: start; }
     @media (min-width: 992px) { .firm-grid { grid-template-columns: 1.1fr 0.9fr; gap: 6rem; } }
-
     .metrics-grid { display: flex; flex-direction: column; gap: 2rem; }
-    
-    .metric-card {
-      background: transparent;
-      border-left: 2px solid var(--color-border);
-      padding: 0.5rem 0 0.5rem 1.5rem;
-      transition: var(--transition-smooth);
-    }
+    .metric-card { background: transparent; border-left: 2px solid var(--color-border); padding: 0.5rem 0 0.5rem 1.5rem; transition: var(--transition-smooth); }
     .metric-card:hover { border-left-color: var(--color-accent); transform: translateX(5px); }
-    .metric-label { 
-      font-size: 0.65rem; 
-      font-weight: 700; 
-      text-transform: uppercase; 
-      letter-spacing: 0.1em; 
-      color: #94a3b8; 
-      display: block; 
-      margin-bottom: 0.5rem;
-    }
-    .metric-card p {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin: 0;
-      font-weight: 500;
-      color: var(--color-text-main);
-    }
+    .metric-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; display: block; margin-bottom: 0.5rem;}
+    .metric-card p { font-size: 0.95rem; line-height: 1.6; margin: 0; font-weight: 500; color: var(--color-text-main); }
 
-    /* ==========================================================================
-       SECCIÓN QUÉ ESTÁ EN JUEGO (Fondo Oscuro)
-       ========================================================================== */
-    .section-dark {
-      background-color: var(--color-bg-dark);
-      color: #94a3b8;
-      padding: 8rem 0;
-      position: relative;
-    }
+    .section-dark { background-color: var(--color-bg-dark); color: #94a3b8; padding: 8rem 0; position: relative; }
     .section-dark::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--color-accent); }
     .section-dark h2 { color: var(--color-text-light); }
     .section-dark .eyebrow { color: #64748b; }
-    .section-dark .eyebrow::before { background-color: var(--color-accent); }
-
     .pillar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 4rem; margin-top: 5rem; }
     .pillar-card { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; transition: transform 0.3s ease; }
     .pillar-card:hover { transform: translateY(-4px); border-top-color: var(--color-accent); }
-    
-    .pillar-number { display: block; font-family: monospace; font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; transition: color 0.3s; }
-    .pillar-card:hover .pillar-number { color: var(--color-text-light); }
+    .pillar-number { display: block; font-family: monospace; font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; }
     .pillar-card h3 { color: var(--color-text-light); font-size: 1.25rem; margin-bottom: 1rem; }
 
-    /* ==========================================================================
-       SECCIÓN EQUIPO (Grilla compacta premium)
-       ========================================================================== */
-    .team-grid-top {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2.5rem;
-      align-items: start; 
-    }
+    .team-grid-top { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2.5rem; align-items: start; }
     @media (min-width: 992px) { .team-grid-top { grid-template-columns: repeat(3, 1fr); } }
-
-    .team-card {
-      background-color: var(--color-bg-dark);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition-smooth);
-      display: flex;
-      flex-direction: column;
-    }
+    .team-card { background-color: var(--color-bg-dark); border-radius: var(--radius-sm); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition-smooth); display: flex; flex-direction: column; }
     .team-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
-
-    .team-photo-wrapper {
-      width: 100%;
-      aspect-ratio: 4/5;
-      overflow: hidden;
-      background-color: #e2e8f0;
-      position: relative;
-    }
-
-    .team-photo {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: grayscale(100%) sepia(10%);
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
-    }
+    .team-photo-wrapper { width: 100%; aspect-ratio: 4/5; overflow: hidden; background-color: #e2e8f0; position: relative; }
+    .team-photo { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) sepia(10%); transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease; }
     .team-card:hover .team-photo { transform: scale(1.05); filter: grayscale(0%); }
-
     .team-info { padding: 1.5rem; text-align: center; }
     .team-info-name { display: inline-block; color: var(--color-text-light); font-size: 1.1rem; font-weight: 600; margin: 0; letter-spacing: -0.01em;}
     .team-info-role { display: inline-block; color: #94a3b8; font-size: 0.9rem; font-weight: 400; margin-left: 0.25rem;}
-
-    .team-description-wrapper {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+    .team-description-wrapper { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
     .team-card:hover .team-description-wrapper { grid-template-rows: 1fr; }
-    
     .team-description-inner { overflow: hidden; opacity: 0; transition: opacity 0.5s ease; text-align: left; }
     .team-card:hover .team-description-inner { opacity: 1; }
-    
-    .team-description-content {
-      padding-top: 1.25rem;
-      margin-top: 1.25rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      color: #cbd5e1;
-      font-size: 0.85rem;
-      line-height: 1.6;
-    }
+    .team-description-content { padding-top: 1.25rem; margin-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.08); color: #cbd5e1; font-size: 0.85rem; line-height: 1.6; }
 
-    /* ==========================================================================
-       SECCIÓN CAPACIDADES / ÁREAS
-       ========================================================================== */
-    .area-grid { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
-      gap: 2rem; 
-    }
-    @media (min-width: 992px) { .area-grid { grid-template-columns: repeat(3, 1fr); } }
-    
-    .area-card {
-      background: var(--color-bg-card);
-      border-radius: var(--radius-md);
-      padding: 3rem 2.5rem;
-      display: flex;
-      flex-direction: column;
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition-smooth);
-      border: 1px solid var(--color-border);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .area-card::before {
-      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
-      background: var(--color-accent); transform: scaleX(0); transform-origin: left;
-      transition: transform var(--transition-smooth);
-    }
-    
-    .area-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: transparent; }
-    .area-card:hover::before { transform: scaleX(1); }
-    .area-card h3 { font-size: 1.15rem; margin-bottom: 1rem; }
-
-    .area-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-    .area-card-number { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #94a3b8; transition: color 0.3s; }
-    .area-card:hover .area-card-number { color: var(--color-text-main); }
-    
-    .area-card-arrow { font-size: 1.25rem; color: #888eb0; transition: var(--transition-smooth); }
-    .area-card:hover .area-card-arrow { color: var(--color-accent); transform: translate(4px, -4px); }
-
-    .area-card-content { flex-grow: 1; }
-    .area-card-link {
-      margin-top: 2rem;
-      font-size: 0.7rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--color-accent);
-      opacity: 0.5; 
-      transition: var(--transition-smooth);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .area-card:hover .area-card-link { opacity: 1; transform: translateX(4px); }
-
-    /* ==========================================================================
-       SECCIÓN CONTACTO
-       ========================================================================== */
-    #contacto {
-      background-color: var(--color-steel-blue);
-      /* El background-image se controlará dinámicamente con JS para el Glow Effect */
-      background-image: radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.4), transparent 60%);
-      color: rgba(255, 255, 255, 0.6);
-      padding: 8rem 0;
-      position: relative;
-      overflow: hidden;
-      transition: background-image 0.2s ease-out;
-    }
-    
-    #contacto::after {
-      content: ""; position: absolute; top: -10%; right: -10%; width: 40%; height: 40%;
-      background: var(--color-accent); filter: blur(120px); opacity: 0.15; pointer-events: none;
-    }
-
+    #contacto { background-color: var(--color-steel-blue); background-image: radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.4), transparent 60%); color: rgba(255, 255, 255, 0.6); padding: 8rem 0; position: relative; overflow: hidden; transition: background-image 0.2s ease-out; }
     #contacto h2, #contacto .eyebrow { color: #ffffff; }
-    #contacto .eyebrow::before { background-color: #ffffff; opacity: 0.8; }
-    #contacto .lead { color: rgba(255, 255, 255, 0.6); }
-
     .contact-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center; }
     @media (min-width: 992px) { .contact-grid { grid-template-columns: 1fr 1fr; gap: 8rem; } }
-
     .contact-details { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem; font-size: 1.15rem; font-weight: 600; color: #ffffff; }
-    .contact-details a { transition: color 0.2s; position: relative; display: inline-block; width: fit-content; }
-    .contact-details a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0px; left: 0; background-color: #ffffff; transition: width 0.3s ease; }
-    .contact-details a:hover { color: #ffffff; opacity: 0.8; }
-    .contact-details a:hover::after { width: 100%; }
-
-    .form-card {
-      background: var(--color-bg-card);
-      border-radius: var(--radius-md);
-      padding: 3.5rem;
-      box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
+    .form-card { background: var(--color-bg-card); border-radius: var(--radius-md); padding: 3.5rem; box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.5); }
     .form-group { margin-bottom: 2rem; position: relative; }
-    .form-label { display: block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; color: #64748b; letter-spacing: 0.1em; transition: color 0.3s;}
-    
-    .form-input {
-      width: 100%; padding: 0.5rem 0; border: none; border-bottom: 1px solid var(--color-border);
-      background: transparent; font-family: inherit; font-size: 1rem; color: var(--color-text-main); transition: all 0.3s ease;
-    }
-    .form-input::placeholder { color: #cbd5e1; font-weight: 300; }
+    .form-label { display: block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; color: #64748b; letter-spacing: 0.1em; }
+    .form-input { width: 100%; padding: 0.5rem 0; border: none; border-bottom: 1px solid var(--color-border); background: transparent; font-family: inherit; font-size: 1rem; color: var(--color-text-main); transition: all 0.3s ease; }
     .form-input:focus { outline: none; border-bottom-color: var(--color-accent); }
-    .form-input:focus + .form-label, .form-group:focus-within .form-label { color: var(--color-accent); }
 
-    /* ==========================================================================
-       FOOTER
-       ========================================================================== */
-    .site-footer { 
-      background: var(--color-bg-darker); 
-      padding: 6rem 0 4rem; 
-      border-top: 1px solid rgba(255, 255, 255, 0.05); 
-      color: rgba(255, 255, 255, 0.4);
-    }
+    .site-footer { background: var(--color-bg-darker); padding: 6rem 0 4rem; color: rgba(255, 255, 255, 0.4); }
     .footer-inner { display: flex; flex-direction: column; gap: 3rem; }
     @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; align-items: flex-end; } }
-    
-    .footer-brand { 
-      font-size: 1.25rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; color: #ffffff; display: inline-block;
-    }
-    
-    .footer-links { display: flex; flex-wrap: wrap; gap: 3rem; }
-    .footer-links a { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); letter-spacing: 0.12em; transition: all 0.3s ease; position: relative;}
-    .footer-links a:hover { color: #ffffff; transform: translateY(-2px); }
-    
-    .copyright-text { font-size: 0.8rem; font-weight: 500; color: rgba(255, 255, 255, 0.3); margin-top: 0.5rem; }
+    .footer-brand { font-size: 1.25rem; font-weight: 900; text-transform: uppercase; color: #ffffff; display: inline-block; }
 
-    /* ==========================================================================
-       ANIMACIONES DE ENTRADA AL SCROLL
-       ========================================================================== */
-    .fade-in-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .fade-in-up.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
 
-    @media (max-width: 768px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .site-nav { display: none; }
-      .nav-toggle { display: block; }
-      .hero-panel-card { padding: 1.5rem; }
-      .form-card { padding: 2rem; }
-    }
-
-    /* ==========================================================================
-       MEJORAS PREMIUM
-       ========================================================================== */
-    
-    /* PRELOADER CINEMÁTICO */
-    .premium-preloader {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background-color: var(--color-bg-darker);
-      z-index: 999999;
-      display: flex; justify-content: center; align-items: center;
-      transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-    .premium-preloader.hide {
-      transform: translateY(-100%);
-    }
-    .preloader-brand {
-      color: white; font-size: 1.5rem; font-weight: 900; letter-spacing: 0.1em;
-      text-transform: uppercase; overflow: hidden;
-    }
-    .preloader-brand span {
-      display: block;
-      transform: translateY(100%);
-      transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-    .premium-preloader.active span {
-      transform: translateY(0);
-    }
-
-    /* Textura de ruido sutil (Efecto Editorial/Print) */
-    .premium-noise {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      pointer-events: none; z-index: 9999; opacity: 0.04;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    }
-
-    /* Barra de progreso de lectura */
-    .scroll-progress {
-      position: fixed; top: 0; left: 0; width: 0%; height: 3px;
-      background: var(--color-accent); z-index: 1001; transition: width 0.1s;
-    }
+    /* PRELOADER */
+    .premium-preloader { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--color-bg-darker); z-index: 999999; display: flex; justify-content: center; align-items: center; transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1); }
+    html.hide-preloader .premium-preloader { display: none !important; animation: none !important; }
+    .premium-preloader.hide { transform: translateY(-100%); }
+    .preloader-brand { color: white; font-size: 1.5rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; overflow: hidden; }
+    .preloader-brand span { display: block; transform: translateY(100%); transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
+    .premium-preloader.active span { transform: translateY(0); }
+    .premium-noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
+    .scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: var(--color-accent); z-index: 1001; transition: width 0.1s; }
 
   </style>
 </head>
 <body>
 
-  <!-- ELEMENTOS PREMIUM -->
   <div class="premium-preloader">
     <div class="preloader-brand"><span>Marchi & Cía.</span></div>
   </div>
@@ -654,62 +484,61 @@
   </header>
 
   <main>
-    <!-- HERO SECTION -->
-    <section class="hero fade-in-up">
-      <div class="container hero-grid">
-        <div class="hero-content">
+    <!-- HERO SECTION SPLIT (NUEVO DISEÑO CONSUMO) -->
+    <section class="hero hero-split fade-in-up">
+      
+      <!-- MITAD IZQUIERDA: Textos y Botones -->
+      <div class="hero-split-text">
+        <div class="hero-split-text-inner">
           <div class="breadcrumb">
             <a href="index.html#areas">Áreas</a> <span>·</span> <span>Consumo y acciones colectivas</span>
           </div>
-          <div class="eyebrow">Impacto masivo</div>
+          <div class="eyebrow-split">Impacto masivo</div>
           
-          <h1>Derecho del consumo y acciones colectivas<span class="dot">.</span></h1>
+          <h1 class="title-split">Derecho del consumo y acciones colectivas.</h1>
           
-          <p class="lead">Defendemos a empresas e instituciones financieras en procedimientos individuales y colectivos propios del derecho del consumo, incluyendo defensa ante acciones del SERNAC, demandas colectivas y controversias derivadas de prácticas comerciales masivas.</p>
+          <p class="desc-split">Defendemos a empresas e instituciones financieras en procedimientos individuales y colectivos propios del derecho del consumo, incluyendo defensa ante acciones del SERNAC, demandas colectivas y controversias derivadas de prácticas comerciales masivas.</p>
           
-          <div class="hero-actions">
-            <a href="index.html#contacto" class="btn btn--primary">Contactar</a>
-            <a href="index.html#areas" class="btn btn--steel">Volver a prácticas</a>
+          <p class="desc-split" style="font-size: 0.85rem; color: #555;">La exposición en estas materias rara vez es solo judicial. También puede comprometer operación, canales comerciales, cumplimiento regulatorio y reputación de marca.</p>
+          
+          <div class="actions-split">
+            <a href="index.html#contacto" class="btn-split btn-split--dark">Contactar</a>
+            <a href="index.html#areas" class="btn-split btn-split--outline">Ver prácticas</a>
           </div>
           
-          <div class="tag-row">
-            <span class="tag">SERNAC</span>
-            <span class="tag">Reclamos masivos</span>
-            <span class="tag">Reputación</span>
+          <div class="tags-split-row">
+            <span class="tag-split">2 Socios</span>
+            <span class="tag-split">2 Asociados</span>
           </div>
-        </div>
-
-        <div class="hero-panel fade-in-up" style="transition-delay: 0.2s;">
-          <div class="hero-panel-card">
-            <div class="eyebrow" style="color: rgba(245,248,251,.55);">Impacto jurídico y reputacional</div>
-            <p style="color: white; font-size: 0.95rem; margin-bottom: 2rem;">Una práctica pensada para conflictos donde la exposición puede escalar con rapidez en sede judicial, operativa y reputacional.</p>
-            
-            <div class="eyebrow" style="color: #94a3b8;">Equipo de referencia</div>
-            
-            <div class="panel-row">
-              <img src="assets/images/eduardo-marchi-thumb.webp" alt="Eduardo Marchi" onerror="this.src='https://ui-avatars.com/api/?name=Eduardo+Marchi&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Eduardo Marchi</div>
-                <div class="panel-row-role">Socio fundador</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <img src="assets/images/valeria-palacios-thumb.webp" alt="Valeria Palacios" onerror="this.src='https://ui-avatars.com/api/?name=Valeria+Palacios&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Valeria Palacios</div>
-                <div class="panel-row-role">Asociada</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <img src="assets/images/tomas-frederick-thumb.webp" alt="Tomás Frederick" onerror="this.src='https://ui-avatars.com/api/?name=Tomas+Frederick&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Tomás Frederick</div>
-                <div class="panel-row-role">Asociado</div>
-              </div>
-            </div>
+          <div class="tags-split-row">
+            <span class="tag-split">SERNAC</span>
+            <span class="tag-split">Acciones Colectivas</span>
           </div>
         </div>
       </div>
+
+      <!-- MITAD DERECHA: Imagen y Overlay del Equipo -->
+      <div class="hero-split-image-container">
+        <div class="hero-image-col"></div>
+        
+        <div class="hero-team-glass">
+          <div class="glass-eyebrow">Equipo de referencia</div>
+          
+          <div class="glass-row">
+            <span class="glass-name">Eduardo Marchi</span>
+            <span class="glass-role">Socio fundador</span>
+          </div>
+          <div class="glass-row">
+            <span class="glass-name">Valeria Palacios</span>
+            <span class="glass-role">Asociada</span>
+          </div>
+          <div class="glass-row">
+            <span class="glass-name">Tomás Frederick</span>
+            <span class="glass-role">Asociado</span>
+          </div>
+        </div>
+      </div>
+      
     </section>
 
     <div class="section-divider fade-in-up"></div>
@@ -775,19 +604,20 @@
 
     <div class="section-divider fade-in-up"></div>
 
-    <!-- EQUIPO RELACIONADO SECTION -->
-    <section class="section" id="equipo">
+    <!-- EQUIPO RELACIONADO -->
+<section class="section" id="equipo">
       <div class="container">
-        <div class="section-header fade-in-up">
-          <div>
+        <div class="section-header fade-in-up" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 40px;">
+          <div style="flex: 1;">
             <div class="eyebrow">Equipo relacionado</div>
-            <h2>La práctica se apoya en un equipo corto y visible<span class="dot">.</span></h2>
+            <h2 style="margin-top: 10px;">La práctica se apoya en un equipo corto y visible<span class="dot">.</span></h2>
           </div>
-          <p class="lead">Los perfiles se muestran como parte real de la capacidad del estudio, con roles claros y un lenguaje coherente con el resto del sitio.</p>
+          <p class="lead" style="flex: 1; max-width: 450px; margin-top: 45px;">
+            Los perfiles se muestran como parte real de la capacidad del estudio, con roles claros en la ejecución del caso.
+          </p>
         </div>
         
         <div class="team-grid-top">
-          <!-- Miembro 1 -->
           <div class="team-card fade-in-up">
             <div class="team-photo-wrapper">
               <img src="assets/images/eduardo-marchi.webp" alt="Eduardo Marchi" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80'">
@@ -798,20 +628,13 @@
               <div class="team-description-wrapper">
                 <div class="team-description-inner">
                   <div class="team-description-content">
-                    <p>Eduardo Marchi lidera la práctica de litigios y resolución de controversias de la firma. Ha representado a empresas nacionales e internacionales en litigios y arbitrajes complejos.</p>
-                    <div class="tag-row" style="margin-top: 1rem; justify-content: center;">
-                      <span class="tag">Litigios complejos</span>
-                      <span class="tag">Seguros</span>
-                      <span class="tag">Consumo</span>
-                      <span class="tag">Insolvencia</span>
-                    </div>
+                    <p>Lidera la práctica de litigios y resolución de controversias masivas. Representa a empresas en arbitrajes y demandas colectivas complejas.</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           
-          <!-- Miembro 2 -->
           <div class="team-card fade-in-up" style="transition-delay: 0.1s;">
             <div class="team-photo-wrapper">
               <img src="assets/images/valeria-palacios.webp" alt="Valeria Palacios" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80'">
@@ -822,19 +645,13 @@
               <div class="team-description-wrapper">
                 <div class="team-description-inner">
                   <div class="team-description-content">
-                    <p>Valeria Palacios concentra su trabajo en investigación jurídica, preparación de escritos, orden de antecedentes y coordinación procesal.</p>
-                    <div class="tag-row" style="margin-top: 1rem; justify-content: center;">
-                      <span class="tag">Investigación</span>
-                      <span class="tag">Escritos</span>
-                      <span class="tag">Seguimiento</span>
-                    </div>
+                    <p>Concentra su trabajo en investigación jurídica, preparación de escritos de defensa y coordinación procesal en juicios de consumo.</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Miembro 3 -->
           <div class="team-card fade-in-up" style="transition-delay: 0.2s;">
             <div class="team-photo-wrapper">
               <img src="assets/images/tomas-frederick.webp" alt="Tomás Frederick" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=400&q=80'">
@@ -845,12 +662,7 @@
               <div class="team-description-wrapper">
                 <div class="team-description-inner">
                   <div class="team-description-content">
-                    <p>Tomás Frederick apoya en tramitación, control de hitos, coordinación de evidencia y soporte a la estrategia del caso.</p>
-                    <div class="tag-row" style="margin-top: 1rem; justify-content: center;">
-                      <span class="tag">Tramitación</span>
-                      <span class="tag">Evidencia</span>
-                      <span class="tag">Soporte</span>
-                    </div>
+                    <p>Apoya en tramitación, control de hitos procesales y coordinación de evidencia para la defensa de prácticas comerciales.</p>
                   </div>
                 </div>
               </div>
@@ -860,193 +672,84 @@
       </div>
     </section>
 
-    <div class="section-divider fade-in-up"></div>
-
-    <!-- CAPACIDADES RELACIONADAS SECTION -->
-    <section class="section" id="areas-relacionadas">
-      <div class="container">
-        <div class="section-header fade-in-up">
-          <div>
-            <div class="eyebrow">Capacidades relacionadas</div>
-            <h2>Cómo dialoga esta práctica con el resto del sitio<span class="dot">.</span></h2>
-          </div>
-          <p class="lead">Las relaciones entre áreas se muestran con la misma lógica del estudio: menos brochure, más claridad estratégica y estructura.</p>
-        </div>
-        
-        <div class="area-grid">
-          <a href="litigios-civiles-comerciales.html" class="area-card fade-in-up">
-            <div class="area-card-header">
-              <span class="area-card-number">Complemento 01</span>
-              <span class="area-card-arrow">↗</span>
-            </div>
-            <div class="area-card-content">
-              <h3>Litigios civiles y comerciales</h3>
-              <p>Representamos a demandantes y demandados en disputas civiles y comerciales complejas, con estrategia procesal clara, preparación rigurosa y foco en el resultado.</p>
-              <span class="area-card-link">Ver sección</span>
-            </div>
-          </a>
-          
-          <a href="responsabilidad-sanitaria.html" class="area-card fade-in-up" style="transition-delay: 0.1s;">
-            <div class="area-card-header">
-              <span class="area-card-number">Complemento 02</span>
-              <span class="area-card-arrow">↗</span>
-            </div>
-            <div class="area-card-content">
-              <h3>Responsabilidad sanitaria</h3>
-              <p>Defendemos a instituciones de salud y profesionales médicos en reclamos, mediaciones y juicios donde importan la técnica, la reputación y la continuidad profesional.</p>
-              <span class="area-card-link">Ver sección</span>
-            </div>
-          </a>
-
-          <a href="acciones-constitucionales.html" class="area-card fade-in-up" style="transition-delay: 0.2s;">
-            <div class="area-card-header">
-              <span class="area-card-number">Complemento 03</span>
-              <span class="area-card-arrow">↗</span>
-            </div>
-            <div class="area-card-content">
-              <h3>Acciones constitucionales</h3>
-              <p>Respondemos con rapidez y criterio frente a actos u omisiones que comprometen derechos fundamentales, patrimonio o continuidad del negocio.</p>
-              <span class="area-card-link">Ver sección</span>
-            </div>
-          </a>
-        </div>
-        
-        <div style="margin-top: 4rem; display: flex; justify-content: space-between;" class="fade-in-up">
-          <a href="insolvencia-reorganizacion.html" style="font-weight: 700; color: var(--color-text-main); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">← Insolvencia y reorganización</a>
-          <a href="acciones-constitucionales.html" style="font-weight: 700; color: var(--color-accent); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Acciones constitucionales →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACTO SECTION -->
+    <!-- CONTACTO -->
     <section class="section" id="contacto">
       <div class="container contact-grid">
         <div class="fade-in-up">
           <div class="eyebrow">Contacto</div>
-          <h2>Si necesita responder a una fiscalización, acción individual o a un reclamo masivo, conversemos<span class="dot">.</span></h2>
-          <p class="lead">Estamos disponibles para revisar el caso, ordenar la exposición y definir una estrategia de respuesta.</p>
-          
+          <h2>Si necesita responder a una fiscalización o reclamo masivo, conversemos<span class="dot">.</span></h2>
+          <p class="lead">Estamos disponibles para revisar el caso, ordenar la exposición y definir una estrategia de respuesta sólida.</p>
           <div class="contact-details">
             <a href="mailto:contacto@marchi.cl">contacto@marchi.cl</a>
             <a href="tel:+56223644238">+56 2 2364 4238</a>
-            <span style="color: rgba(255, 255, 255, 0.6); font-weight: 400; font-size:0.95rem; margin-top:0.5rem;">Av. Isidora Goyenechea 3000, piso 23, Las Condes, Santiago</span>
           </div>
         </div>
-        
         <div class="form-card fade-in-up" style="transition-delay: 0.2s;">
-          <form action="mailto:contacto@marchi.cl" method="post" enctype="text/plain">
-            
+          <form onsubmit="event.preventDefault();">
             <div class="form-group">
-              <label class="form-label" for="name">Nombre</label>
-              <input class="form-input" type="text" id="name" name="name" placeholder="Nombre y cargo" required>
+              <label class="form-label" for="nombre">Nombre completo</label>
+              <input class="form-input" type="text" id="nombre" placeholder="Ej. Juan Pérez" required>
             </div>
-            
             <div class="form-group">
-              <label class="form-label" for="email">Email</label>
-              <input class="form-input" type="email" id="email" name="email" placeholder="correo@empresa.cl" required>
+              <label class="form-label" for="email">Correo corporativo</label>
+              <input class="form-input" type="email" id="email" placeholder="correo@empresa.cl" required>
             </div>
-            
             <div class="form-group">
-              <label class="form-label" for="subject">Asunto</label>
-              <input class="form-input" type="text" id="subject" name="subject" placeholder="Breve descripción del asunto" required>
+              <label class="form-label" for="mensaje">Asunto</label>
+              <textarea class="form-input" id="mensaje" rows="3" placeholder="Breve contexto de la contingencia." required></textarea>
             </div>
-            
-            <div class="form-group">
-              <label class="form-label" for="message">Mensaje</label>
-              <textarea class="form-input" id="message" name="message" rows="4" placeholder="Cuéntenos brevemente el contexto del caso." required></textarea>
-            </div>
-            
             <button type="submit" class="btn btn--primary" style="width: 100%; margin-top: 1rem;">Enviar consulta</button>
-            <p style="font-size: 0.65rem; color: #94a3b8; text-align: center; margin-top: 1rem;">El formulario abre su cliente de correo con el asunto y el mensaje ya preparados.</p>
           </form>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER INVERTIDO (Oscuro) -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div>
-        <div class="footer-brand">Marchi & Cía<span class="dot">.</span></div>
-        <div class="copyright-text">Marchi 2026 · Consumo y acciones colectivas</div>
-      </div>
-      <div class="footer-links">
-        <a href="index.html#areas">Áreas</a>
-        <a href="equipo.html">Equipo</a>
-        <a href="index.html#contacto">Contacto</a>
-      </div>
+      <div class="footer-brand">Marchi & Cía<span class="dot">.</span></div>
+      <div class="copyright-text">Marchi 2026 · Consumo y acciones colectivas</div>
     </div>
   </footer>
 
-  <!-- SCRIPTS -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // 1. Manejo del Header Glassmorphism
       const header = document.getElementById('main-header');
       window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
-        }
+        if (window.scrollY > 50) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
       });
 
-      // 2. Observer para revelar elementos (Fade-in-up)
-      const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
-      const observer = new IntersectionObserver((entries, observer) => {
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
+          if (entry.isIntersecting) entry.target.classList.add('is-visible');
         });
-      }, observerOptions);
-      document.querySelectorAll('.fade-in-up').forEach((el) => { observer.observe(el); });
+      }, { threshold: 0.15 });
 
-      // 3. Preloader Animación
+      document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
+
       const preloader = document.querySelector('.premium-preloader');
-      if(preloader) {
+      if(preloader && !document.documentElement.classList.contains('hide-preloader')) {
         setTimeout(() => preloader.classList.add('active'), 100);
         setTimeout(() => {
           preloader.classList.add('hide');
           setTimeout(() => preloader.remove(), 1000); 
         }, 1200);
+      } else if (preloader) {
+        preloader.remove();
       }
 
-      // 4. Barra de progreso de lectura
-      const progressBar = document.querySelector('.scroll-progress');
-      window.addEventListener('scroll', () => {
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        if (progressBar) progressBar.style.width = scrolled + '%';
-      });
-
-      // 5. Interacciones de Escritorio (Parallax & Glow)
       if (window.innerWidth >= 992) {
-        // Parallax Hero
         const heroSection = document.querySelector('.hero');
-        const heroPanel = document.querySelector('.hero-panel');
-        if(heroSection && heroPanel) {
+        const heroImageCol = document.querySelector('.hero-image-col');
+        if(heroSection && heroImageCol) {
           heroSection.addEventListener('mousemove', (e) => {
-            const moveX = (e.clientX / window.innerWidth - 0.5) * 30; 
-            const moveY = (e.clientY / window.innerHeight - 0.5) * 30;
-            heroPanel.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
+            const moveX = (e.clientX / window.innerWidth - 0.5) * 20; 
+            const moveY = (e.clientY / window.innerHeight - 0.5) * 20;
+            heroImageCol.style.transform = `translate(${-moveX}px, ${-moveY}px) scale(1.05)`;
           });
           heroSection.addEventListener('mouseleave', () => {
-            heroPanel.style.transform = `translate(0px, 0px)`;
-          });
-        }
-
-        // Glow Tracking Dinámico en Contacto
-        const contactSection = document.getElementById('contacto');
-        if(contactSection) {
-          contactSection.addEventListener('mousemove', (e) => {
-            const rect = contactSection.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            contactSection.style.backgroundImage = `radial-gradient(circle at ${x}px ${y}px, rgba(30, 58, 138, 0.4), transparent 60%)`;
+            heroImageCol.style.transform = `translate(0px, 0px) scale(1)`;
           });
         }
       }

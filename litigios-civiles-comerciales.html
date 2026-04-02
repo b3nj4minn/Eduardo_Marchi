@@ -274,18 +274,56 @@
     .nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--color-text-main); }
 
     /* ==========================================================================
-       HERO SECTION
+       HERO SECTION SPLIT (60/40)
        ========================================================================== */
-    .hero { 
-      padding: 13rem 0 7rem; 
-      background: radial-gradient(circle at top right, #ffffff 0%, var(--color-bg-body) 70%);
+    .hero-split {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #ffffff;
+      padding-top: 80px; 
     }
-    .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 5rem; align-items: center; }
-    .hero-actions { display: flex; gap: 1rem; margin: 3rem 0; flex-wrap: wrap; }
+    
+    @media (min-width: 992px) {
+      .hero-split {
+        flex-direction: row;
+        padding-top: 0;
+      }
+      .hero-split-text {
+        width: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 8rem 4rem 4rem 10vw; 
+      }
+      .hero-split-text-inner {
+        width: 100%;
+        max-width: 540px; 
+        margin-right: auto;
+      }
+      .hero-split-image-container {
+        width: 40%;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-image-col {
+        position: absolute;
+        top: -20px; left: -20px; right: -20px; bottom: -20px;
+        background-image: url('assets/images/business.webp');
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.2s ease-out; 
+      }
+    }
 
-    /* Breadcrumbs */
+    @media (max-width: 991px) {
+      .hero-split-text { padding: 6rem 2rem 3rem; }
+      .hero-split-image-container { min-height: 500px; position: relative; overflow: hidden; }
+      .hero-image-col { width: 100%; height: 100%; position: absolute; top:0; left:0; background-image: url('assets/images/business.webp'); background-size: cover; background-position: center; }
+    }
+
     .breadcrumb {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 600;
       color: var(--color-text-muted);
       text-transform: uppercase;
@@ -299,39 +337,102 @@
     .breadcrumb a:hover { color: var(--color-accent); }
     .breadcrumb span { opacity: 0.5; }
 
-    .hero-panel {
-      background-color: var(--color-bg-darker);
-      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 24px);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      width: 100%;
-      max-width: 480px; 
-      margin-left: auto;
-      box-shadow: var(--shadow-dark);
-      position: relative;
-      transition: transform 0.2s ease-out; /* Parallax */
+    .eyebrow-split {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 1.5rem;
     }
-    .hero-panel-card {
-      background-color: var(--color-bg-dark);
-      border: 1px solid var(--color-border-light);
-      border-radius: var(--radius-md);
-      padding: 3rem 2.5rem; 
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-      position: relative;
-      z-index: 1;
+    .title-split {
+      font-size: clamp(2.5rem, 3.8vw, 4.2rem);
+      line-height: 1.05;
+      color: var(--color-text-main);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.04em;
+      font-weight: 900;
     }
-    
-    .panel-row {
-      display: flex; align-items: center; gap: 1.25rem; padding: 1rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.03);
+    .desc-split {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 1.25rem;
+      max-width: 95%;
+    }
+
+    .actions-split {
+      display: flex;
+      gap: 1rem;
+      margin: 2.5rem 0 1.5rem;
+      flex-wrap: wrap;
+    }
+    .btn-split {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.85rem 2.2rem;
+      border-radius: 99px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
       transition: all 0.3s ease;
-      border-radius: var(--radius-sm);
+      cursor: pointer;
+      text-decoration: none;
     }
-    .panel-row:hover { background: rgba(255,255,255,0.02); transform: translateX(6px); padding-left: 0.75rem; border-bottom-color: transparent;}
-    .panel-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .panel-row img { width: 52px; height: 52px; border-radius: 50%; filter: grayscale(100%); object-fit: cover; }
-    .panel-row-name { color: var(--color-text-light); font-size: 1.05rem; font-weight: 600; line-height: 1.2; margin-bottom: 2px; }
-    .panel-row-role { color: #94a3b8; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;}
+    .btn-split--dark { background-color: #111; color: #fff; border: 1px solid #111; }
+    .btn-split--dark:hover { background-color: var(--color-accent); border-color: var(--color-accent); }
+    .btn-split--outline { background-color: transparent; color: #111; border: 1px solid #ccc; }
+    .btn-split--outline:hover { background-color: rgba(0,0,0,0.05); }
+
+    .tags-split-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .tag-split {
+      padding: 0.3rem 0.9rem;
+      border: 1px solid #d1d1d1;
+      border-radius: 99px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #666;
+    }
+
+    .hero-team-glass {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      width: calc(100% - 4rem);
+      max-width: 320px;
+      background: rgba(5, 10, 15, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      z-index: 2;
+    }
+    @media (max-width: 991px) {
+       .hero-team-glass { bottom: 0; right: 0; left: 0; width: 100%; max-width: 100%; padding: 1.5rem; }
+    }
+
+    .glass-eyebrow {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 1rem;
+    }
+    .glass-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.65rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .glass-row:last-child { border-bottom: none; padding-bottom: 0; }
+    
+    .glass-name {
+      color: #ffffff; 
+      font-size: 0.9rem; 
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .glass-role {
+      color: rgba(255,255,255,0.6); font-size: 0.5rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.15em; text-align: right;
+    }
 
     /* ==========================================================================
        SECCIÓN VISIÓN (Fondo Blanco)
@@ -594,7 +695,6 @@
       .hero-grid { grid-template-columns: 1fr; }
       .site-nav { display: none; }
       .nav-toggle { display: block; }
-      .hero-panel-card { padding: 1.5rem; }
       .form-card { padding: 2rem; }
     }
 
@@ -665,59 +765,51 @@
   </header>
 
   <main>
-    <!-- HERO SECTION -->
-    <section class="hero fade-in-up">
-      <div class="container hero-grid">
-        <div class="hero-content">
+    <!-- HERO SECTION SPLIT (DISEÑO 60/40) -->
+    <section class="hero hero-split fade-in-up">
+      <div class="hero-split-text">
+        <div class="hero-split-text-inner">
           <div class="breadcrumb">
             <a href="index.html#areas">Áreas</a> <span>·</span> <span>Litigios civiles y comerciales</span>
           </div>
-          <div class="eyebrow">Controversias</div>
+          <div class="eyebrow-split">Controversias</div>
           
-          <h1>Litigios civiles y comerciales<span class="dot">.</span></h1>
+          <h1 class="title-split">Litigios civiles y comerciales<span class="dot">.</span></h1>
           
-          <p class="lead">Representamos a demandantes y demandados en controversias civiles y comerciales de alta complejidad, incluyendo arbitrajes, conflictos contractuales, responsabilidad civil, disputas societarias y medidas urgentes cuando están en juego activos relevantes, continuidad operativa o reputación.</p>
+          <p class="desc-split">Representamos a demandantes y demandados en controversias civiles y comerciales de alta complejidad, incluyendo arbitrajes, conflictos contractuales, responsabilidad civil, disputas societarias y medidas urgentes cuando están en juego activos relevantes, continuidad operativa o reputación.</p>
           
-          <div class="hero-actions">
-            <a href="index.html#contacto" class="btn btn--primary">Contactar</a>
-            <a href="index.html#areas" class="btn btn--steel">Volver a prácticas</a>
+          <div class="actions-split">
+            <a href="index.html#contacto" class="btn-split btn-split--dark">Contactar</a>
+            <a href="index.html#areas" class="btn-split btn-split--outline">Volver a prácticas</a>
           </div>
           
-          <div class="tag-row">
-            <span class="tag">Litigios complejos</span>
-            <span class="tag">Arbitraje</span>
-            <span class="tag">Medidas urgentes</span>
+          <div class="tags-split-row">
+            <span class="tag-split">Litigios complejos</span>
+            <span class="tag-split">Arbitraje</span>
+            <span class="tag-split">Medidas urgentes</span>
           </div>
         </div>
+      </div>
 
-        <div class="hero-panel fade-in-up" style="transition-delay: 0.2s;">
-          <div class="hero-panel-card">
-            <div class="eyebrow" style="color: rgba(245,248,251,.55);">Controversias complejas</div>
-            <p style="color: white; font-size: 0.95rem; margin-bottom: 2rem;">Una práctica central de la firma, dedicada a controversias complejas que exigen criterio claro y ejecución rigurosa.</p>
-            
-            <div class="eyebrow" style="color: #94a3b8;">Equipo de referencia</div>
-            
-            <div class="panel-row">
-              <img src="assets/images/eduardo-marchi-thumb.webp" alt="Eduardo Marchi" onerror="this.src='https://ui-avatars.com/api/?name=Eduardo+Marchi&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Eduardo Marchi</div>
-                <div class="panel-row-role">Socio fundador</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <img src="assets/images/ignacio-hormaechea-thumb.webp" alt="Ignacio Hormaechea" onerror="this.src='https://ui-avatars.com/api/?name=Ignacio+Hormaechea&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Ignacio Hormaechea</div>
-                <div class="panel-row-role">Socio</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <img src="assets/images/tomas-frederick-thumb.webp" alt="Tomás Frederick" onerror="this.src='https://ui-avatars.com/api/?name=Tomas+Frederick&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Tomás Frederick</div>
-                <div class="panel-row-role">Asociado</div>
-              </div>
-            </div>
+      <div class="hero-split-image-container">
+        <!-- Reemplazado a business.webp como solicitado -->
+        <div class="hero-image-col" style="background-image: url('assets/images/business.webp');"></div>
+        
+        <!-- Recuadro del Equipo (Glassmorphism) -->
+        <div class="hero-team-glass">
+          <div class="glass-eyebrow">Equipo de referencia</div>
+          
+          <div class="glass-row">
+            <span class="glass-name">Eduardo Marchi</span>
+            <span class="glass-role">Socio fundador</span>
+          </div>
+          <div class="glass-row">
+            <span class="glass-name">Ignacio Hormaechea</span>
+            <span class="glass-role">Socio</span>
+          </div>
+          <div class="glass-row">
+            <span class="glass-name">Tomás Frederick</span>
+            <span class="glass-role">Asociado</span>
           </div>
         </div>
       </div>
@@ -1036,17 +1128,17 @@
 
       // 5. Interacciones de Escritorio (Parallax & Glow)
       if (window.innerWidth >= 992) {
-        // Parallax Hero
-        const heroSection = document.querySelector('.hero');
-        const heroPanel = document.querySelector('.hero-panel');
-        if(heroSection && heroPanel) {
+        // Parallax Hero Split
+        const heroSection = document.querySelector('.hero-split');
+        const heroImageCol = document.querySelector('.hero-image-col');
+        if(heroSection && heroImageCol) {
           heroSection.addEventListener('mousemove', (e) => {
             const moveX = (e.clientX / window.innerWidth - 0.5) * 30; 
             const moveY = (e.clientY / window.innerHeight - 0.5) * 30;
-            heroPanel.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
+            heroImageCol.style.transform = `translate(${-moveX}px, ${-moveY}px) scale(1.05)`;
           });
           heroSection.addEventListener('mouseleave', () => {
-            heroPanel.style.transform = `translate(0px, 0px)`;
+            heroImageCol.style.transform = `translate(0px, 0px) scale(1)`;
           });
         }
 

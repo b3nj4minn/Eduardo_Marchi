@@ -12,6 +12,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
+  <!-- SCRIPT DE TRANSICIÓN INVISIBLE -->
+  <script>
+    if (sessionStorage.getItem('skipLoader') === 'true') {
+      document.documentElement.classList.add('hide-preloader');
+      sessionStorage.removeItem('skipLoader'); 
+    }
+  </script>
+
   <style>
     /* ==========================================================================
        MARCHI & CÍA - HIGH-END BOUTIQUE LAW FIRM STYLES
@@ -276,63 +284,154 @@
     .nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--color-text-main); }
 
     /* ==========================================================================
-       HERO SECTION
+       HERO SECTION SPLIT (60/40)
        ========================================================================== */
-    .hero { 
-      padding: 13rem 0 7rem; 
-      background: radial-gradient(circle at top right, #ffffff 0%, var(--color-bg-body) 70%);
-    }
-    .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 5rem; align-items: center; }
-    .hero-actions { display: flex; gap: 1rem; margin: 3rem 0; flex-wrap: wrap; }
-
-    /* Breadcrumbs */
-    .breadcrumb {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--color-text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 2rem;
+    .hero-split {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .breadcrumb a { transition: color 0.3s; }
-    .breadcrumb a:hover { color: var(--color-accent); }
-    .breadcrumb span { opacity: 0.5; }
-
-    .hero-panel {
-      background-color: var(--color-bg-darker);
-      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 24px);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      width: 100%;
-      max-width: 480px; 
-      margin-left: auto;
-      box-shadow: var(--shadow-dark);
-      position: relative;
-    }
-    .hero-panel-card {
-      background-color: var(--color-bg-dark);
-      border: 1px solid var(--color-border-light);
-      border-radius: var(--radius-md);
-      padding: 3rem 2.5rem; 
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-      position: relative;
-      z-index: 1;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #ffffff; /* Fondo blanco purificado */
+      padding-top: 80px; /* Compensa el header en móviles */
     }
     
-    .panel-row {
-      display: flex; align-items: center; gap: 1.25rem; padding: 1rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-      transition: all 0.3s ease;
-      border-radius: var(--radius-sm);
+    @media (min-width: 992px) {
+      .hero-split {
+        flex-direction: row;
+        padding-top: 0;
+      }
+      .hero-split-text {
+        width: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 8rem 4rem 4rem 10vw; 
+      }
+      .hero-split-text-inner {
+        width: 100%;
+        max-width: 540px; 
+        margin-right: auto;
+      }
+      .hero-split-image-container {
+        width: 40%;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-image-col {
+        position: absolute;
+        top: -20px; left: -20px; right: -20px; bottom: -20px;
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.2s ease-out; 
+      }
     }
-    .panel-row:hover { background: rgba(255,255,255,0.02); transform: translateX(6px); padding-left: 0.75rem; border-bottom-color: transparent;}
-    .panel-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .panel-row img { width: 52px; height: 52px; border-radius: 50%; filter: grayscale(100%); object-fit: cover; }
-    .panel-row-name { color: var(--color-text-light); font-size: 1.05rem; font-weight: 600; line-height: 1.2; margin-bottom: 2px; }
-    .panel-row-role { color: #94a3b8; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;}
+
+    /* Ajustes Mobile para el Hero Split */
+    @media (max-width: 991px) {
+      .hero-split-text { padding: 6rem 2rem 3rem; }
+      .hero-split-image-container { min-height: 500px; position: relative; overflow: hidden; }
+      .hero-image-col { width: 100%; height: 100%; position: absolute; top:0; left:0; background-size: cover; background-position: center; }
+    }
+
+    /* Tipografía Específica del Hero (Estilo Editorial) */
+    .eyebrow-split {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 1.5rem;
+    }
+    .title-split {
+      font-size: clamp(2.5rem, 3.8vw, 4.2rem);
+      line-height: 1.05;
+      color: var(--color-text-main);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+    }
+    .desc-split {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 1.25rem;
+      max-width: 95%;
+    }
+
+    /* Botones de Referencia (Pills) */
+    .actions-split {
+      display: flex;
+      gap: 1rem;
+      margin: 2.5rem 0 1.5rem;
+      flex-wrap: wrap;
+    }
+    .btn-split {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.85rem 2.2rem;
+      border-radius: 99px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-split--dark { background-color: #111; color: #fff; border: 1px solid #111; }
+    .btn-split--dark:hover { background-color: var(--color-accent); border-color: var(--color-accent); }
+    .btn-split--outline { background-color: transparent; color: #111; border: 1px solid #ccc; }
+    .btn-split--outline:hover { background-color: rgba(0,0,0,0.05); }
+
+    /* Etiquetas/Tags debajo de los botones */
+    .tags-split-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .tag-split {
+      padding: 0.3rem 0.9rem;
+      border: 1px solid #d1d1d1;
+      border-radius: 99px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #666;
+    }
+
+    /* Caja Oscura de Equipo (Glassmorphism en la esquina inferior derecha) */
+    .hero-team-glass {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      width: calc(100% - 4rem);
+      max-width: 320px;
+      background: rgba(5, 10, 15, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      z-index: 2;
+    }
+    @media (max-width: 991px) {
+       .hero-team-glass { bottom: 0; right: 0; left: 0; width: 100%; max-width: 100%; padding: 1.5rem; }
+    }
+
+    .glass-eyebrow {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 1rem;
+    }
+    .glass-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.65rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .glass-row:last-child { border-bottom: none; padding-bottom: 0; }
+    
+    .glass-name {
+      color: #ffffff; 
+      font-size: 0.9rem; 
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .glass-role {
+      color: rgba(255,255,255,0.6); font-size: 0.5rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.15em; text-align: right;
+    }
 
     /* ==========================================================================
        SECCIÓN ÁREAS / CAPACIDADES
@@ -516,7 +615,7 @@
     .form-input:focus + .form-label, .form-group:focus-within .form-label { color: var(--color-accent); }
 
     /* ==========================================================================
-       FOOTER
+       FOOTER INVERTIDO (Oscuro)
        ========================================================================== */
     .site-footer { 
       background: var(--color-bg-darker); 
@@ -528,11 +627,25 @@
     @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; align-items: flex-end; } }
     
     .footer-brand { 
-      font-size: 1.25rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; color: #ffffff; display: inline-block;
+      font-size: 1.25rem; 
+      font-weight: 900; 
+      text-transform: uppercase; 
+      letter-spacing: 0.1em; 
+      margin-bottom: 0.75rem; 
+      color: #ffffff; 
+      display: inline-block;
     }
     
     .footer-links { display: flex; flex-wrap: wrap; gap: 3rem; }
-    .footer-links a { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); letter-spacing: 0.12em; transition: all 0.3s ease; position: relative;}
+    .footer-links a { 
+      font-size: 0.75rem; 
+      font-weight: 700; 
+      text-transform: uppercase; 
+      color: rgba(255, 255, 255, 0.6); 
+      letter-spacing: 0.12em; 
+      transition: all 0.3s ease; 
+      position: relative;
+    }
     .footer-links a:hover { color: #ffffff; transform: translateY(-2px); }
     
     .copyright-text { font-size: 0.8rem; font-weight: 500; color: rgba(255, 255, 255, 0.3); margin-top: 0.5rem; }
@@ -540,26 +653,47 @@
     /* ==========================================================================
        ANIMACIONES DE ENTRADA AL SCROLL
        ========================================================================== */
-    .fade-in-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .fade-in-up.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
 
+    /* Responsive General Fixes */
     @media (max-width: 768px) {
       .hero-grid { grid-template-columns: 1fr; }
       .site-nav { display: none; }
       .nav-toggle { display: block; }
-      .hero-panel-card { padding: 1.5rem; }
       .form-card { padding: 2rem; }
     }
+
+    /* PRELOADER CINEMÁTICO */
+    .premium-preloader {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background-color: var(--color-bg-darker); z-index: 999999;
+      display: flex; justify-content: center; align-items: center;
+      transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    .premium-preloader.hide { transform: translateY(-100%); }
+    .preloader-brand { color: white; font-size: 1.5rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; overflow: hidden; }
+    .preloader-brand span { display: block; transform: translateY(100%); transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
+    .premium-preloader.active span { transform: translateY(0); }
+
+    .premium-noise {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none; z-index: 9999; opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Barra de progreso de lectura */
+    .scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: var(--color-accent); z-index: 1001; transition: width 0.1s; }
+
   </style>
 </head>
 <body>
+
+  <div class="premium-preloader">
+    <div class="preloader-brand"><span>Marchi & Cía.</span></div>
+  </div>
+  <div class="premium-noise"></div>
+  <div class="scroll-progress"></div>
 
   <!-- CABECERA -->
   <header class="site-header" id="main-header">
@@ -575,56 +709,55 @@
   </header>
 
   <main>
-    <!-- HERO SECTION -->
-    <section class="hero fade-in-up">
-      <div class="container hero-grid">
-        <div class="hero-content">
+    <!-- HERO SECTION SPLIT (NUEVO DISEÑO 60/40) -->
+    <section class="hero hero-split fade-in-up">
+      <!-- MITAD IZQUIERDA: Textos y Botones -->
+      <div class="hero-split-text">
+        <div class="hero-split-text-inner">
           <div class="breadcrumb">
             <a href="index.html#areas">Áreas</a> <span>·</span> <span>Acciones constitucionales</span>
           </div>
-          <div class="eyebrow">Urgencia</div>
+          <div class="eyebrow-split">Urgencia</div>
           
-          <h1>Acciones constitucionales<span class="dot">.</span><br>Recurso de protección<span class="dot">.</span></h1>
+          <h1 class="title-split">Acciones constitucionales y recurso de protección<span class="dot">.</span></h1>
           
-          <p class="lead">Intervenimos en recursos de protección y otras acciones constitucionales cuando actos u omisiones de autoridades o particulares afectan derechos fundamentales, patrimonio o continuidad del negocio. Son asuntos en los que la rapidez y la calidad de la respuesta inicial suelen definir el curso del caso.</p>
+          <p class="desc-split">Intervenimos en recursos de protección y otras acciones constitucionales cuando actos u omisiones de autoridades o particulares afectan derechos fundamentales, patrimonio o continuidad del negocio. Son asuntos en los que la rapidez y la calidad de la respuesta inicial suelen definir el curso del caso.</p>
           
-          <div class="hero-actions">
-            <a href="index.html#contacto" class="btn btn--primary">Contactar</a>
-            <a href="index.html#areas" class="btn btn--steel">Volver a prácticas</a>
+          <div class="actions-split">
+            <a href="index.html#contacto" class="btn-split btn-split--dark">Contactar</a>
+            <a href="index.html#areas" class="btn-split btn-split--outline">Volver a prácticas</a>
           </div>
           
-          <div class="tag-row">
-            <span class="tag">Recurso de protección</span>
-            <span class="tag">Medidas urgentes</span>
-            <span class="tag">Revisión judicial</span>
+          <!-- Etiquetas tipo "pills" -->
+          <div class="tags-split-row">
+            <span class="tag-split">2 Socios</span>
+            <span class="tag-split">1 Asociado</span>
+          </div>
+          <div class="tags-split-row">
+            <span class="tag-split">Recurso de protección</span>
+            <span class="tag-split">Medidas urgentes</span>
           </div>
         </div>
+      </div>
 
-        <div class="hero-panel fade-in-up" style="transition-delay: 0.2s;">
-          <div class="hero-panel-card">
-            <div class="eyebrow" style="color: #94a3b8;">Equipo de referencia</div>
-            
-            <div class="panel-row">
-              <img src="assets/images/eduardo-marchi-thumb.webp" alt="Eduardo Marchi" onerror="this.src='https://ui-avatars.com/api/?name=Eduardo+Marchi&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Eduardo Marchi</div>
-                <div class="panel-row-role">Socio fundador</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <img src="assets/images/ignacio-hormaechea-thumb.webp" alt="Ignacio Hormaechea" onerror="this.src='https://ui-avatars.com/api/?name=Ignacio+Hormaechea&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Ignacio Hormaechea</div>
-                <div class="panel-row-role">Socio</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <img src="assets/images/tomas-frederick-thumb.webp" alt="Tomás Frederick" onerror="this.src='https://ui-avatars.com/api/?name=Tomas+Frederick&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Tomás Frederick</div>
-                <div class="panel-row-role">Asociado</div>
-              </div>
-            </div>
+      <!-- MITAD DERECHA: Imagen y Overlay del Equipo -->
+      <div class="hero-split-image-container">
+        <div class="hero-image-col" style="background-image: url('assets/images/constitutional.webp');"></div>
+        
+        <div class="hero-team-glass">
+          <div class="glass-eyebrow">Equipo de referencia</div>
+          
+          <div class="glass-row">
+            <span class="glass-name">Eduardo Marchi</span>
+            <span class="glass-role">Socio fundador</span>
+          </div>
+          <div class="glass-row">
+            <span class="glass-name">Ignacio Hormaechea</span>
+            <span class="glass-role">Socio</span>
+          </div>
+          <div class="glass-row">
+            <span class="glass-name">Tomás Frederick</span>
+            <span class="glass-role">Asociado</span>
           </div>
         </div>
       </div>
@@ -921,6 +1054,64 @@
       document.querySelectorAll('.fade-in-up').forEach((el) => {
         observer.observe(el);
       });
+
+      // 3. Funcionalidad del Menú Móvil
+      const navToggle = document.querySelector('.nav-toggle');
+      const siteNav = document.querySelector('.site-nav');
+      if (navToggle && siteNav) {
+        navToggle.addEventListener('click', () => {
+          siteNav.classList.toggle('is-active-mobile');
+        });
+      }
+
+      // 4. Preloader Animación (ESTO SOLUCIONA LA PANTALLA AZUL)
+      const preloader = document.querySelector('.premium-preloader');
+      if(preloader && !document.documentElement.classList.contains('hide-preloader')) {
+        setTimeout(() => preloader.classList.add('active'), 100);
+        setTimeout(() => {
+          preloader.classList.add('hide');
+          setTimeout(() => preloader.remove(), 1000); 
+        }, 1200);
+      } else if (preloader) {
+        preloader.remove();
+      }
+
+      // 5. Barra de progreso de lectura
+      const progressBar = document.querySelector('.scroll-progress');
+      window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        if (progressBar) progressBar.style.width = scrolled + '%';
+      });
+
+      // 6. Interacciones de Escritorio (Parallax & Glow)
+      if (window.innerWidth >= 992) {
+        const heroSection = document.querySelector('.hero');
+        const heroImageCol = document.querySelector('.hero-image-col');
+        if(heroSection && heroImageCol) {
+          heroSection.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX / window.innerWidth - 0.5) * 20; 
+            const moveY = (e.clientY / window.innerHeight - 0.5) * 20;
+            // El scale(1.05) evita que se vean los bordes al moverse
+            heroImageCol.style.transform = `translate(${-moveX}px, ${-moveY}px) scale(1.05)`;
+          });
+          heroSection.addEventListener('mouseleave', () => {
+            heroImageCol.style.transform = `translate(0px, 0px) scale(1)`;
+          });
+        }
+
+        // Glow Tracking Dinámico en Contacto
+        const contactSection = document.getElementById('contacto');
+        if(contactSection) {
+          contactSection.addEventListener('mousemove', (e) => {
+            const rect = contactSection.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            contactSection.style.backgroundImage = `radial-gradient(circle at ${x}px ${y}px, rgba(30, 58, 138, 0.4), transparent 60%)`;
+          });
+        }
+      }
     });
   </script>
 </body>
