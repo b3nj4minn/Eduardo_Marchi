@@ -10,13 +10,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
-  <script>
-    if (sessionStorage.getItem('skipLoader') === 'true') {
-      document.documentElement.classList.add('hide-preloader');
-      sessionStorage.removeItem('skipLoader'); 
-    }
-  </script>
 
   <style>
     /* ==========================================================================
@@ -493,127 +486,6 @@
     .pillar-card h3 { color: var(--color-text-light); font-size: 1.25rem; }
 
     /* ==========================================================================
-       SECCIÓN EQUIPO RELACIONADO (Alineación Izq/Der y Tarjetas Modulares)
-       ========================================================================== */
-    .team-header-aligned {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      margin-bottom: 4rem;
-    }
-    @media (min-width: 992px) {
-      .team-header-aligned {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 4rem;
-      }
-      .team-header-aligned > div { width: 55%; }
-      .team-header-aligned .team-desc-aligned { width: 40%; margin-top: 2rem; color: #64748b; font-size: 1.05rem; line-height: 1.6; }
-    }
-
-    .team-grid-custom {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2.5rem;
-      align-items: start;
-    }
-    @media (min-width: 992px) { .team-grid-custom { grid-template-columns: repeat(3, 1fr); } }
-
-    .team-card-new {
-      background-color: var(--color-bg-dark);
-      border-radius: 4px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.4s ease;
-    }
-    .team-card-new:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
-
-    .team-photo-new {
-      width: 100%;
-      aspect-ratio: 4/5; /* Aspect ratio estándar para mantener consistencia con fotos */
-      object-fit: cover;
-      filter: grayscale(100%);
-      transition: filter 0.5s ease;
-    }
-    .team-card-new:hover .team-photo-new { filter: grayscale(0%); }
-
-    /* Tarjeta Unificada con Expansión al Hover */
-    .team-bar-new {
-      background-color: #0f172a;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-    }
-    .team-bar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-    .team-name-new { color: #ffffff; font-size: 1rem; font-weight: 700; margin: 0; }
-    .team-role-new { color: #94a3b8; font-size: 0.85rem; font-weight: 400; margin: 0; }
-
-    /* Lógica de Expansión Interactiva (Hover) */
-    .team-description-wrapper-new {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .team-card-new:hover .team-description-wrapper-new {
-      grid-template-rows: 1fr;
-    }
-    .team-description-inner-new {
-      overflow: hidden;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .team-card-new:hover .team-description-inner-new {
-      opacity: 1;
-    }
-    
-    .team-divider-line {
-      width: 100%;
-      height: 1px;
-      background-color: rgba(255,255,255,0.1);
-      margin: 1.25rem 0;
-    }
-    .team-description-text {
-      color: #cbd5e1;
-      font-size: 0.85rem;
-      line-height: 1.6;
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-    .team-tags-outline {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-.tag-outline {
-  padding: 0.4rem 1rem;
-  background-color: #ffffff;
-  border: 1px solid #ffffff;
-  border-radius: 99px;
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: #0c1424; /* Texto azul corporativo oscuro */
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  transition: all 0.3s ease;
-  cursor: default;
-  display: inline-block;
-}
-
-.tag-outline:hover {
-  background-color: rgba(15, 23, 42, 0.3); /* Más oscuro que el 0.08 anterior */
-  color: #ffffff;
-  border-color: transparent;
-}
-
-    /* ==========================================================================
        SECCIÓN CONTACTO Y FOOTER
        ========================================================================== */
     #contacto {
@@ -709,18 +581,6 @@
       .form-card { padding: 2rem; }
     }
 
-    /* PRELOADER CINEMÁTICO */
-    .premium-preloader {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background-color: var(--color-bg-darker); z-index: 999999;
-      display: flex; justify-content: center; align-items: center;
-      transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-    .premium-preloader.hide { transform: translateY(-100%); }
-    .preloader-brand { color: white; font-size: 1.5rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; overflow: hidden; }
-    .preloader-brand span { display: block; transform: translateY(100%); transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
-    .premium-preloader.active span { transform: translateY(0); }
-
     .premium-noise {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none; z-index: 9999; opacity: 0.04;
@@ -734,20 +594,17 @@
 </head>
 <body>
 
-  <div class="premium-preloader">
-    <div class="preloader-brand"><span>Marchi & Cía.</span></div>
-  </div>
   <div class="premium-noise"></div>
   <div class="scroll-progress"></div>
 
   <header class="site-header" id="main-header">
     <div class="container header-inner">
-      <a href="index.html" class="brand">Marchi & Cía<span class="dot">.</span></a>
+      <a href="inicio.html" class="brand">Marchi & Cía<span class="dot">.</span></a>
       <button class="nav-toggle" aria-label="Abrir menú">☰</button>
       <nav class="site-nav">
-        <a href="index.html#areas" class="is-active">Áreas</a>
+        <a href="inicio.html#areas" class="is-active">Áreas</a>
         <a href="equipo.html">Equipo</a>
-        <a href="index.html#contacto">Contacto</a>
+        <a href="#contacto">Contacto</a>
       </nav>
     </div>
   </header>
@@ -757,7 +614,7 @@
       <div class="hero-split-text">
         <div class="hero-split-text-inner">
           <div class="breadcrumb">
-            <a href="index.html#areas">Áreas</a> <span>·</span> <span>Insolvencia y reorganización</span>
+            <a href="inicio.html#areas">Áreas</a> <span>·</span> <span>Insolvencia y reorganización</span>
           </div>
           <div class="eyebrow-split">Crisis</div>
           
@@ -768,8 +625,8 @@
           <p class="desc-split" style="font-size: 0.85rem; color: #555;">Actuamos en escenarios donde la presión financiera obliga a tomar decisiones jurídicas y comerciales en tiempos acotados.</p>
           
           <div class="actions-split">
-            <a href="index.html#contacto" class="btn-split btn-split--dark">Contactar</a>
-            <a href="index.html#areas" class="btn-split btn-split--outline">Volver a prácticas</a>
+            <a href="#contacto" class="btn-split btn-split--dark">Contactar</a>
+            <a href="inicio.html#areas" class="btn-split btn-split--outline">Volver a prácticas</a>
           </div>
           
           <div class="tags-split-row">
@@ -856,90 +713,6 @@
             <span class="pillar-number">03</span>
             <h3>Conflicto concursal</h3>
             <p style="font-size:0.95rem;">Representación en incidentes, impugnaciones, verificaciones y demás controversias propias del procedimiento.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="equipo">
-      <div class="container">
-        
-        <div class="team-header-aligned fade-in-up">
-          <div>
-            <div class="eyebrow">- Equipo relacionado</div>
-            <h2>La práctica se apoya en un equipo corto y visible.</h2>
-          </div>
-          <p class="team-desc-aligned">Los perfiles se muestran como parte real de la capacidad del estudio, con roles claros en la ejecución del caso.</p>
-        </div>
-        
-        <div class="team-grid-custom">
-          <!-- Miembro 1 -->
-          <div class="team-card-new fade-in-up">
-            <img src="assets/images/eduardo-marchi.webp" alt="Eduardo Marchi" class="team-photo-new" onerror="this.src='https://ui-avatars.com/api/?name=Eduardo+Marchi&background=1e293b&color=fff'">
-            <div class="team-bar-new">
-              <div class="team-bar-header">
-                <span class="team-name-new">Eduardo Marchi</span>
-                <span class="team-role-new">Socio fundador</span>
-              </div>
-              <div class="team-description-wrapper-new">
-                <div class="team-description-inner-new">
-                  <div class="team-divider-line"></div>
-                  <div class="team-description-text">
-                    Lidera la práctica de resolución de controversias. Representa a acreedores y deudores en procesos de reorganización y liquidación de alta complejidad.
-                  </div>
-                  <div class="team-tags-outline">
-                    <span class="tag-outline">Litigios</span>
-                    <span class="tag-outline">Reorganización</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Miembro 2 -->
-          <div class="team-card-new fade-in-up" style="transition-delay: 0.1s;">
-            <img src="assets/images/tomas-frederick.webp" alt="Tomás Frederick" class="team-photo-new" onerror="this.src='https://ui-avatars.com/api/?name=Tomas+Frederick&background=1e293b&color=fff'">
-            <div class="team-bar-new">
-              <div class="team-bar-header">
-                <span class="team-name-new">Tomás Frederick</span>
-                <span class="team-role-new">Asociado</span>
-              </div>
-              <div class="team-description-wrapper-new">
-                <div class="team-description-inner-new">
-                  <div class="team-divider-line"></div>
-                  <div class="team-description-text">
-                    Apoya en tramitación, control de hitos procesales, coordinación de evidencia y soporte directo a la estrategia del caso concursal.
-                  </div>
-                  <div class="team-tags-outline">
-                    <span class="tag-outline">Tramitación</span>
-                    <span class="tag-outline">Soporte</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Miembro 3 -->
-          <div class="team-card-new fade-in-up" style="transition-delay: 0.2s;">
-            <img src="assets/images/lorenzo-miranda.webp" alt="Lorenzo Miranda" class="team-photo-new" onerror="this.src='https://ui-avatars.com/api/?name=Lorenzo+Miranda&background=1e293b&color=fff'">
-            <div class="team-bar-new">
-              <div class="team-bar-header">
-                <span class="team-name-new">Lorenzo Miranda</span>
-                <span class="team-role-new">Counsel externo</span>
-              </div>
-              <div class="team-description-wrapper-new">
-                <div class="team-description-inner-new">
-                  <div class="team-divider-line"></div>
-                  <div class="team-description-text">
-                    Se incorpora como counsel externo de apoyo cuando el asunto concursal requiere seniority adicional o una mirada altamente especializada.
-                  </div>
-                  <div class="team-tags-outline">
-                    <span class="tag-outline">Seniority</span>
-                    <span class="tag-outline">Especialidad</span>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -1049,9 +822,9 @@
         <div class="copyright-text">Marchi 2026 · Insolvencia y reorganización</div>
       </div>
       <div class="footer-links">
-        <a href="index.html#areas">Áreas</a>
+        <a href="inicio.html#areas">Áreas</a>
         <a href="equipo.html">Equipo</a>
-        <a href="index.html#contacto">Contacto</a>
+        <a href="#contacto">Contacto</a>
       </div>
     </div>
   </footer>
@@ -1088,19 +861,7 @@
         observer.observe(el);
       });
 
-      // 3. Preloader Animación
-      const preloader = document.querySelector('.premium-preloader');
-      if(preloader && !document.documentElement.classList.contains('hide-preloader')) {
-        setTimeout(() => preloader.classList.add('active'), 100);
-        setTimeout(() => {
-          preloader.classList.add('hide');
-          setTimeout(() => preloader.remove(), 1000); 
-        }, 1200);
-      } else if (preloader) {
-        preloader.remove();
-      }
-
-      // 4. Barra de progreso de lectura
+      // 3. Barra de progreso de lectura
       const progressBar = document.querySelector('.scroll-progress');
       window.addEventListener('scroll', () => {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -1109,7 +870,7 @@
         if (progressBar) progressBar.style.width = scrolled + '%';
       });
 
-      // 5. Parallax Sensible al Mouse en Hero
+      // 4. Parallax Sensible al Mouse en Hero
       if (window.innerWidth >= 992) {
         const heroSection = document.querySelector('.hero-split');
         const heroImageCol = document.querySelector('.hero-image-col');

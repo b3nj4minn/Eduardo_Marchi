@@ -64,6 +64,10 @@
       color: white;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--color-bg-body);
@@ -339,6 +343,31 @@
     .team-body p { color: #cbd5e1; font-size: 0.85rem; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1; }
 
     /* ==========================================================================
+       SECCIÓN ÁREAS
+       ========================================================================== */
+    .area-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
+    @media (min-width: 992px) { .area-grid { grid-template-columns: repeat(3, 1fr); } }
+    
+    .area-card {
+      background: var(--color-bg-card); border-radius: var(--radius-md); padding: 3rem 2.5rem;
+      display: flex; flex-direction: column; box-shadow: var(--shadow-sm); transition: var(--transition-smooth);
+      border: 1px solid var(--color-border); position: relative; overflow: hidden;
+    }
+    .area-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--color-accent); transform: scaleX(0); transform-origin: left; transition: transform var(--transition-smooth); }
+    .area-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: transparent; }
+    .area-card:hover::before { transform: scaleX(1); }
+    .area-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .area-card-number { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #94a3b8; transition: color 0.3s; }
+    .area-card:hover .area-card-number { color: var(--color-text-main); }
+    .area-card-arrow { font-size: 1.25rem; color: #888eb0; transition: var(--transition-smooth); }
+    .area-card:hover .area-card-arrow { color: var(--color-accent); transform: translate(4px, -4px); }
+    .area-card-content { flex-grow: 1; }
+    .area-card-content h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--color-text-main); }
+    .area-card-content p { color: var(--color-text-muted); font-size: 0.95rem; }
+    .area-card-link { margin-top: 2rem; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent); opacity: 0.5; transition: var(--transition-smooth); display: inline-flex; align-items: center; gap: 0.5rem; }
+    .area-card:hover .area-card-link { opacity: 1; transform: translateX(4px); }
+
+    /* ==========================================================================
        SECCIÓN MODELO DE TRABAJO (Fondo Oscuro)
        ========================================================================== */
     .section-dark {
@@ -418,23 +447,6 @@
     .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
     .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
 
-    .premium-preloader {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background-color: var(--color-bg-darker); z-index: 999999;
-      display: flex; justify-content: center; align-items: center;
-      transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-    .premium-preloader.hide { transform: translateY(-100%); }
-    .preloader-brand { color: white; font-size: 1.5rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; overflow: hidden; }
-    .preloader-brand span { display: block; transform: translateY(100%); transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
-    .premium-preloader.active span { transform: translateY(0); }
-
-    .premium-noise {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      pointer-events: none; z-index: 9999; opacity: 0.04;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    }
-
     .scroll-progress {
       position: fixed; top: 0; left: 0; width: 0%; height: 3px;
       background: var(--color-accent); z-index: 1001; transition: width 0.1s;
@@ -447,27 +459,24 @@
       .hero-panel-card { padding: 1.5rem; }
       .form-card { padding: 2rem; }
       .partner-feature-body { padding: 2rem; }
+      .area-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
   <!-- ELEMENTOS PREMIUM -->
-  <div class="premium-preloader">
-    <div class="preloader-brand"><span>Marchi & Cía.</span></div>
-  </div>
-  <div class="premium-noise"></div>
   <div class="scroll-progress"></div>
 
   <!-- CABECERA -->
   <header class="site-header" id="main-header">
     <div class="container header-inner">
-      <a href="index.html" class="brand" aria-label="Marchi & Cía.">Marchi & Cía<span class="dot">.</span></a>
+      <a href="inicio.html" class="brand" aria-label="Marchi & Cía.">Marchi & Cía<span class="dot">.</span></a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
       <nav class="site-nav" aria-label="Principal">
-        <a href="index.html#areas">Áreas</a>
-        <a href="equipo.html" class="is-active">Equipo</a>
-        <a href="index.html#contacto">Contacto</a>
+        <a href="#areas">Áreas</a>
+        <a href="#equipo" class="is-active">Equipo</a>
+        <a href="#contacto">Contacto</a>
       </nav>
     </div>
   </header>
@@ -482,63 +491,6 @@
           
           <p class="lead">Marchi & Cía. es una firma boutique dedicada a controversias civiles y comerciales de alta complejidad.</p>
           <p>Trabajamos con una lógica simple: entender el contexto del cliente, dimensionar la exposición y definir una estrategia jurídicamente sólida, comercialmente sensata y bien ejecutada. No aplicamos fórmulas estándar. Cada asunto se aborda con preparación, criterio y foco en el objetivo.</p>
-          
-          <div class="tag-row" style="margin-top: 2.5rem;">
-            <span class="tag">Socio fundador</span>
-            <span class="tag">Socio</span>
-            <span class="tag">Asociada</span>
-            <span class="tag">Asociado</span>
-            <span class="tag">Counsel externo</span>
-          </div>
-        </div>
-
-        <div class="hero-panel fade-in-up" style="transition-delay: 0.2s;">
-          <div class="hero-panel-card">
-            <div class="eyebrow" style="color: rgba(245,248,251,.6);">Equipo 2026</div>
-            <p style="color:rgba(245,248,251,.72);font-size:0.95rem; margin-bottom: 2rem;">Socios visibles, un modelo de trabajo claro y un equipo directamente vinculado a la estrategia y ejecución real del caso.</p>
-            
-            <div class="panel-row">
-              <img src="assets/images/eduardo-marchi-thumb.webp" alt="Eduardo Marchi" onerror="this.src='https://ui-avatars.com/api/?name=Eduardo+Marchi&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Eduardo</div>
-                <div class="panel-row-role">Socio fundador</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <img src="assets/images/ignacio-hormaechea-thumb.webp" alt="Ignacio Hormaechea" onerror="this.src='https://ui-avatars.com/api/?name=Ignacio+Hormaechea&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Ignacio</div>
-                <div class="panel-row-role">Socio</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <img src="assets/images/valeria-palacios-thumb.webp" alt="Valeria Palacios" onerror="this.src='https://ui-avatars.com/api/?name=Valeria+Palacios&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Valeria</div>
-                <div class="panel-row-role">Asociada</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <img src="assets/images/tomas-frederick-thumb.webp" alt="Tomás Frederick" onerror="this.src='https://ui-avatars.com/api/?name=Tomas+Frederick&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Tomás</div>
-                <div class="panel-row-role">Asociado</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <img src="assets/images/lorenzo-miranda-thumb.webp" alt="Lorenzo Miranda" onerror="this.src='https://ui-avatars.com/api/?name=Lorenzo+Miranda&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Lorenzo</div>
-                <div class="panel-row-role">Counsel externo</div>
-              </div>
-            </div>
-            
-            <div class="tag-row" style="margin-top: 2rem;">
-              <span class="tag tag--dark">2 socios</span>
-              <span class="tag tag--dark">2 asociados</span>
-              <span class="tag tag--dark">1 counsel externo</span>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -572,7 +524,7 @@
     <div class="section-divider fade-in-up"></div>
 
     <!-- SOCIOS (Tarjetas Premium Expandidas) -->
-    <section class="section">
+    <section class="section" id="equipo">
       <div class="container">
         <div class="section-header fade-in-up">
           <div>
@@ -722,6 +674,96 @@
       </div>
     </section>
 
+    <!-- DIVISOR SUTIL -->
+    <div class="section-divider fade-in-up"></div>
+
+    <!-- ÁREAS SECTION -->
+    <section class="section" id="areas">
+      <div class="container">
+        <div class="section-header fade-in-up">
+          <div>
+            <div class="eyebrow">Prácticas</div>
+            <h2>Áreas que complementan esta práctica<span class="dot">.</span></h2>
+          </div>
+          <p class="lead">Muchos de estos conflictos exigen una mirada que cruce litigación, seguros, consumo, insolvencia o tutela urgente, según la estructura del caso.</p>
+        </div>
+        
+        <div class="area-grid">
+          <a href="litigios-civiles-comerciales.html" class="area-card fade-in-up">
+            <div class="area-card-header">
+              <span class="area-card-number">01 · Controversias</span>
+              <span class="area-card-arrow">↗</span>
+            </div>
+            <div class="area-card-content">
+              <h3>Litigios civiles y comerciales</h3>
+              <p>Representamos a demandantes y demandados en disputas civiles y comerciales complejas, con estrategia procesal clara, preparación rigurosa y foco en el resultado.</p>
+              <span class="area-card-link">Ver sección</span>
+            </div>
+          </a>
+          
+          <a href="responsabilidad-sanitaria.html" class="area-card fade-in-up" style="transition-delay: 0.1s;">
+            <div class="area-card-header">
+              <span class="area-card-number">02 · Salud</span>
+              <span class="area-card-arrow">↗</span>
+            </div>
+            <div class="area-card-content">
+              <h3>Responsabilidad sanitaria</h3>
+              <p>Defendemos a instituciones de salud y profesionales médicos en reclamos, mediaciones y juicios donde importan la técnica, la reputación y la continuidad profesional.</p>
+              <span class="area-card-link">Ver sección</span>
+            </div>
+          </a>
+
+          <a href="derecho-seguros.html" class="area-card fade-in-up" style="transition-delay: 0.2s;">
+            <div class="area-card-header">
+              <span class="area-card-number">03 · Seguros</span>
+              <span class="area-card-arrow">↗</span>
+            </div>
+            <div class="area-card-content">
+              <h3>Derecho de seguros</h3>
+              <p>Intervenimos en controversias de cobertura, liquidación de siniestros, impugnaciones y litigios del mercado asegurador, con lectura técnica de póliza y estrategia procesal definida.</p>
+              <span class="area-card-link">Ver sección</span>
+            </div>
+          </a>
+
+          <a href="insolvencia-reorganizacion.html" class="area-card fade-in-up" style="transition-delay: 0.3s;">
+            <div class="area-card-header">
+              <span class="area-card-number">04 · Crisis</span>
+              <span class="area-card-arrow">↗</span>
+            </div>
+            <div class="area-card-content">
+              <h3>Insolvencia y reorganización</h3>
+              <p>Asesoramos y litigamos en reorganizaciones, liquidaciones y conflictos concursales, priorizando continuidad, recuperación y protección de valor.</p>
+              <span class="area-card-link">Ver sección</span>
+            </div>
+          </a>
+
+          <a href="consumo-acciones-colectivas.html" class="area-card fade-in-up" style="transition-delay: 0.4s;">
+            <div class="area-card-header">
+              <span class="area-card-number">05 · Impacto masivo</span>
+              <span class="area-card-arrow">↗</span>
+            </div>
+            <div class="area-card-content">
+              <h3>Consumo y acciones colectivas</h3>
+              <p>Defendemos a empresas e instituciones financieras en materias propias del derecho del consumo, con atención al impacto jurídico, operativo y reputacional del caso.</p>
+              <span class="area-card-link">Ver sección</span>
+            </div>
+          </a>
+
+          <a href="acciones-constitucionales.html" class="area-card fade-in-up" style="transition-delay: 0.5s;">
+            <div class="area-card-header">
+              <span class="area-card-number">06 · Urgencia</span>
+              <span class="area-card-arrow">↗</span>
+            </div>
+            <div class="area-card-content">
+              <h3>Acciones constitucionales</h3>
+              <p>Respondemos con rapidez y criterio frente a actos u omisiones que comprometen derechos fundamentales, patrimonio o continuidad del negocio.</p>
+              <span class="area-card-link">Ver sección</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- CONTACTO SECTION (Rediseñada) -->
     <section class="section" id="contacto">
       <div class="container contact-grid">
@@ -766,13 +808,13 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>
-        <div class="footer-brand">Marchi & Cía<span class="dot">.</span></div>
+        <a href="inicio.html" class="footer-brand" style="text-decoration: none;">Marchi & Cía<span class="dot">.</span></a>
         <div class="copyright-text">Marchi 2026 · Equipo</div>
       </div>
       <div class="footer-links">
-        <a href="index.html#areas">Áreas</a>
-        <a href="equipo.html">Equipo</a>
-        <a href="index.html#contacto">Contacto</a>
+        <a href="#areas">Áreas</a>
+        <a href="#equipo">Equipo</a>
+        <a href="#contacto">Contacto</a>
       </div>
     </div>
   </footer>
@@ -797,16 +839,6 @@
         });
       }, observerOptions);
       document.querySelectorAll('.fade-in-up').forEach((el) => { observer.observe(el); });
-
-      // 3. Preloader Animación
-      const preloader = document.querySelector('.premium-preloader');
-      if(preloader) {
-        setTimeout(() => preloader.classList.add('active'), 100);
-        setTimeout(() => {
-          preloader.classList.add('hide');
-          setTimeout(() => preloader.remove(), 1000); 
-        }, 1200);
-      }
 
       // 4. Barra de progreso de lectura
       const progressBar = document.querySelector('.scroll-progress');

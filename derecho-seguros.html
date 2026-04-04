@@ -10,13 +10,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
-  <script>
-    if (sessionStorage.getItem('skipLoader') === 'true') {
-      document.documentElement.classList.add('hide-preloader');
-      sessionStorage.removeItem('skipLoader'); 
-    }
-  </script>
 
   <style>
     /* ==========================================================================
@@ -288,8 +281,8 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      background-color: #ffffff; /* Fondo blanco purificado */
-      padding-top: 80px; /* Compensa el header en móviles */
+      background-color: #ffffff;
+      padding-top: 80px;
     }
     
     @media (min-width: 992px) {
@@ -465,6 +458,29 @@
     .area-card:hover::before { transform: scaleX(1); }
     .area-card h3 { font-size: 1.15rem; margin-bottom: 1rem; }
 
+    .area-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .area-card-number { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #94a3b8; transition: color 0.3s; }
+    .area-card:hover .area-card-number { color: var(--color-text-main); }
+    
+    .area-card-arrow { font-size: 1.25rem; color: #888eb0; transition: var(--transition-smooth); }
+    .area-card:hover .area-card-arrow { color: var(--color-accent); transform: translate(4px, -4px); }
+
+    .area-card-content { flex-grow: 1; }
+    .area-card-link {
+      margin-top: 2rem;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+      opacity: 0.5; 
+      transition: var(--transition-smooth);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .area-card:hover .area-card-link { opacity: 1; transform: translateX(4px); }
+
     /* ==========================================================================
        SECCIÓN FIRMA / VISIÓN (Métricas estilo Checklist)
        ========================================================================== */
@@ -503,66 +519,6 @@
     .pillar-number { display: block; font-family: monospace; font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; transition: color 0.3s; }
     .pillar-card:hover .pillar-number { color: var(--color-text-light); }
     .pillar-card h3 { color: var(--color-text-light); font-size: 1.25rem; }
-
-    /* ==========================================================================
-       SECCIÓN EQUIPO (Grilla compacta premium)
-       ========================================================================== */
-    .team-grid-top {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2.5rem;
-      align-items: start; 
-    }
-    @media (min-width: 992px) { .team-grid-top { grid-template-columns: repeat(3, 1fr); } }
-
-    .team-card {
-      background-color: var(--color-bg-dark);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition-smooth);
-      display: flex;
-      flex-direction: column;
-    }
-    .team-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
-
-    .team-photo-wrapper {
-      width: 100%;
-      aspect-ratio: 4/5;
-      overflow: hidden;
-      background-color: #e2e8f0;
-      position: relative;
-    }
-
-    .team-photo {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: grayscale(100%) sepia(10%);
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
-    }
-    .team-card:hover .team-photo { transform: scale(1.05); filter: grayscale(0%); }
-
-    .team-info { padding: 1.5rem; text-align: center; }
-    .team-info-name { display: inline-block; color: var(--color-text-light); font-size: 1.1rem; font-weight: 600; margin: 0; letter-spacing: -0.01em;}
-    .team-info-role { display: inline-block; color: #94a3b8; font-size: 0.9rem; font-weight: 400; margin-left: 0.25rem;}
-
-    .team-description-wrapper {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .team-card:hover .team-description-wrapper { grid-template-rows: 1fr; }
-    
-    .team-description-inner { overflow: hidden; opacity: 0; transition: opacity 0.5s ease; text-align: left; }
-    .team-card:hover .team-description-inner { opacity: 1; }
-    
-    .team-description-content {
-      padding-top: 1.25rem;
-      margin-top: 1.25rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      color: #cbd5e1;
-      font-size: 0.85rem;
-      line-height: 1.6;
-    }
 
     /* ==========================================================================
        SECCIÓN CONTACTO
@@ -663,18 +619,6 @@
       .form-card { padding: 2rem; }
     }
 
-    /* PRELOADER CINEMÁTICO */
-    .premium-preloader {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background-color: var(--color-bg-darker); z-index: 999999;
-      display: flex; justify-content: center; align-items: center;
-      transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-    .premium-preloader.hide { transform: translateY(-100%); }
-    .preloader-brand { color: white; font-size: 1.5rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; overflow: hidden; }
-    .preloader-brand span { display: block; transform: translateY(100%); transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
-    .premium-preloader.active span { transform: translateY(0); }
-
     .premium-noise {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none; z-index: 9999; opacity: 0.04;
@@ -688,20 +632,17 @@
 </head>
 <body>
 
-  <div class="premium-preloader">
-    <div class="preloader-brand"><span>Marchi & Cía.</span></div>
-  </div>
   <div class="premium-noise"></div>
   <div class="scroll-progress"></div>
 
   <header class="site-header" id="main-header">
     <div class="container header-inner">
-      <a href="index.html" class="brand">Marchi & Cía<span class="dot">.</span></a>
+      <a href="inicio.html" class="brand">Marchi & Cía<span class="dot">.</span></a>
       <button class="nav-toggle" aria-label="Abrir menú">☰</button>
       <nav class="site-nav">
-        <a href="index.html#areas" class="is-active">Áreas</a>
+        <a href="inicio.html#areas" class="is-active">Áreas</a>
         <a href="equipo.html">Equipo</a>
-        <a href="index.html#contacto">Contacto</a>
+        <a href="#contacto">Contacto</a>
       </nav>
     </div>
   </header>
@@ -711,7 +652,7 @@
       <div class="hero-split-text">
         <div class="hero-split-text-inner">
           <div class="breadcrumb">
-            <a href="index.html#areas">Áreas</a> <span>·</span> <span>Derecho de seguros</span>
+            <a href="inicio.html#areas">Áreas</a> <span>·</span> <span>Derecho de seguros</span>
           </div>
           <div class="eyebrow-split">Cobertura y siniestros</div>
           
@@ -722,8 +663,8 @@
           <p class="desc-split" style="font-size: 0.85rem; color: #555;">Actuamos con una lógica simple: entender el contexto del cliente, dimensionar la exposición y definir una estrategia jurídicamente sólida y comercialmente sensata.</p>
           
           <div class="actions-split">
-            <a href="index.html#contacto" class="btn-split btn-split--dark">Contactar</a>
-            <a href="index.html#areas" class="btn-split btn-split--outline">Volver a prácticas</a>
+            <a href="#contacto" class="btn-split btn-split--dark">Contactar</a>
+            <a href="inicio.html#areas" class="btn-split btn-split--outline">Volver a prácticas</a>
           </div>
           
           <div class="tags-split-row">
@@ -813,83 +754,6 @@
             <span class="pillar-number">03</span>
             <h3>Litigios de Seguros</h3>
             <p style="font-size:0.95rem;">Defensa y persecución judicial de derechos derivados del contrato de seguro en sede civil y arbitral.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="equipo">
-      <div class="container">
-        <div class="section-header fade-in-up">
-          <div>
-            <div class="eyebrow">Equipo relacionado</div>
-            <h2>La práctica se apoya en un equipo corto y visible<span class="dot">.</span></h2>
-          </div>
-          <p class="lead">Los perfiles se muestran como parte real de la capacidad técnica del estudio en asuntos de cobertura.</p>
-        </div>
-        
-        <div class="team-grid-top">
-          <div class="team-card fade-in-up">
-            <div class="team-photo-wrapper">
-              <img src="assets/images/eduardo-marchi.webp" alt="Eduardo Marchi" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80'">
-            </div>
-            <div class="team-info">
-              <h3 class="team-info-name">Eduardo Marchi</h3>
-              <span class="team-info-role">Socio fundador</span>
-              <div class="team-description-wrapper">
-                <div class="team-description-inner">
-                  <div class="team-description-content">
-                    <p>Lidera la práctica de resolución de controversias en seguros y reaseguros. Representa a empresas nacionales e internacionales en controversias complejas de cobertura y siniestros de alta cuantía.</p>
-                    <div class="tag-row" style="margin-top: 1rem; justify-content: center;">
-                      <span class="tag">Cobertura</span>
-                      <span class="tag">Siniestros</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="team-card fade-in-up" style="transition-delay: 0.1s;">
-            <div class="team-photo-wrapper">
-              <img src="assets/images/tomas-frederick.webp" alt="Tomás Frederick" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=400&q=80'">
-            </div>
-            <div class="team-info">
-              <h3 class="team-info-name">Tomás Frederick</h3>
-              <span class="team-info-role">Asociado</span>
-              <div class="team-description-wrapper">
-                <div class="team-description-inner">
-                  <div class="team-description-content">
-                    <p>Se enfoca en el análisis técnico de pólizas, liquidación de siniestros complejos y la gestión estratégica de reclamaciones frente a aseguradores y liquidadores.</p>
-                    <div class="tag-row" style="margin-top: 1rem; justify-content: center;">
-                      <span class="tag">Análisis técnico</span>
-                      <span class="tag">Gestión</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="team-card fade-in-up" style="transition-delay: 0.2s;">
-            <div class="team-photo-wrapper">
-              <img src="assets/images/valeria-palacios.webp" alt="Valeria Palacios" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80'">
-            </div>
-            <div class="team-info">
-              <h3 class="team-info-name">Valeria Palacios</h3>
-              <span class="team-info-role">Asociada</span>
-              <div class="team-description-wrapper">
-                <div class="team-description-inner">
-                  <div class="team-description-content">
-                    <p>Apoya en la tramitación inmediata, levantamiento urgente de evidencia documental y soporte operativo para asegurar el ingreso oportuno de los recursos y reclamaciones.</p>
-                    <div class="tag-row" style="margin-top: 1rem; justify-content: center;">
-                      <span class="tag">Tramitación</span>
-                      <span class="tag">Soporte</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -999,9 +863,9 @@
         <div class="copyright-text">Marchi 2026 · Derecho de seguros</div>
       </div>
       <div class="footer-links">
-        <a href="index.html#areas">Áreas</a>
+        <a href="inicio.html#areas">Áreas</a>
         <a href="equipo.html">Equipo</a>
-        <a href="index.html#contacto">Contacto</a>
+        <a href="#contacto">Contacto</a>
       </div>
     </div>
   </footer>
@@ -1038,19 +902,7 @@
         observer.observe(el);
       });
 
-      // 3. Preloader Animación (ESTO ELIMINA LA PANTALLA AZUL)
-      const preloader = document.querySelector('.premium-preloader');
-      if(preloader && !document.documentElement.classList.contains('hide-preloader')) {
-        setTimeout(() => preloader.classList.add('active'), 100);
-        setTimeout(() => {
-          preloader.classList.add('hide');
-          setTimeout(() => preloader.remove(), 1000); 
-        }, 1200);
-      } else if (preloader) {
-        preloader.remove();
-      }
-
-      // 4. Barra de progreso de lectura
+      // 3. Barra de progreso de lectura
       const progressBar = document.querySelector('.scroll-progress');
       window.addEventListener('scroll', () => {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -1059,7 +911,7 @@
         if (progressBar) progressBar.style.width = scrolled + '%';
       });
 
-      // 5. Parallax Sensible al Mouse en Hero
+      // 4. Parallax Sensible al Mouse en Hero
       if (window.innerWidth >= 992) {
         const heroSection = document.querySelector('.hero');
         const heroImageCol = document.querySelector('.hero-image-col');

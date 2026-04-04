@@ -12,14 +12,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
-  <!-- SCRIPT DE TRANSICIÓN INVISIBLE -->
-  <script>
-    if (sessionStorage.getItem('skipLoader') === 'true') {
-      document.documentElement.classList.add('hide-preloader');
-      sessionStorage.removeItem('skipLoader'); 
-    }
-  </script>
-
   <style>
     /* ==========================================================================
        MARCHI & CÍA - HIGH-END BOUTIQUE LAW FIRM STYLES
@@ -495,64 +487,8 @@
     .pillar-card h3 { color: var(--color-text-light); font-size: 1.25rem; margin-bottom: 1rem; }
 
     /* ==========================================================================
-       SECCIÓN EQUIPO (Grilla compacta premium)
+       SECCIÓN EQUIPO (Eliminada a pedido)
        ========================================================================== */
-    .team-grid-top {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2.5rem;
-      align-items: start; 
-    }
-    @media (min-width: 992px) { .team-grid-top { grid-template-columns: repeat(3, 1fr); } }
-
-    .team-card {
-      background-color: var(--color-bg-dark);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition-smooth);
-      display: flex;
-      flex-direction: column;
-    }
-    .team-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
-
-    .team-photo-wrapper {
-      width: 100%;
-      aspect-ratio: 4/5;
-      overflow: hidden;
-      background-color: #e2e8f0;
-      position: relative;
-    }
-
-    .team-photo {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: grayscale(100%) sepia(10%);
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
-    }
-    .team-card:hover .team-photo { transform: scale(1.05); filter: grayscale(0%); }
-
-    .team-info { padding: 1.5rem; text-align: center; }
-    .team-info-name { display: inline-block; color: var(--color-text-light); font-size: 1.1rem; font-weight: 600; margin: 0; letter-spacing: -0.01em;}
-    .team-info-role { display: inline-block; color: #94a3b8; font-size: 0.9rem; font-weight: 400; margin-left: 0.25rem;}
-
-    .team-description-wrapper {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .team-card:hover .team-description-wrapper { grid-template-rows: 1fr; }
-    
-    .team-description-inner { overflow: hidden; opacity: 0; transition: opacity 0.5s ease; text-align: left; }
-    .team-card:hover .team-description-inner { opacity: 1; }
-    
-    .team-description-content {
-      padding-top: 1.25rem;
-      margin-top: 1.25rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      color: #cbd5e1;
-      font-size: 0.85rem;
-      line-height: 1.6;
-    }
 
     /* ==========================================================================
        SECCIÓN CAPACIDADES / ÁREAS
@@ -698,30 +634,6 @@
        MEJORAS PREMIUM
        ========================================================================== */
     
-    .premium-preloader {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background-color: var(--color-bg-darker);
-      z-index: 999999;
-      display: flex; justify-content: center; align-items: center;
-      transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-    .premium-preloader.hide {
-      transform: translateY(-100%);
-    }
-    .preloader-brand {
-      color: white; font-size: 1.5rem; font-weight: 900; letter-spacing: 0.1em;
-      text-transform: uppercase; overflow: hidden;
-    }
-    .preloader-brand span {
-      display: block;
-      transform: translateY(100%);
-      transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-    .premium-preloader.active span {
-      transform: translateY(0);
-    }
-
     .premium-noise {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none; z-index: 9999; opacity: 0.04;
@@ -738,21 +650,18 @@
 <body>
 
   <!-- ELEMENTOS PREMIUM -->
-  <div class="premium-preloader">
-    <div class="preloader-brand"><span>Marchi & Cía.</span></div>
-  </div>
   <div class="premium-noise"></div>
   <div class="scroll-progress"></div>
 
   <!-- CABECERA -->
   <header class="site-header" id="main-header">
     <div class="container header-inner">
-      <a href="index.html" class="brand">Marchi & Cía<span class="dot">.</span></a>
+      <a href="inicio.html" class="brand">Marchi & Cía<span class="dot">.</span></a>
       <button class="nav-toggle" aria-label="Abrir menú">☰</button>
       <nav class="site-nav">
-        <a href="index.html#areas" class="is-active">Áreas</a>
+        <a href="inicio.html#areas" class="is-active">Áreas</a>
         <a href="equipo.html">Equipo</a>
-        <a href="index.html#contacto">Contacto</a>
+        <a href="#contacto">Contacto</a>
       </nav>
     </div>
   </header>
@@ -764,7 +673,7 @@
       <!-- MITAD IZQUIERDA: Textos y Botones -->
       <div class="hero-split-text">
         <div class="hero-split-text-inner">
-          <div class="eyebrow-split">Boutique de litigios y disputas</div>
+          <div class="eyebrow-split">Area</div>
           
           <h1 class="title-split">Responsabilidad sanitaria y defensa médica.</h1>
           
@@ -773,8 +682,8 @@
           <p class="desc-split desc-split--small">Trabajamos con una lógica simple: entender el contexto del cliente, dimensionar la exposición y definir una estrategia jurídicamente sólida, comercialmente sensata y bien ejecutada. No aplicamos fórmulas estándar. Cada asunto se aborda con preparación, criterio y foco en el objetivo.</p>
           
           <div class="actions-split">
-            <a href="index.html#contacto" class="btn-split btn-split--dark">Contactar</a>
-            <a href="index.html#areas" class="btn-split btn-split--outline">Ver prácticas</a>
+            <a href="#contacto" class="btn-split btn-split--dark">Contactar</a>
+            <a href="inicio.html#areas" class="btn-split btn-split--outline">Ver prácticas</a>
           </div>
           
           <div class="tags-split-row">
@@ -877,90 +786,6 @@
             <span class="pillar-number">03</span>
             <h3>Continuidad profesional</h3>
             <p style="font-size:0.95rem;">El objetivo no es solo la defensa judicial. También es proteger la continuidad de la práctica, la institución y la toma de decisiones futuras.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-divider fade-in-up"></div>
-
-    <!-- EQUIPO RELACIONADO SECTION -->
-    <section class="section" id="equipo">
-      <div class="container">
-        <div class="section-header fade-in-up">
-          <div>
-            <div class="eyebrow">Equipo relacionado</div>
-            <h2>La práctica se apoya en un equipo corto y visible<span class="dot">.</span></h2>
-          </div>
-          <p class="lead">Los perfiles se muestran como parte real de la capacidad del estudio, con roles claros y un lenguaje coherente con el resto del sitio.</p>
-        </div>
-        
-        <div class="team-grid-top">
-          <!-- Miembro 1 -->
-          <div class="team-card fade-in-up">
-            <div class="team-photo-wrapper">
-              <img src="assets/images/eduardo-marchi.webp" alt="Eduardo Marchi" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80'">
-            </div>
-            <div class="team-info">
-              <h3 class="team-info-name">Eduardo Marchi</h3>
-              <span class="team-info-role">Socio fundador</span>
-              <div class="team-description-wrapper">
-                <div class="team-description-inner">
-                  <div class="team-description-content">
-                    <p>Eduardo Marchi lidera la práctica de litigios y resolución de controversias de la firma. Ha representado a empresas nacionales e internacionales en litigios complejos.</p>
-                    <div class="tag-row" style="margin-top: 1rem; justify-content: center;">
-                      <span class="tag">Litigios complejos</span>
-                      <span class="tag">Seguros</span>
-                      <span class="tag">Consumo</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Miembro 2 -->
-          <div class="team-card fade-in-up" style="transition-delay: 0.1s;">
-            <div class="team-photo-wrapper">
-              <img src="assets/images/ignacio-hormaechea.webp" alt="Ignacio Hormaechea" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80'">
-            </div>
-            <div class="team-info">
-              <h3 class="team-info-name">Ignacio Hormaechea</h3>
-              <span class="team-info-role">Socio</span>
-              <div class="team-description-wrapper">
-                <div class="team-description-inner">
-                  <div class="team-description-content">
-                    <p>Ignacio Hormaechea participa directamente en controversias civiles y comerciales, con foco en la evaluación temprana, la definición de estrategia procesal y la conducción coordinada.</p>
-                    <div class="tag-row" style="margin-top: 1rem; justify-content: center;">
-                      <span class="tag">Estrategia procesal</span>
-                      <span class="tag">Atención directa</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Miembro 3 -->
-          <div class="team-card fade-in-up" style="transition-delay: 0.2s;">
-            <div class="team-photo-wrapper">
-              <img src="assets/images/valeria-palacios.webp" alt="Valeria Palacios" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80'">
-            </div>
-            <div class="team-info">
-              <h3 class="team-info-name">Valeria Palacios</h3>
-              <span class="team-info-role">Asociada</span>
-              <div class="team-description-wrapper">
-                <div class="team-description-inner">
-                  <div class="team-description-content">
-                    <p>Valeria Palacios concentra su trabajo en investigación jurídica, preparación de escritos, orden de antecedentes y coordinación procesal.</p>
-                    <div class="tag-row" style="margin-top: 1rem; justify-content: center;">
-                      <span class="tag">Investigación</span>
-                      <span class="tag">Escritos</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -1078,9 +903,9 @@
         <div class="copyright-text">Marchi 2026 · Responsabilidad sanitaria</div>
       </div>
       <div class="footer-links">
-        <a href="index.html#areas">Áreas</a>
+        <a href="inicio.html#areas">Áreas</a>
         <a href="equipo.html">Equipo</a>
-        <a href="index.html#contacto">Contacto</a>
+        <a href="#contacto">Contacto</a>
       </div>
     </div>
   </footer>
@@ -1109,16 +934,6 @@
         });
       }, observerOptions);
       document.querySelectorAll('.fade-in-up').forEach((el) => { observer.observe(el); });
-
-      // 3. Preloader Animación
-      const preloader = document.querySelector('.premium-preloader');
-      if(preloader) {
-        setTimeout(() => preloader.classList.add('active'), 100);
-        setTimeout(() => {
-          preloader.classList.add('hide');
-          setTimeout(() => preloader.remove(), 1000); 
-        }, 1200);
-      }
 
       // 4. Barra de progreso de lectura
       const progressBar = document.querySelector('.scroll-progress');
@@ -1160,4 +975,4 @@
     });
   </script>
 </body>
-</html>j
+</html>

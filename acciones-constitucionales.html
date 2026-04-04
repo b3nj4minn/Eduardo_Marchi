@@ -12,14 +12,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
-  <!-- SCRIPT DE TRANSICIÓN INVISIBLE -->
-  <script>
-    if (sessionStorage.getItem('skipLoader') === 'true') {
-      document.documentElement.classList.add('hide-preloader');
-      sessionStorage.removeItem('skipLoader'); 
-    }
-  </script>
-
   <style>
     /* ==========================================================================
        MARCHI & CÍA - HIGH-END BOUTIQUE LAW FIRM STYLES
@@ -506,66 +498,6 @@
     .pillar-card h3 { color: var(--color-text-light); font-size: 1.25rem; }
 
     /* ==========================================================================
-       SECCIÓN EQUIPO (Grilla compacta premium)
-       ========================================================================== */
-    .team-grid-top {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2.5rem;
-      align-items: start; 
-    }
-    @media (min-width: 992px) { .team-grid-top { grid-template-columns: repeat(3, 1fr); } }
-
-    .team-card {
-      background-color: var(--color-bg-dark);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition-smooth);
-      display: flex;
-      flex-direction: column;
-    }
-    .team-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
-
-    .team-photo-wrapper {
-      width: 100%;
-      aspect-ratio: 4/5;
-      overflow: hidden;
-      background-color: #e2e8f0;
-      position: relative;
-    }
-
-    .team-photo {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: grayscale(100%) sepia(10%);
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
-    }
-    .team-card:hover .team-photo { transform: scale(1.05); filter: grayscale(0%); }
-
-    .team-info { padding: 1.5rem; text-align: center; }
-    .team-info-name { display: inline-block; color: var(--color-text-light); font-size: 1.1rem; font-weight: 600; margin: 0; letter-spacing: -0.01em;}
-    .team-info-role { display: inline-block; color: #94a3b8; font-size: 0.9rem; font-weight: 400; margin-left: 0.25rem;}
-
-    .team-description-wrapper {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .team-card:hover .team-description-wrapper { grid-template-rows: 1fr; }
-    
-    .team-description-inner { overflow: hidden; opacity: 0; transition: opacity 0.5s ease; text-align: left; }
-    .team-card:hover .team-description-inner { opacity: 1; }
-    
-    .team-description-content {
-      padding-top: 1.25rem;
-      margin-top: 1.25rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      color: #cbd5e1;
-      font-size: 0.85rem;
-      line-height: 1.6;
-    }
-
-    /* ==========================================================================
        SECCIÓN CONTACTO
        ========================================================================== */
     #contacto {
@@ -664,18 +596,6 @@
       .form-card { padding: 2rem; }
     }
 
-    /* PRELOADER CINEMÁTICO */
-    .premium-preloader {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background-color: var(--color-bg-darker); z-index: 999999;
-      display: flex; justify-content: center; align-items: center;
-      transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-    .premium-preloader.hide { transform: translateY(-100%); }
-    .preloader-brand { color: white; font-size: 1.5rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; overflow: hidden; }
-    .preloader-brand span { display: block; transform: translateY(100%); transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
-    .premium-preloader.active span { transform: translateY(0); }
-
     .premium-noise {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none; z-index: 9999; opacity: 0.04;
@@ -689,21 +609,18 @@
 </head>
 <body>
 
-  <div class="premium-preloader">
-    <div class="preloader-brand"><span>Marchi & Cía.</span></div>
-  </div>
   <div class="premium-noise"></div>
   <div class="scroll-progress"></div>
 
   <!-- CABECERA -->
   <header class="site-header" id="main-header">
     <div class="container header-inner">
-      <a href="index.html" class="brand">Marchi & Cía<span class="dot">.</span></a>
+      <a href="inicio.html" class="brand">Marchi & Cía<span class="dot">.</span></a>
       <button class="nav-toggle" aria-label="Abrir menú">☰</button>
       <nav class="site-nav">
-        <a href="index.html#areas" class="is-active">Áreas</a>
+        <a href="inicio.html#areas" class="is-active">Áreas</a>
         <a href="equipo.html">Equipo</a>
-        <a href="index.html#contacto">Contacto</a>
+        <a href="#contacto">Contacto</a>
       </nav>
     </div>
   </header>
@@ -715,7 +632,7 @@
       <div class="hero-split-text">
         <div class="hero-split-text-inner">
           <div class="breadcrumb">
-            <a href="index.html#areas">Áreas</a> <span>·</span> <span>Acciones constitucionales</span>
+            <a href="inicio.html#areas">Áreas</a> <span>·</span> <span>Acciones constitucionales</span>
           </div>
           <div class="eyebrow-split">Urgencia</div>
           
@@ -724,8 +641,8 @@
           <p class="desc-split">Intervenimos en recursos de protección y otras acciones constitucionales cuando actos u omisiones de autoridades o particulares afectan derechos fundamentales, patrimonio o continuidad del negocio. Son asuntos en los que la rapidez y la calidad de la respuesta inicial suelen definir el curso del caso.</p>
           
           <div class="actions-split">
-            <a href="index.html#contacto" class="btn-split btn-split--dark">Contactar</a>
-            <a href="index.html#areas" class="btn-split btn-split--outline">Volver a prácticas</a>
+            <a href="#contacto" class="btn-split btn-split--dark">Contactar</a>
+            <a href="inicio.html#areas" class="btn-split btn-split--outline">Volver a prácticas</a>
           </div>
           
           <!-- Etiquetas tipo "pills" -->
@@ -819,86 +736,6 @@
             <span class="pillar-number">03</span>
             <h3>Coordinación de fondo</h3>
             <p style="font-size:0.95rem;">La acción constitucional nunca opera aislada; es el preludio o el escudo de un conflicto mayor que debe integrarse a la estrategia corporativa.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- EQUIPO RELACIONADO SECTION -->
-    <section class="section" id="equipo">
-      <div class="container">
-        <div class="section-header fade-in-up">
-          <div>
-            <div class="eyebrow">Equipo relacionado</div>
-            <h2>La práctica se apoya en un equipo corto y visible<span class="dot">.</span></h2>
-          </div>
-          <p class="lead">Los perfiles se muestran como parte real de la capacidad del estudio, con roles claros en la ejecución del caso.</p>
-        </div>
-        
-        <div class="team-grid-top">
-          <!-- Miembro 1 -->
-          <div class="team-card fade-in-up">
-            <div class="team-photo-wrapper">
-              <img src="assets/images/eduardo-marchi.webp" alt="Eduardo Marchi" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80'">
-            </div>
-            <div class="team-info">
-              <h3 class="team-info-name">Eduardo Marchi</h3>
-              <span class="team-info-role">Socio fundador</span>
-              <div class="team-description-wrapper">
-                <div class="team-description-inner">
-                  <div class="team-description-content">
-                    <p>Lidera la práctica de resolución de controversias. Representa a empresas nacionales e internacionales en litigios complejos y escenarios de alta presión judicial.</p>
-                    <div class="tag-row" style="margin-top: 1rem; justify-content: center;">
-                      <span class="tag">Litigios complejos</span>
-                      <span class="tag">Estrategia</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Miembro 2 -->
-          <div class="team-card fade-in-up" style="transition-delay: 0.1s;">
-            <div class="team-photo-wrapper">
-              <img src="assets/images/ignacio-hormaechea.webp" alt="Ignacio Hormaechea" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80'">
-            </div>
-            <div class="team-info">
-              <h3 class="team-info-name">Ignacio Hormaechea</h3>
-              <span class="team-info-role">Socio</span>
-              <div class="team-description-wrapper">
-                <div class="team-description-inner">
-                  <div class="team-description-content">
-                    <p>Foco en la evaluación temprana, la definición de la estrategia procesal urgente y la conducción táctica frente a Cortes de Apelaciones y la Corte Suprema.</p>
-                    <div class="tag-row" style="margin-top: 1rem; justify-content: center;">
-                      <span class="tag">Atención directa</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Miembro 3 -->
-          <div class="team-card fade-in-up" style="transition-delay: 0.2s;">
-            <div class="team-photo-wrapper">
-              <img src="assets/images/tomas-frederick.webp" alt="Tomás Frederick" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=400&q=80'">
-            </div>
-            <div class="team-info">
-              <h3 class="team-info-name">Tomás Frederick</h3>
-              <span class="team-info-role">Asociado</span>
-              <div class="team-description-wrapper">
-                <div class="team-description-inner">
-                  <div class="team-description-content">
-                    <p>Apoya en tramitación inmediata, levantamiento urgente de evidencia documental y soporte operativo para asegurar el ingreso oportuno de los recursos.</p>
-                    <div class="tag-row" style="margin-top: 1rem; justify-content: center;">
-                      <span class="tag">Tramitación</span>
-                      <span class="tag">Soporte</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -1016,9 +853,9 @@
         <div class="copyright-text">Marchi 2026 · Acciones constitucionales</div>
       </div>
       <div class="footer-links">
-        <a href="index.html#areas">Áreas</a>
+        <a href="inicio.html#areas">Áreas</a>
         <a href="equipo.html">Equipo</a>
-        <a href="index.html#contacto">Contacto</a>
+        <a href="#contacto">Contacto</a>
       </div>
     </div>
   </footer>
@@ -1064,19 +901,7 @@
         });
       }
 
-      // 4. Preloader Animación (ESTO SOLUCIONA LA PANTALLA AZUL)
-      const preloader = document.querySelector('.premium-preloader');
-      if(preloader && !document.documentElement.classList.contains('hide-preloader')) {
-        setTimeout(() => preloader.classList.add('active'), 100);
-        setTimeout(() => {
-          preloader.classList.add('hide');
-          setTimeout(() => preloader.remove(), 1000); 
-        }, 1200);
-      } else if (preloader) {
-        preloader.remove();
-      }
-
-      // 5. Barra de progreso de lectura
+      // 4. Barra de progreso de lectura
       const progressBar = document.querySelector('.scroll-progress');
       window.addEventListener('scroll', () => {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -1085,7 +910,7 @@
         if (progressBar) progressBar.style.width = scrolled + '%';
       });
 
-      // 6. Interacciones de Escritorio (Parallax & Glow)
+      // 5. Interacciones de Escritorio (Parallax & Glow)
       if (window.innerWidth >= 992) {
         const heroSection = document.querySelector('.hero');
         const heroImageCol = document.querySelector('.hero-image-col');

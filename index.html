@@ -165,7 +165,7 @@
     
     .premium-preloader { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--color-bg-darker); z-index: 999999; display: flex; justify-content: center; align-items: center; transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1); }
     .premium-preloader.hide { transform: translateY(-100%); }
-    .preloader-brand { color: white; font-size: 1.5rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; overflow: hidden; }
+    .preloader-brand { color: white; font-size: clamp(1.5rem, 4vw, 3rem); font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; overflow: hidden; text-align: center; }
     .preloader-brand span { display: block; transform: translateY(100%); transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
     .premium-preloader.active span { transform: translateY(0); }
     
@@ -176,7 +176,7 @@
 
   <!-- ELEMENTOS PREMIUM -->
   <div class="premium-preloader">
-    <div class="preloader-brand"><span>Marchi & Cía.</span></div>
+    <div class="preloader-brand"><span>Marchi & Cía</span></div>
   </div>
   <div class="premium-noise"></div>
 
@@ -194,7 +194,7 @@
         
         <!-- Indicador visual de Scroll para transición dinámica -->
         <div class="scroll-indicator-wrap" onclick="triggerTransition()">
-          <span>Desliza para ingresar</span>
+          <span>Conocer la Firma</span>
           <div class="scroll-line"></div>
         </div>
         

@@ -12,15 +12,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
-  <!-- SCRIPT DE TRANSICIÓN INVISIBLE (Debe ir aquí, antes de los estilos) -->
-  <script>
-    // Si detectamos la señal de la portada, bloqueamos el preloader ANTES de que renderice
-    if (sessionStorage.getItem('skipLoader') === 'true') {
-      document.documentElement.classList.add('hide-preloader');
-      sessionStorage.removeItem('skipLoader'); // Limpiamos la señal
-    }
-  </script>
-
   <style>
     /* ==========================================================================
        MARCHI & CÍA - HIGH-END BOUTIQUE LAW FIRM STYLES
@@ -162,36 +153,94 @@
        HERO SECTION
        ========================================================================== */
     .hero { 
-      padding: 13rem 0 7rem; 
-      background: radial-gradient(circle at top right, #ffffff 0%, var(--color-bg-body) 70%);
+      padding: 14rem 0 8rem; 
+      position: relative;
+      background-color: var(--color-bg-body);
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
     }
-    .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 5rem; align-items: center; }
+    .hero-container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+    .hero-content {
+      max-width: 55%; 
+    }
     .hero-actions { display: flex; gap: 1rem; margin: 3rem 0; flex-wrap: wrap; }
 
-    .hero-panel {
-      background-color: var(--color-bg-darker);
-      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 24px);
-      border-radius: var(--radius-lg); padding: 1.5rem; width: 100%; max-width: 480px; 
-      margin-left: auto; box-shadow: var(--shadow-dark); position: relative; transition: transform 0.2s ease-out; 
+    /* ==========================================================================
+       ESTILOS DEL NUEVO RECUADRO DE IMAGEN Y EQUIPO
+       ========================================================================== */
+    .hero-image-wrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      border-radius: 0;
+      box-shadow: none;
+      overflow: hidden;
+      z-index: 1;
     }
-    .hero-panel-card {
-      background-color: var(--color-bg-dark); border: 1px solid var(--color-border-light);
-      border-radius: var(--radius-md); padding: 3rem 2.5rem; box-shadow: 0 20px 40px rgba(0,0,0,0.5); position: relative; z-index: 1;
+    .hero-bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center left;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
-    
-    .panel-stats { display: flex; gap: 0.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
-    .panel-stat { 
-      border: 1px solid var(--color-border-light); color: var(--color-text-light); 
-      font-size: 0.65rem; padding: 0.5rem 1rem; border-radius: 99px; font-weight: 700; 
-      text-transform: uppercase; letter-spacing: 0.05em;
+    .hero-team-box {
+      position: absolute;
+      bottom: 01.4rem;
+      right: 01.4rem;
+      background-color: rgba(40, 44, 52, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 2.5rem 3rem;
+      width: 100%;
+      max-width: 440px;
+      border-radius: 0
+      box-shadow: var(--shadow-dark);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
-
-    .panel-row { display: flex; align-items: center; gap: 1.25rem; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.03); transition: all 0.3s ease; border-radius: var(--radius-sm); }
-    .panel-row:hover { background: rgba(255,255,255,0.02); transform: translateX(6px); padding-left: 0.75rem; border-bottom-color: transparent;}
-    .panel-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .panel-row img { width: 52px; height: 52px; border-radius: 50%; filter: grayscale(100%); object-fit: cover; }
-    .panel-row-name { color: var(--color-text-light); font-size: 1.05rem; font-weight: 600; line-height: 1.2; margin-bottom: 2px; }
-    .panel-row-role { color: #94a3b8; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;}
+    .hero-team-box-title {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #a1a1aa;
+      margin-bottom: 2rem;
+    }
+    .hero-team-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .hero-team-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .hero-team-item-name {
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .hero-team-item-role {
+      color: #a1a1aa;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: right;
+      line-height: 1.4;
+    }
 
     /* ==========================================================================
        SECCIÓN ÁREAS
@@ -329,7 +378,11 @@
       }
       .site-nav.is-active-mobile { display: flex !important; }
       .site-nav a { width: 100%; text-align: left; padding: 0.5rem 0; }
-      .hero-grid, .firm-grid, .contact-grid, .team-grid-top, .team-grid-bottom, .area-grid, .pillar-grid, .metrics-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+      .hero { padding: 9rem 0 4rem; min-height: auto; display: block; }
+      .hero-content { max-width: 100%; }
+      .hero-image-wrapper { position: relative; width: 100%; height: 600px; margin-top: 3rem; border-radius: var(--radius-md); }
+      .hero-team-box { bottom: 1.5rem; right: 1.5rem; width: calc(100% - 3rem); max-width: none; padding: 1.5rem 2rem; }
+      .firm-grid, .contact-grid, .team-grid-top, .team-grid-bottom, .area-grid, .pillar-grid, .metrics-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
       .hero-panel { margin-left: 0; max-width: 100%; margin-top: 1rem; }
       .hero-actions { flex-direction: column; width: 100%; }
       .hero-actions .btn { width: 100%; text-align: center; }
@@ -343,28 +396,6 @@
        MEJORAS PREMIUM AÑADIDAS (NUEVAS Y PREVIAS)
        ========================================================================== */
     
-    /* PRELOADER CINEMÁTICO */
-    .premium-preloader {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background-color: var(--color-bg-darker); z-index: 999999;
-      display: flex; justify-content: center; align-items: center;
-      transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-    
-    /* Regla para apagar el preloader instantáneamente si la señal se activó */
-    html.hide-preloader .premium-preloader {
-      display: none !important;
-      animation: none !important;
-    }
-
-    .premium-preloader.hide { transform: translateY(-100%); }
-    .preloader-brand { color: white; font-size: 1.5rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; overflow: hidden; }
-    .preloader-brand span { display: block; transform: translateY(100%); transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
-    .premium-preloader.active span { transform: translateY(0); }
-
-    /* Textura de ruido sutil */
-    .premium-noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
-
     /* Barra de progreso de lectura */
     .scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: var(--color-accent); z-index: 1001; transition: width 0.1s; }
 
@@ -373,10 +404,6 @@
 <body>
 
   <!-- ELEMENTOS PREMIUM -->
-  <div class="premium-preloader">
-    <div class="preloader-brand"><span>Marchi & Cía.</span></div>
-  </div>
-  <div class="premium-noise"></div>
   <div class="scroll-progress"></div>
 
   <!-- CABECERA -->
@@ -387,7 +414,7 @@
       <nav class="site-nav">
         <a href="#areas">Áreas</a>
         <a href="equipo.html">Equipo</a>
-        <a href="index.html#contacto">Contacto</a>
+        <a href="#contacto">Contacto</a>
       </nav>
     </div>
   </header>
@@ -395,11 +422,41 @@
   <main>
     <!-- HERO SECTION -->
     <section class="hero fade-in-up">
-      <div class="container hero-grid">
+      
+      <div class="hero-image-wrapper fade-in-up is-visible" style="transition-delay: 0.2s;">
+        <img src="assets/images/Prubb.webp" alt="Fondo Hero" class="hero-bg">
+        <div class="hero-team-box">
+          <div class="hero-team-box-title">Equipo 2026</div>
+          <div class="hero-team-list">
+            <div class="hero-team-item">
+              <span class="hero-team-item-name">Eduardo Marchi</span>
+              <span class="hero-team-item-role">Socio fundador</span>
+            </div>
+            <div class="hero-team-item">
+              <span class="hero-team-item-name">Ignacio Hormaechea</span>
+              <span class="hero-team-item-role">Socio</span>
+            </div>
+            <div class="hero-team-item">
+              <span class="hero-team-item-name">Valeria Palacios</span>
+              <span class="hero-team-item-role">Asociada</span>
+            </div>
+            <div class="hero-team-item">
+              <span class="hero-team-item-name">Tomás Frederick</span>
+              <span class="hero-team-item-role">Asociado</span>
+            </div>
+            <div class="hero-team-item">
+              <span class="hero-team-item-name">Lorenzo<br>Miranda</span>
+              <span class="hero-team-item-role">Counsel<br>externo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container hero-container">
         <div class="hero-content">
           <div class="eyebrow">Boutique de litigios y disputas</div>
-          <h1>Disputas complejas<span class="dot">.</span><br>Criterio comercial<span class="dot">.</span></h1>
-          <p class="lead">Marchi & Cía. es una firma boutique dedicada a controversias civiles y comerciales de alta complejidad. Representamos a empresas, instituciones y profesionales de la salud cuando están en juego patrimonio, continuidad operativa y reputación. Actuamos con criterio comercial, preparación rigurosa y foco permanente en el resultado.</p>
+          <h1><span style="white-space: nowrap;">Disputas complejas</span><br>Criterio comercial</h1>
+          <p class="lead">Marchi & Cía. es una firma boutique dedicada a controversias civiles y comerciales de alta complejidad. Representamos a empresas, instituciones y profesionales de la salud cuando están en juego patrimonio, continuity operativa y reputación. Actuamos con criterio comercial, preparación rigurosa y foco permanente en el resultado.</p>
           <p>Trabajamos con una lógica simple: entender el contexto del cliente, dimensionar la exposición y definir una estrategia jurídicamente sólida, comercialmente sensata y bien ejecutada. No aplicamos fórmulas estándar. Cada asunto se aborda con preparación, criterio y foco en el objetivo.</p>
           
           <div class="hero-actions">
@@ -415,53 +472,6 @@
             <span class="tag">Patrimonio</span>
             <span class="tag">Continuidad operativa</span>
             <span class="tag">Reputación</span>
-          </div>
-        </div>
-
-        <div class="hero-panel fade-in-up" style="transition-delay: 0.2s;">
-          <div class="hero-panel-card">
-            <div class="eyebrow" style="color: #94a3b8;">Equipo</div>
-            <div class="panel-stats">
-              <span class="panel-stat">2 socios</span>
-              <span class="panel-stat">2 asociados</span>
-              <span class="panel-stat">1 counsel externo</span>
-            </div>
-            
-            <div class="panel-row">
-              <img src="assets/images/eduardo-marchi-thumb.webp" alt="Eduardo Marchi" onerror="this.src='https://ui-avatars.com/api/?name=Eduardo+Marchi&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Eduardo Marchi</div>
-                <div class="panel-row-role">Socio fundador</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <img src="assets/images/ignacio-hormaechea-thumb.webp" alt="Ignacio Hormaechea" onerror="this.src='https://ui-avatars.com/api/?name=Ignacio+Hormaechea&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Ignacio Hormaechea</div>
-                <div class="panel-row-role">Socio</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <img src="assets/images/valeria-palacios-thumb.webp" alt="Valeria Palacios" onerror="this.src='https://ui-avatars.com/api/?name=Valeria+Palacios&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Valeria Palacios</div>
-                <div class="panel-row-role">Asociada</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <img src="assets/images/tomas-frederick-thumb.webp" alt="Tomás Frederick" onerror="this.src='https://ui-avatars.com/api/?name=Tomas+Frederick&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Tomás Frederick</div>
-                <div class="panel-row-role">Asociado</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <img src="assets/images/lorenzo-miranda-thumb.webp" alt="Lorenzo Miranda" onerror="this.src='https://ui-avatars.com/api/?name=Lorenzo+Miranda&background=1e293b&color=fff'">
-              <div>
-                <div class="panel-row-name">Lorenzo Miranda</div>
-                <div class="panel-row-role">Counsel externo</div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -615,7 +625,7 @@
           <!-- Miembro 1 -->
           <div class="team-card fade-in-up">
             <div class="team-photo-wrapper">
-              <img src="assets/images/eduardo-marchi.webp" alt="Eduardo Marchi" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80'">
+              <img src="assets/images/eduardo-marchi.webp" alt="Eduardo Marchi" class="team-photo">
             </div>
             <div class="team-info">
               <h3 class="team-info-name">Eduardo Marchi</h3>
@@ -639,7 +649,7 @@
           <!-- Miembro 2 -->
           <div class="team-card fade-in-up" style="transition-delay: 0.1s;">
             <div class="team-photo-wrapper">
-              <img src="assets/images/ignacio-hormaechea.webp" alt="Ignacio Hormaechea" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80'">
+              <img src="assets/images/ignacio-hormaechea.webp" alt="Ignacio Hormaechea" class="team-photo">
             </div>
             <div class="team-info">
               <h3 class="team-info-name">Ignacio Hormaechea</h3>
@@ -665,7 +675,7 @@
           <!-- Miembro 3 -->
           <div class="team-card fade-in-up" style="transition-delay: 0.2s;">
             <div class="team-photo-wrapper">
-              <img src="assets/images/valeria-palacios.webp" alt="Valeria Palacios" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80'">
+              <img src="assets/images/valeria-palacios.webp" alt="Valeria Palacios" class="team-photo">
             </div>
             <div class="team-info">
               <h3 class="team-info-name">Valeria Palacios</h3>
@@ -688,7 +698,7 @@
           <!-- Miembro 4 -->
           <div class="team-card fade-in-up" style="transition-delay: 0.3s;">
             <div class="team-photo-wrapper">
-              <img src="assets/images/tomas-frederick.webp" alt="Tomás Frederick" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=400&q=80'">
+              <img src="assets/images/tomas-frederick.webp" alt="Tomás Frederick" class="team-photo">
             </div>
             <div class="team-info">
               <h3 class="team-info-name">Tomás Frederick</h3>
@@ -711,7 +721,7 @@
           <!-- Miembro 5 - Lorenzo Miranda (Counsel Externo con color diferenciado Gris Oscuro y texto blanco) -->
           <div class="team-card fade-in-up" style="transition-delay: 0.4s; background-color: #515154;">
             <div class="team-photo-wrapper">
-              <img src="assets/images/lorenzo-miranda.webp" alt="Lorenzo Miranda" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80'">
+              <img src="assets/images/lorenzo-miranda.webp" alt="Lorenzo Miranda" class="team-photo">
             </div>
             <div class="team-info">
               <h3 class="team-info-name" style="color: #ffffff;">Lorenzo Miranda</h3>
@@ -818,9 +828,9 @@
         <div class="copyright-text">© 2026 Marchi & Cía. Todos los derechos reservados.</div>
       </div>
       <div class="footer-links">
-        <a href="index.html#areas">Áreas</a>
+        <a href="#areas">Áreas</a>
         <a href="equipo.html">Equipo</a>
-        <a href="index.html#contacto">Contacto</a>
+        <a href="#contacto">Contacto</a>
       </div>
     </div>
   </footer>
@@ -878,20 +888,6 @@
       // NUEVAS MEJORAS PREMIUM JS
       // ==========================================================================
       
-      // 1. Preloader Animación
-      const preloader = document.querySelector('.premium-preloader');
-      // Verificamos si NO venimos de la portada para animar el preloader normal
-      if(preloader && !document.documentElement.classList.contains('hide-preloader')) {
-        setTimeout(() => preloader.classList.add('active'), 100);
-        setTimeout(() => {
-          preloader.classList.add('hide');
-          setTimeout(() => preloader.remove(), 1000); 
-        }, 1200);
-      } else if (preloader) {
-        // Si veníamos de la portada, borramos el div del HTML directamente
-        preloader.remove();
-      }
-
       // 2. Barra de progreso de lectura
       const progressBar = document.querySelector('.scroll-progress');
       window.addEventListener('scroll', () => {

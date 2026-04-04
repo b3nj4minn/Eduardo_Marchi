@@ -11,14 +11,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
-  <!-- SCRIPT DE TRANSICIÓN INVISIBLE -->
-  <script>
-    if (sessionStorage.getItem('skipLoader') === 'true') {
-      document.documentElement.classList.add('hide-preloader');
-      sessionStorage.removeItem('skipLoader'); 
-    }
-  </script>
 
   <style>
     /* ==========================================================================
@@ -450,13 +442,6 @@
     .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
     .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
 
-    /* PRELOADER */
-    .premium-preloader { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--color-bg-darker); z-index: 999999; display: flex; justify-content: center; align-items: center; transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1); }
-    html.hide-preloader .premium-preloader { display: none !important; animation: none !important; }
-    .premium-preloader.hide { transform: translateY(-100%); }
-    .preloader-brand { color: white; font-size: 1.5rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; overflow: hidden; }
-    .preloader-brand span { display: block; transform: translateY(100%); transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
-    .premium-preloader.active span { transform: translateY(0); }
     .premium-noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
     .scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: var(--color-accent); z-index: 1001; transition: width 0.1s; }
 
@@ -464,21 +449,18 @@
 </head>
 <body>
 
-  <div class="premium-preloader">
-    <div class="preloader-brand"><span>Marchi & Cía.</span></div>
-  </div>
   <div class="premium-noise"></div>
   <div class="scroll-progress"></div>
 
   <!-- CABECERA -->
   <header class="site-header" id="main-header">
     <div class="container header-inner">
-      <a href="index.html" class="brand">Marchi & Cía<span class="dot">.</span></a>
+      <a href="inicio.html" class="brand">Marchi & Cía<span class="dot">.</span></a>
       <button class="nav-toggle" aria-label="Abrir menú">☰</button>
       <nav class="site-nav">
-        <a href="index.html#areas" class="is-active">Áreas</a>
+        <a href="inicio.html#areas" class="is-active">Áreas</a>
         <a href="equipo.html">Equipo</a>
-        <a href="index.html#contacto">Contacto</a>
+        <a href="#contacto">Contacto</a>
       </nav>
     </div>
   </header>
@@ -491,7 +473,7 @@
       <div class="hero-split-text">
         <div class="hero-split-text-inner">
           <div class="breadcrumb">
-            <a href="index.html#areas">Áreas</a> <span>·</span> <span>Consumo y acciones colectivas</span>
+            <a href="inicio.html#areas">Áreas</a> <span>·</span> <span>Consumo y acciones colectivas</span>
           </div>
           <div class="eyebrow-split">Impacto masivo</div>
           
@@ -502,8 +484,8 @@
           <p class="desc-split" style="font-size: 0.85rem; color: #555;">La exposición en estas materias rara vez es solo judicial. También puede comprometer operación, canales comerciales, cumplimiento regulatorio y reputación de marca.</p>
           
           <div class="actions-split">
-            <a href="index.html#contacto" class="btn-split btn-split--dark">Contactar</a>
-            <a href="index.html#areas" class="btn-split btn-split--outline">Ver prácticas</a>
+            <a href="#contacto" class="btn-split btn-split--dark">Contactar</a>
+            <a href="inicio.html#areas" class="btn-split btn-split--outline">Ver prácticas</a>
           </div>
           
           <div class="tags-split-row">
@@ -602,76 +584,6 @@
       </div>
     </section>
 
-    <div class="section-divider fade-in-up"></div>
-
-    <!-- EQUIPO RELACIONADO -->
-<section class="section" id="equipo">
-      <div class="container">
-        <div class="section-header fade-in-up" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 40px;">
-          <div style="flex: 1;">
-            <div class="eyebrow">Equipo relacionado</div>
-            <h2 style="margin-top: 10px;">La práctica se apoya en un equipo corto y visible<span class="dot">.</span></h2>
-          </div>
-          <p class="lead" style="flex: 1; max-width: 450px; margin-top: 45px;">
-            Los perfiles se muestran como parte real de la capacidad del estudio, con roles claros en la ejecución del caso.
-          </p>
-        </div>
-        
-        <div class="team-grid-top">
-          <div class="team-card fade-in-up">
-            <div class="team-photo-wrapper">
-              <img src="assets/images/eduardo-marchi.webp" alt="Eduardo Marchi" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80'">
-            </div>
-            <div class="team-info">
-              <h3 class="team-info-name">Eduardo Marchi</h3>
-              <span class="team-info-role">Socio fundador</span>
-              <div class="team-description-wrapper">
-                <div class="team-description-inner">
-                  <div class="team-description-content">
-                    <p>Lidera la práctica de litigios y resolución de controversias masivas. Representa a empresas en arbitrajes y demandas colectivas complejas.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="team-card fade-in-up" style="transition-delay: 0.1s;">
-            <div class="team-photo-wrapper">
-              <img src="assets/images/valeria-palacios.webp" alt="Valeria Palacios" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80'">
-            </div>
-            <div class="team-info">
-              <h3 class="team-info-name">Valeria Palacios</h3>
-              <span class="team-info-role">Asociada</span>
-              <div class="team-description-wrapper">
-                <div class="team-description-inner">
-                  <div class="team-description-content">
-                    <p>Concentra su trabajo en investigación jurídica, preparación de escritos de defensa y coordinación procesal en juicios de consumo.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="team-card fade-in-up" style="transition-delay: 0.2s;">
-            <div class="team-photo-wrapper">
-              <img src="assets/images/tomas-frederick.webp" alt="Tomás Frederick" class="team-photo" onerror="this.src='https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=400&q=80'">
-            </div>
-            <div class="team-info">
-              <h3 class="team-info-name">Tomás Frederick</h3>
-              <span class="team-info-role">Asociado</span>
-              <div class="team-description-wrapper">
-                <div class="team-description-inner">
-                  <div class="team-description-content">
-                    <p>Apoya en tramitación, control de hitos procesales y coordinación de evidencia para la defensa de prácticas comerciales.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- CONTACTO -->
     <section class="section" id="contacto">
       <div class="container contact-grid">
@@ -727,17 +639,6 @@
       }, { threshold: 0.15 });
 
       document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
-
-      const preloader = document.querySelector('.premium-preloader');
-      if(preloader && !document.documentElement.classList.contains('hide-preloader')) {
-        setTimeout(() => preloader.classList.add('active'), 100);
-        setTimeout(() => {
-          preloader.classList.add('hide');
-          setTimeout(() => preloader.remove(), 1000); 
-        }, 1200);
-      } else if (preloader) {
-        preloader.remove();
-      }
 
       if (window.innerWidth >= 992) {
         const heroSection = document.querySelector('.hero');
