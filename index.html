@@ -163,7 +163,8 @@
     .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
     .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
     
-    .premium-preloader { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--color-bg-darker); z-index: 999999; display: flex; justify-content: center; align-items: center; transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1); }
+    /* Se cambió la transición de transform 1s a transform 2.5s para que suba más lento */
+    .premium-preloader { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--color-bg-darker); z-index: 999999; display: flex; justify-content: center; align-items: center; transition: transform 2.5s cubic-bezier(0.77, 0, 0.175, 1); }
     .premium-preloader.hide { transform: translateY(-100%); }
     .preloader-brand { color: white; font-size: clamp(1.5rem, 4vw, 3rem); font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; overflow: hidden; text-align: center; }
     .preloader-brand span { display: block; transform: translateY(100%); transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
@@ -235,11 +236,12 @@
       // 2. Preloader Animación
       const preloader = document.querySelector('.premium-preloader');
       if(preloader) {
-        setTimeout(() => preloader.classList.add('active'), 100);
+        setTimeout(() => preloader.classList.add('active'), 50); // El texto aparece casi inmediatamente
         setTimeout(() => {
           preloader.classList.add('hide');
-          setTimeout(() => preloader.remove(), 1000); 
-        }, 1200);
+          // Se mantiene la eliminación en 2500ms para permitir que la lenta animación en CSS termine de subir
+          setTimeout(() => preloader.remove(), 2500); 
+        }, 500); // Reducido significativamente para que empiece a subir sin quedarse estancado abajo
       }
 
       // ==========================================
