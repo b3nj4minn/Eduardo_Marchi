@@ -75,6 +75,28 @@
       .section-header > div { max-width: 50%; }
       .section-header > p { max-width: 40%; }
     }
+        #contacto {
+      background-color: var(--color-steel-blue);
+      background-image: radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.4), transparent 60%);
+      color: rgba(255, 255, 255, 0.6); padding: 8rem 0; position: relative; overflow: hidden; transition: background-image 0.2s ease-out;
+    }
+    #contacto h2, #contacto .eyebrow { color: #ffffff; }
+    #contacto .eyebrow::before { background-color: #ffffff; opacity: 0.8; }
+    #contacto .lead { color: rgba(255, 255, 255, 0.6); }
+    .contact-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center; }
+    @media (min-width: 992px) { .contact-grid { grid-template-columns: 1fr 1fr; gap: 8rem; } }
+    .contact-details { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem; font-size: 1.15rem; font-weight: 600; color: #ffffff; }
+    .contact-details a { transition: color 0.2s; position: relative; display: inline-block; width: fit-content; }
+    .contact-details a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0px; left: 0; background-color: #ffffff; transition: width 0.3s ease; }
+    .contact-details a:hover { color: #ffffff; opacity: 0.8; }
+    .contact-details a:hover::after { width: 100%; }
+    .form-card { background: var(--color-bg-card); border-radius: var(--radius-md); padding: 3.5rem; box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.05); }
+    .form-group { margin-bottom: 2rem; position: relative; }
+    .form-label { display: block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; color: #64748b; letter-spacing: 0.1em; transition: color 0.3s;}
+    .form-input { width: 100%; padding: 0.5rem 0; border: none; border-bottom: 1px solid var(--color-border); background: transparent; font-family: inherit; font-size: 1rem; color: var(--color-text-main); transition: all 0.3s ease; }
+    .form-input::placeholder { color: #cbd5e1; font-weight: 300; }
+    .form-input:focus { outline: none; border-bottom-color: var(--color-accent); }
+    .form-input:focus + .form-label, .form-group:focus-within .form-label { color: var(--color-accent); }
 
     /* HEADER PREMIUM */
     .site-header {
@@ -380,7 +402,7 @@
     <section class="hero-split">
       <div class="hero-content">
         <div class="fade-in-up">
-          <h1 class="hero-title">Seis áreas en las que importan el criterio, la preparación y la claridad estratégica<span class="dot">.</span></h1>
+          <h1 class="hero-title">Seis áreas en las que importan el criterio, la preparación y la claridad estratégica<span class="dot"></span></h1>
           
           <p class="hero-text">
             Muchos de estos conflictos exigen una mirada que cruce litigación, seguros, consumo, insolvencia o tutela urgente, según la estructura del caso.
@@ -486,7 +508,49 @@
       </div>
     </section>
   </main>
-
+  <section class="section" id="contacto">
+      <div class="container contact-grid">
+        <div class="fade-in-up">
+          <div class="eyebrow">Contacto</div>
+          <h2>Si necesita evaluar una contingencia, conversemos<span class="dot"></span></h2>
+          <p class="lead">Estamos disponibles para revisar el caso, ordenar la exposición y definir una estrategia de respuesta sólida.</p>
+          
+          <div class="contact-details">
+            <a href="mailto:contacto@marchi.cl">contacto@marchi.cl</a>
+            <a href="tel:+56223644238">+56 2 2364 4238</a>
+            <span style="color: rgba(255, 255, 255, 0.6); font-weight: 400; font-size:0.95rem; margin-top:0.5rem;">Av. Isidora Goyenechea 3000, piso 23, Las Condes, Santiago</span>
+          </div>
+        </div>
+        
+        <div class="form-card fade-in-up" style="transition-delay: 0.2s;">
+          <form onsubmit="event.preventDefault(); alert('Mensaje de prueba enviado con éxito.');">
+            
+            <div class="form-group">
+              <label class="form-label" for="nombre">Nombre completo</label>
+              <input class="form-input" type="text" id="nombre" placeholder="Ej. nombre y cargo" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="email">Correo corporativo</label>
+              <input class="form-input" type="email" id="email" placeholder="correo@empresa.cl" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="asunto">Asunto a tratar</label>
+              <input class="form-input" type="text" id="asunto" placeholder="Breve descripción del conflicto" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="mensaje">Detalles preliminares</label>
+              <textarea class="form-input" id="mensaje" rows="3" placeholder="Cuéntenos el contexto sin incluir información confidencial aún." required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn--primary" style="width: 100%; margin-top: 1rem; padding: 0.8rem; background: var(--color-accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Enviar consulta</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       // Header scroll effect
@@ -513,6 +577,17 @@
         const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
         progressBar.style.width = scrolled + '%';
       });
+
+      // 4. Glow Tracking Dinámico en Contacto
+      const contactSection = document.getElementById('contacto');
+      if(contactSection) {
+        contactSection.addEventListener('mousemove', (e) => {
+          const rect = contactSection.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          contactSection.style.backgroundImage = `radial-gradient(circle at ${x}px ${y}px, rgba(30, 58, 138, 0.5), transparent 60%)`;
+        });
+      }
     });
   </script>
 </body>

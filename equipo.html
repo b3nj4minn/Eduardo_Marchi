@@ -34,18 +34,14 @@
       --color-accent-light: #3b82f6;
       
       --color-border: rgba(15, 23, 42, 0.08);
-      --color-border-light: rgba(255, 255, 255, 0.08);
       
       /* Sombras Premium */
       --shadow-sm: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
-      --shadow-md: 0 12px 30px -4px rgba(0, 0, 0, 0.06);
       --shadow-lg: 0 24px 50px -12px rgba(0, 0, 0, 0.1);
-      --shadow-dark: 0 40px 80px -20px rgba(0, 0, 0, 0.5);
       
       /* Radios */
       --radius-sm: 4px;
       --radius-md: 12px;
-      --radius-lg: 16px;
       
       /* Espaciado */
       --container-max: 1240px;
@@ -252,33 +248,38 @@
        ========================================================================== */
     .hero { 
       padding: 13rem 0 7rem; 
-      background: radial-gradient(circle at top right, #ffffff 0%, var(--color-bg-body) 70%);
-    }
-    .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 5rem; align-items: center; }
-
-    .hero-panel {
-      background-color: var(--color-bg-darker);
-      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 24px);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem; width: 100%; max-width: 480px; margin-left: auto;
-      box-shadow: var(--shadow-dark); position: relative; transition: transform 0.2s ease-out; 
-    }
-    .hero-panel-card {
-      background-color: var(--color-bg-dark);
-      border: 1px solid var(--color-border-light); border-radius: var(--radius-md);
-      padding: 3rem 2.5rem; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-      position: relative; z-index: 1;
+      background: var(--color-bg-body);
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-height: 90vh; /* Da la sensación de pantalla dividida inmersiva */
     }
     
-    .panel-row {
-      display: flex; align-items: center; gap: 1.25rem; padding: 0.8rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.03); transition: all 0.3s ease; border-radius: var(--radius-sm);
+    .hero-image-bg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 45%; /* Mitad derecha de la pantalla */
+      z-index: 0;
     }
-    .panel-row:hover { background: rgba(255,255,255,0.02); transform: translateX(6px); padding-left: 0.75rem; border-bottom-color: transparent;}
-    .panel-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .panel-row img { width: 44px; height: 44px; border-radius: 50%; filter: grayscale(100%); object-fit: cover; }
-    .panel-row-name { color: var(--color-text-light); font-size: 0.95rem; font-weight: 600; line-height: 1.2; margin-bottom: 2px; }
-    .panel-row-role { color: #94a3b8; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;}
+    
+    .hero-image-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-grid { 
+      display: grid; 
+      grid-template-columns: 1.15fr 0.85fr; 
+      gap: 5rem; 
+      align-items: center; 
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
 
     /* ==========================================================================
        FIRM GRID (Introducción)
@@ -341,31 +342,6 @@
     .team-body { padding: 2.5rem; flex-grow: 1; display: flex; flex-direction: column; }
     .team-body h3 { color: var(--color-text-light); font-size: 1.25rem; margin-bottom: 1.5rem; }
     .team-body p { color: #cbd5e1; font-size: 0.85rem; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1; }
-
-    /* ==========================================================================
-       SECCIÓN ÁREAS
-       ========================================================================== */
-    .area-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
-    @media (min-width: 992px) { .area-grid { grid-template-columns: repeat(3, 1fr); } }
-    
-    .area-card {
-      background: var(--color-bg-card); border-radius: var(--radius-md); padding: 3rem 2.5rem;
-      display: flex; flex-direction: column; box-shadow: var(--shadow-sm); transition: var(--transition-smooth);
-      border: 1px solid var(--color-border); position: relative; overflow: hidden;
-    }
-    .area-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--color-accent); transform: scaleX(0); transform-origin: left; transition: transform var(--transition-smooth); }
-    .area-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: transparent; }
-    .area-card:hover::before { transform: scaleX(1); }
-    .area-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-    .area-card-number { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #94a3b8; transition: color 0.3s; }
-    .area-card:hover .area-card-number { color: var(--color-text-main); }
-    .area-card-arrow { font-size: 1.25rem; color: #888eb0; transition: var(--transition-smooth); }
-    .area-card:hover .area-card-arrow { color: var(--color-accent); transform: translate(4px, -4px); }
-    .area-card-content { flex-grow: 1; }
-    .area-card-content h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--color-text-main); }
-    .area-card-content p { color: var(--color-text-muted); font-size: 0.95rem; }
-    .area-card-link { margin-top: 2rem; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent); opacity: 0.5; transition: var(--transition-smooth); display: inline-flex; align-items: center; gap: 0.5rem; }
-    .area-card:hover .area-card-link { opacity: 1; transform: translateX(4px); }
 
     /* ==========================================================================
        SECCIÓN MODELO DE TRABAJO (Fondo Oscuro)
@@ -453,13 +429,13 @@
     }
 
     @media (max-width: 768px) {
+      .hero { min-height: auto; padding-bottom: 0; display: block; }
       .hero-grid { grid-template-columns: 1fr; }
+      .hero-image-bg { position: relative; width: 100%; height: 400px; margin-top: 3rem; }
       .site-nav { display: none; }
       .nav-toggle { display: block; }
-      .hero-panel-card { padding: 1.5rem; }
       .form-card { padding: 2rem; }
       .partner-feature-body { padding: 2rem; }
-      .area-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -474,7 +450,7 @@
       <a href="inicio.html" class="brand" aria-label="Marchi & Cía.">Marchi & Cía<span class="dot">.</span></a>
       <button class="nav-toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
       <nav class="site-nav" aria-label="Principal">
-        <a href="#areas">Áreas</a>
+        <a href="inicio.html#areas">Áreas</a>
         <a href="#equipo" class="is-active">Equipo</a>
         <a href="#contacto">Contacto</a>
       </nav>
@@ -484,14 +460,21 @@
   <main>
     <!-- HERO SECTION -->
     <section class="hero fade-in-up">
+      <!-- Fondo de imagen lado derecho -->
+      <div class="hero-image-bg">
+        <img src="assets/images/EquipoSection.webp" alt="Equipo Marchi & Cía" onerror="this.src='https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80'">
+      </div>
+
       <div class="container hero-grid">
         <div class="hero-content">
           <div class="eyebrow">Equipo</div>
-          <h1>Liderazgo visible.<br>Ejecución rigurosa<span class="dot">.</span></h1>
+          <h1>Liderazgo visible<br>Ejecución rigurosa<span class="dot"></span></h1>
           
-          <p class="lead">Marchi & Cía. es una firma boutique dedicada a controversias civiles y comerciales de alta complejidad.</p>
-          <p>Trabajamos con una lógica simple: entender el contexto del cliente, dimensionar la exposición y definir una estrategia jurídicamente sólida, comercialmente sensata y bien ejecutada. No aplicamos fórmulas estándar. Cada asunto se aborda con preparación, criterio y foco en el objetivo.</p>
+          <p class="lead">Marchi & Cía. representa a compañías y actores privados en controversias civiles y comerciales complejas. Cada asunto se aborda con criterio, preparación y una estrategia clara de conducción del conflicto.</p>
+          
         </div>
+        <!-- Espaciador para la grilla que permite ver la imagen de fondo -->
+        <div></div>
       </div>
     </section>
 
@@ -502,8 +485,8 @@
       <div class="container firm-grid">
         <div>
           <div class="eyebrow">Marchi & Cía.</div>
-          <h2>Una firma boutique orientada a controversias complejas<span class="dot">.</span></h2>
-          <p class="lead" style="margin-top: 1.5rem;">Una página de equipo que deja en claro la jerarquía interna, la forma de trabajo y la capacidad real de ejecución del estudio.</p>
+          <h2>Una firma boutique orientada a controversias complejas<span class="dot"></span></h2>
+          <p class="lead" style="margin-top: 1.5rem;">Marchi & Cía. representa a compañías y actores privados en controversias civiles y comerciales complejas, con foco en estrategia, exposición y resultado.</p>
         </div>
         <div>
           <p>Marchi & Cía. es una firma boutique dedicada a controversias civiles y comerciales de alta complejidad.</p>
@@ -529,9 +512,9 @@
         <div class="section-header fade-in-up">
           <div>
             <div class="eyebrow">Socios</div>
-            <h2>Dos socios al frente de los asuntos que importan<span class="dot">.</span></h2>
+            <h2>Socios al frente de cada asunto estratégico<span class="dot"></span></h2>
           </div>
-          <p class="lead">Una estructura de trabajo pensada para asegurar atención directa, criterio temprano y conducción visible en controversias de alta complejidad.</p>
+          <p class="lead">Trabajo involucrado, estructura liviana y participación real en la estrategia y la ejecución.</p>
         </div>
         
         <!-- Socio 1 -->
@@ -580,10 +563,10 @@
       <div class="container">
         <div class="section-header fade-in-up">
           <div>
-            <div class="eyebrow">Equipo ampliado</div>
-            <h2>Asociados visibles y apoyo senior cuando el caso lo requiere<span class="dot">.</span></h2>
+            <div class="eyebrow">Equipo Integrado</div>
+            <h2>Asociados involucrados y capacidad multidisciplinaria para asuntos complejos<span class="dot"></span></h2>
           </div>
-          <p class="lead">Una estructura de trabajo en la que los asociados participan directamente y el counsel externo se integra cuando el asunto exige profundidad adicional o experiencia especializada.</p>
+          <p class="lead">Los asociados participan en la conducción de cada asunto e integramos experiencia especializada cuando la controversia incorpora dimensiones urbanísticas o regulatorias relacionadas a activos inmobiliarios.</p>
         </div>
         
         <div class="team-grid">
@@ -630,7 +613,7 @@
             <div class="team-body">
               <div class="eyebrow" style="color: var(--color-accent-light);">Counsel externo</div>
               <h3>Lorenzo Miranda</h3>
-              <p>Su práctica se centra en derecho inmobiliario y desarrollo de proyectos, con especial experiencia en regulación urbana, tramitación administrativa y estructuración jurídica. Su trabajo se caracteriza por una aproximación técnica, estratégica y orientada a la solución de problemas en escenarios regulatorios exigentes.<br><br>Español.</p>
+              <p>Su práctica se centra en derecho inmobiliario y desarrollo de proyectos, con especial experiencia en regulación urbana, tramitación administrativa y estructuración jurídica. Su trabajo se caracteriza por una aproximación técnica, estratégica y orientada a la solución de problemas en escenarios regulatorios exigentes.<br><br>Obtuvo el título de abogado en 2002. Español.</p>
               <div class="tag-row" style="margin-top: auto;">
                 <span class="tag tag--dark" style="border-color: rgba(255,255,255,0.2);">Seniority</span>
                 <span class="tag tag--dark" style="border-color: rgba(255,255,255,0.2);">Apoyo selectivo</span>
@@ -649,7 +632,7 @@
         <div class="section-header">
           <div>
             <div class="eyebrow">Modelo de trabajo</div>
-            <h2>Dirección clara. Ejecución involucrada.<span class="dot">.</span></h2>
+            <h2>Dirección clara Ejecución involucrada<span class="dot"></span></h2>
           </div>
           <p class="lead" style="color: #94a3b8;">Cada asunto se conduce con participación visible de los socios, trabajo sustantivo de los asociados y apoyo complementario cuando el caso lo requiere.</p>
         </div>
@@ -677,99 +660,12 @@
     <!-- DIVISOR SUTIL -->
     <div class="section-divider fade-in-up"></div>
 
-    <!-- ÁREAS SECTION -->
-    <section class="section" id="areas">
-      <div class="container">
-        <div class="section-header fade-in-up">
-          <div>
-            <div class="eyebrow">Prácticas</div>
-            <h2>Áreas que complementan esta práctica<span class="dot">.</span></h2>
-          </div>
-          <p class="lead">Muchos de estos conflictos exigen una mirada que cruce litigación, seguros, consumo, insolvencia o tutela urgente, según la estructura del caso.</p>
-        </div>
-        
-        <div class="area-grid">
-          <a href="litigios-civiles-comerciales.html" class="area-card fade-in-up">
-            <div class="area-card-header">
-              <span class="area-card-number">01 · Controversias</span>
-              <span class="area-card-arrow">↗</span>
-            </div>
-            <div class="area-card-content">
-              <h3>Litigios civiles y comerciales</h3>
-              <p>Representamos a demandantes y demandados en disputas civiles y comerciales complejas, con estrategia procesal clara, preparación rigurosa y foco en el resultado.</p>
-              <span class="area-card-link">Ver sección</span>
-            </div>
-          </a>
-          
-          <a href="responsabilidad-sanitaria.html" class="area-card fade-in-up" style="transition-delay: 0.1s;">
-            <div class="area-card-header">
-              <span class="area-card-number">02 · Salud</span>
-              <span class="area-card-arrow">↗</span>
-            </div>
-            <div class="area-card-content">
-              <h3>Responsabilidad sanitaria</h3>
-              <p>Defendemos a instituciones de salud y profesionales médicos en reclamos, mediaciones y juicios donde importan la técnica, la reputación y la continuidad profesional.</p>
-              <span class="area-card-link">Ver sección</span>
-            </div>
-          </a>
-
-          <a href="derecho-seguros.html" class="area-card fade-in-up" style="transition-delay: 0.2s;">
-            <div class="area-card-header">
-              <span class="area-card-number">03 · Seguros</span>
-              <span class="area-card-arrow">↗</span>
-            </div>
-            <div class="area-card-content">
-              <h3>Derecho de seguros</h3>
-              <p>Intervenimos en controversias de cobertura, liquidación de siniestros, impugnaciones y litigios del mercado asegurador, con lectura técnica de póliza y estrategia procesal definida.</p>
-              <span class="area-card-link">Ver sección</span>
-            </div>
-          </a>
-
-          <a href="insolvencia-reorganizacion.html" class="area-card fade-in-up" style="transition-delay: 0.3s;">
-            <div class="area-card-header">
-              <span class="area-card-number">04 · Crisis</span>
-              <span class="area-card-arrow">↗</span>
-            </div>
-            <div class="area-card-content">
-              <h3>Insolvencia y reorganización</h3>
-              <p>Asesoramos y litigamos en reorganizaciones, liquidaciones y conflictos concursales, priorizando continuidad, recuperación y protección de valor.</p>
-              <span class="area-card-link">Ver sección</span>
-            </div>
-          </a>
-
-          <a href="consumo-acciones-colectivas.html" class="area-card fade-in-up" style="transition-delay: 0.4s;">
-            <div class="area-card-header">
-              <span class="area-card-number">05 · Impacto masivo</span>
-              <span class="area-card-arrow">↗</span>
-            </div>
-            <div class="area-card-content">
-              <h3>Consumo y acciones colectivas</h3>
-              <p>Defendemos a empresas e instituciones financieras en materias propias del derecho del consumo, con atención al impacto jurídico, operativo y reputacional del caso.</p>
-              <span class="area-card-link">Ver sección</span>
-            </div>
-          </a>
-
-          <a href="acciones-constitucionales.html" class="area-card fade-in-up" style="transition-delay: 0.5s;">
-            <div class="area-card-header">
-              <span class="area-card-number">06 · Urgencia</span>
-              <span class="area-card-arrow">↗</span>
-            </div>
-            <div class="area-card-content">
-              <h3>Acciones constitucionales</h3>
-              <p>Respondemos con rapidez y criterio frente a actos u omisiones que comprometen derechos fundamentales, patrimonio o continuidad del negocio.</p>
-              <span class="area-card-link">Ver sección</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
     <!-- CONTACTO SECTION (Rediseñada) -->
     <section class="section" id="contacto">
       <div class="container contact-grid">
         <div class="fade-in-up">
           <div class="eyebrow">Contacto</div>
-          <h2>Si necesita evaluar una contingencia o responder a una demanda, conversemos<span class="dot">.</span></h2>
+          <h2>Si necesita evaluar una contingencia o responder a una demanda, conversemos<span class="dot"></span></h2>
           <p class="lead">Estamos disponibles para revisar el caso, ordenar la exposición y definir una estrategia de respuesta.</p>
           
           <div class="contact-details">
@@ -783,7 +679,7 @@
           <form class="contact-form" action="mailto:contacto@marchi.cl" method="post" enctype="text/plain">
             <label class="form-group">
               <span class="form-label">Nombre</span>
-              <input class="form-input" type="text" name="name" placeholder="Nombre y cargo" required>
+              <input class="form-input" type="text" name="name" placeholder="nombre y cargo" required>
             </label>
             <label class="form-group">
               <span class="form-label">Email</span>
@@ -798,7 +694,7 @@
               <textarea class="form-input" name="message" rows="5" placeholder="Cuéntenos brevemente el contexto del caso." required></textarea>
             </label>
             <button type="submit" class="btn btn--primary btn--full" style="margin-top: 1rem;">Enviar consulta</button>
-            <p style="font-size: 0.65rem; color: #94a3b8; text-align: center; margin-top: 1rem;">El formulario abre su cliente de correo con el asunto y el mensaje ya preparados.</p>
+            <p style="font-size: 0.65rem; color: #94a3b8; text-align: center; margin-top: 1rem;"></p>
           </form>
         </div>
       </div>
@@ -812,7 +708,7 @@
         <div class="copyright-text">Marchi 2026 · Equipo</div>
       </div>
       <div class="footer-links">
-        <a href="#areas">Áreas</a>
+        <a href="inicio.html#areas">Áreas</a>
         <a href="#equipo">Equipo</a>
         <a href="#contacto">Contacto</a>
       </div>
@@ -820,60 +716,52 @@
   </footer>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // 1. Manejo del Header Glassmorphism
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Manejo del Header Glassmorphism (Optimizado)
       const header = document.getElementById('main-header');
       window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) header.classList.add('scrolled');
-        else header.classList.remove('scrolled');
-      });
+        header.classList.toggle('scrolled', window.scrollY > 50);
+      }, { passive: true });
 
       // 2. Observer para revelar elementos (Fade-in-up)
-      const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
-      const observer = new IntersectionObserver((entries, observer) => {
+      const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
+            obs.unobserve(entry.target);
           }
         });
-      }, observerOptions);
-      document.querySelectorAll('.fade-in-up').forEach((el) => { observer.observe(el); });
+      }, { root: null, rootMargin: '0px', threshold: 0.15 });
+      
+      document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
 
-      // 4. Barra de progreso de lectura
+      // 4. Barra de progreso de lectura (Optimizado para evitar layout thrashing constante)
       const progressBar = document.querySelector('.scroll-progress');
-      window.addEventListener('scroll', () => {
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        if (progressBar) progressBar.style.width = scrolled + '%';
-      });
+      if (progressBar) {
+        window.addEventListener('scroll', () => {
+          const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          progressBar.style.width = (winScroll / height) * 100 + '%';
+        }, { passive: true });
+      }
 
-      // 5. Interacciones de Escritorio (Parallax & Glow)
+      // 5. Interacciones de Escritorio (Glow con RequestAnimationFrame para rendimiento)
       if (window.innerWidth >= 992) {
-        // Parallax Hero
-        const heroSection = document.querySelector('.hero');
-        const heroPanel = document.querySelector('.hero-panel');
-        if(heroSection && heroPanel) {
-          heroSection.addEventListener('mousemove', (e) => {
-            const moveX = (e.clientX / window.innerWidth - 0.5) * 30; 
-            const moveY = (e.clientY / window.innerHeight - 0.5) * 30;
-            heroPanel.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
-          });
-          heroSection.addEventListener('mouseleave', () => {
-            heroPanel.style.transform = `translate(0px, 0px)`;
-          });
-        }
-
-        // Glow Tracking Dinámico en Contacto
         const contactSection = document.getElementById('contacto');
-        if(contactSection) {
+        if (contactSection) {
+          let ticking = false;
           contactSection.addEventListener('mousemove', (e) => {
-            const rect = contactSection.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            contactSection.style.backgroundImage = `radial-gradient(circle at ${x}px ${y}px, rgba(30, 58, 138, 0.4), transparent 60%)`;
-          });
+            if (!ticking) {
+              window.requestAnimationFrame(() => {
+                const rect = contactSection.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                contactSection.style.backgroundImage = `radial-gradient(circle at ${x}px ${y}px, rgba(30, 58, 138, 0.4), transparent 60%)`;
+                ticking = false;
+              });
+              ticking = true;
+            }
+          }, { passive: true });
         }
       }
     });

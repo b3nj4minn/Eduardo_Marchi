@@ -386,6 +386,64 @@
     
     .nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--color-text-main); }
 
+    /* Cabecera dividida en dos columnas */
+    .section-header-split { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 4rem; align-items: flex-start; }
+    @media (min-width: 992px) { .section-header-split { grid-template-columns: 1.1fr 0.9fr; gap: 6rem; } }
+    .section-header-split .lead { margin: 0; }
+    .section-header-split-right { padding-top: 2rem; } /* Alinea visualmente el texto con el título */
+
+    .area-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+      gap: 2rem; 
+    }
+    @media (min-width: 992px) { .area-grid { grid-template-columns: repeat(3, 1fr); } }
+    
+    .area-card {
+      background: var(--color-bg-card);
+      border-radius: var(--radius-md);
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+      border: 1px solid var(--color-border);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .area-card::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+      background: var(--color-accent); transform: scaleX(0); transform-origin: left;
+      transition: transform var(--transition-smooth);
+    }
+    
+    .area-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: transparent; }
+    .area-card:hover::before { transform: scaleX(1); }
+    .area-card h3 { font-size: 1.15rem; margin-bottom: 1rem; }
+
+    .area-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .area-card-number { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #94a3b8; transition: color 0.3s; }
+    .area-card:hover .area-card-number { color: var(--color-text-main); }
+    
+    .area-card-arrow { font-size: 1.25rem; color: #888eb0; transition: var(--transition-smooth); }
+    .area-card:hover .area-card-arrow { color: var(--color-accent); transform: translate(4px, -4px); }
+
+    .area-card-content { flex-grow: 1; }
+    .area-card-link {
+      margin-top: 2rem;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+      opacity: 0.5; 
+      transition: var(--transition-smooth);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .area-card:hover .area-card-link { opacity: 1; transform: translateX(4px); }
     /* ==========================================================================
        RESTO DE SECCIONES (INTACTAS)
        ========================================================================== */
@@ -473,11 +531,9 @@
       <div class="hero-split-text">
         <div class="hero-split-text-inner">
           <div class="breadcrumb">
-            <a href="inicio.html#areas">Áreas</a> <span>·</span> <span>Consumo y acciones colectivas</span>
-          </div>
-          <div class="eyebrow-split">Impacto masivo</div>
+            <a href="inicio.html#areas">Área</a> </div>
           
-          <h1 class="title-split">Derecho del consumo y acciones colectivas.</h1>
+          <h1 class="title-split">Derecho del consumo y acciones colectivas</h1>
           
           <p class="desc-split">Defendemos a empresas e instituciones financieras en procedimientos individuales y colectivos propios del derecho del consumo, incluyendo defensa ante acciones del SERNAC, demandas colectivas y controversias derivadas de prácticas comerciales masivas.</p>
           
@@ -530,7 +586,7 @@
       <div class="container firm-grid">
         <div>
           <div class="eyebrow">Visión de la práctica</div>
-          <h2>Una práctica donde la exposición rara vez es solo judicial<span class="dot">.</span></h2>
+          <h2>Una práctica donde la exposición rara vez es solo judicial<span class="dot"></span></h2>
           <p class="lead" style="margin-bottom: 2rem;">Pensada para conflictos en que la respuesta jurídica debe conversar desde el inicio con la operación, el regulador y la reputación de la marca.</p>
           <p>Nuestra práctica abarca conflictos vinculados a publicidad y marketing, deberes de información, etiquetado, productos y servicios defectuosos, comercio electrónico, promociones, cobros, términos y condiciones, reclamos y comunicación con consumidores. Actuamos en asuntos que afectan a empresas de diversas industrias, entre ellas retail, seguros, banca, salud y servicios.</p>
           <p>En esta materia, la exposición rara vez es solo judicial. También puede comprometer operación, canales comerciales, cumplimiento regulatorio y reputación. Por eso trabajamos desde etapas tempranas en la recolección de antecedentes, la definición de una estrategia procesal y la coordinación interna de la respuesta.</p>
@@ -559,7 +615,7 @@
         <div class="section-header">
           <div>
             <div class="eyebrow">Qué está en juego</div>
-            <h2>Los asuntos de impacto masivo exigen orden, coordinación y criterio<span class="dot">.</span></h2>
+            <h2>Los asuntos de impacto masivo exigen orden, coordinación y criterio<span class="dot"></span></h2>
           </div>
           <p class="lead" style="color: #94a3b8;">La respuesta exige coordinar litigio, operación y reputación bajo una misma estrategia.</p>
         </div>
@@ -583,13 +639,69 @@
         </div>
       </div>
     </section>
+    <!-- CAPACIDADES RELACIONADAS SECTION -->
+    <section class="section" id="areas-relacionadas">
+      <div class="container">
+        <div class="section-header-split fade-in-up">
+          <div>
+            <div class="eyebrow">Capacidades relacionadas</div>
+            <h2 style="margin-bottom: 0;">Áreas relacionadas que fortalecen la estrategia<span class="dot"></span></h2>
+          </div>
+          <div class="section-header-split-right">
+            <p class="lead">Determinadas controversias exigen una mirada que combine litigación, regulación y experiencia sectorial dentro de una estructura coherente de defensa.</p>
+          </div>
+        </div>
+        
+        <div class="area-grid">
+          <a href="litigios-civiles-comerciales.html" class="area-card fade-in-up">
+            <div class="area-card-header">
+              <span class="area-card-number">01 · Controversias</span>
+              <span class="area-card-arrow">↗</span>
+            </div>
+            <div class="area-card-content">
+              <h3>Litigios civiles y comerciales</h3>
+              <p>Controversias complejas entre actores privados, con foco en estrategia procesal, exposición patrimonial y protección del negocio.</p>
+              <span class="area-card-link">Ver sección</span>
+            </div>
+          </a>
+          
+          <a href="responsabilidad-sanitaria.html" class="area-card fade-in-up" style="transition-delay: 0.1s;">
+            <div class="area-card-header">
+              <span class="area-card-number">02 · Salud</span>
+              <span class="area-card-arrow">↗</span>
+            </div>
+            <div class="area-card-content">
+              <h3>Responsabilidad sanitaria</h3>
+              <p>Defensa de clínicas, compañías y profesionales de la salud en controversias de responsabilidad médica y sanitaria de alta sensibilidad.</p>
+              <span class="area-card-link">Ver sección</span>
+            </div>
+          </a>
 
+          <a href="derecho-seguros.html" class="area-card fade-in-up" style="transition-delay: 0.2s;">
+            <div class="area-card-header">
+              <span class="area-card-number">03 · Seguros</span>
+              <span class="area-card-arrow">↗</span>
+            </div>
+            <div class="area-card-content">
+              <h3>Derecho de seguros</h3>
+              <p>Intervenimos en controversias de cobertura, liquidación de siniestros, impugnaciones y litigios del mercado asegurador, con lectura técnica de póliza y estrategia procesal definida.</p>
+              <span class="area-card-link">Ver sección</span>
+            </div>
+          </a>
+        </div>
+        
+        <div style="margin-top: 4rem; display: flex; justify-content: space-between;" class="fade-in-up">
+          <a href="inicio.html#areas" style="font-weight: 700; color: var(--color-text-main); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">← Volver a prácticas</a>
+          <a href="litigios-civiles-comerciales.html" style="font-weight: 700; color: var(--color-accent); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Litigios civiles y comerciales →</a>
+        </div>
+      </div>
+    </section>
     <!-- CONTACTO -->
     <section class="section" id="contacto">
       <div class="container contact-grid">
         <div class="fade-in-up">
           <div class="eyebrow">Contacto</div>
-          <h2>Si necesita responder a una fiscalización o reclamo masivo, conversemos<span class="dot">.</span></h2>
+          <h2>Si necesita responder a una fiscalización o reclamo masivo, conversemos<span class="dot"></span></h2>
           <p class="lead">Estamos disponibles para revisar el caso, ordenar la exposición y definir una estrategia de respuesta sólida.</p>
           <div class="contact-details">
             <a href="mailto:contacto@marchi.cl">contacto@marchi.cl</a>
@@ -600,7 +712,7 @@
           <form onsubmit="event.preventDefault();">
             <div class="form-group">
               <label class="form-label" for="nombre">Nombre completo</label>
-              <input class="form-input" type="text" id="nombre" placeholder="Ej. Juan Pérez" required>
+              <input class="form-input" type="text" id="nombre" placeholder="Ej. nombre y cargo" required>
             </div>
             <div class="form-group">
               <label class="form-label" for="email">Correo corporativo</label>
@@ -619,7 +731,7 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div class="footer-brand">Marchi & Cía<span class="dot">.</span></div>
+      <div class="footer-brand">Marchi & Cía<span class="dot"></span></div>
       <div class="copyright-text">Marchi 2026 · Consumo y acciones colectivas</div>
     </div>
   </footer>
