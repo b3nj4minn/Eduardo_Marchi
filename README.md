@@ -1,4 +1,4 @@
-# Marchi & Cía. — sitio estático listo para subir
+# Marchi & Cía — sitio estático listo para subir
 
 ## Incluye
 - Home larga con scroll
