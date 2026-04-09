@@ -677,24 +677,24 @@ Asesora en derecho inmobiliario, desarrollo de proyectos, con experiencia en reg
         </div>
         
         <div class="form-card fade-in-up" style="transition-delay: 0.2s;">
-          <form class="contact-form" action="mailto:contacto@marchi.cl" method="post" enctype="text/plain">
-            <label class="form-group">
-              <span class="form-label">Nombre</span>
-              <input class="form-input" type="text" name="name" placeholder="nombre y cargo" required>
-            </label>
-            <label class="form-group">
-              <span class="form-label">Email</span>
-              <input class="form-input" type="email" name="email" placeholder="correo@empresa.cl" required>
-            </label>
-            <label class="form-group">
-              <span class="form-label">Asunto</span>
-              <input class="form-input" type="text" name="subject" placeholder="Breve descripción del asunto" required>
-            </label>
-            <label class="form-group">
-              <span class="form-label">Mensaje</span>
-              <textarea class="form-input" name="message" rows="5" placeholder="Cuéntenos brevemente el contexto del caso." required></textarea>
-            </label>
-            <button type="submit" class="btn btn--primary btn--full" style="margin-top: 1rem;">Enviar consulta</button>
+<form action="enviar.php" method="POST">
+            
+            <div class="form-group">
+              <label class="form-label" for="nombre">Nombre y cargo</label>
+              <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Ej. nombre y cargo" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="email">Correo corporativo</label>
+              <input class="form-input" type="email" id="email" name="email" placeholder="correo@empresa.cl" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="mensaje">Mensaje preliminar</label>
+              <textarea class="form-input" id="mensaje" name="mensaje" rows="4" placeholder="Breve contexto del caso (opcional)." required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn--primary" style="width: 100%; margin-top: 1rem;">Enviar consulta</button>
             <p style="font-size: 0.65rem; color: #94a3b8; text-align: center; margin-top: 1rem;"></p>
           </form>
         </div>

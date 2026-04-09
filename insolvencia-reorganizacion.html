@@ -800,11 +800,11 @@
         </div>
         
         <div class="form-card fade-in-up" style="transition-delay: 0.2s;">
-          <form action="mailto:contacto@marchi.cl" method="post" enctype="text/plain">
+<form action="enviar.php" method="POST">
             
             <div class="form-group">
-              <label class="form-label" for="name">nombre y cargo</label>
-              <input class="form-input" type="text" id="name" name="name" placeholder="Ej. nombre y cargo" required>
+              <label class="form-label" for="nombre">Nombre y cargo</label>
+              <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Ej. nombre y cargo" required>
             </div>
             
             <div class="form-group">
@@ -813,8 +813,8 @@
             </div>
             
             <div class="form-group">
-              <label class="form-label" for="message">Mensaje preliminar</label>
-              <textarea class="form-input" id="message" name="message" rows="4" placeholder="Breve contexto del caso (opcional). El formulario abrirá su cliente de correo." required></textarea>
+              <label class="form-label" for="mensaje">Mensaje preliminar</label>
+              <textarea class="form-input" id="mensaje" name="mensaje" rows="4" placeholder="Breve contexto del caso (opcional)." required></textarea>
             </div>
             
             <button type="submit" class="btn btn--primary" style="width: 100%; margin-top: 1rem;">Enviar consulta</button>

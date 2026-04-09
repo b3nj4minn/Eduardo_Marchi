@@ -523,29 +523,25 @@
         </div>
         
         <div class="form-card fade-in-up" style="transition-delay: 0.2s;">
-          <form onsubmit="event.preventDefault(); alert('Mensaje de prueba enviado con éxito.');">
+        <form action="enviar.php" method="POST">
             
             <div class="form-group">
-              <label class="form-label" for="nombre">Nombre completo</label>
-              <input class="form-input" type="text" id="nombre" placeholder="Ej. nombre y cargo" required>
+              <label class="form-label" for="nombre">Nombre y cargo</label>
+              <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Ej. nombre y cargo" required>
             </div>
             
             <div class="form-group">
               <label class="form-label" for="email">Correo corporativo</label>
-              <input class="form-input" type="email" id="email" placeholder="correo@empresa.cl" required>
+              <input class="form-input" type="email" id="email" name="email" placeholder="correo@empresa.cl" required>
             </div>
             
             <div class="form-group">
-              <label class="form-label" for="asunto">Asunto a tratar</label>
-              <input class="form-input" type="text" id="asunto" placeholder="Breve descripción del conflicto" required>
+              <label class="form-label" for="mensaje">Mensaje preliminar</label>
+              <textarea class="form-input" id="mensaje" name="mensaje" rows="4" placeholder="Breve contexto del caso (opcional)." required></textarea>
             </div>
             
-            <div class="form-group">
-              <label class="form-label" for="mensaje">Detalles preliminares</label>
-              <textarea class="form-input" id="mensaje" rows="3" placeholder="Cuéntenos el contexto sin incluir información confidencial aún." required></textarea>
-            </div>
-            
-            <button type="submit" class="btn btn--primary" style="width: 100%; margin-top: 1rem; padding: 0.8rem; background: var(--color-accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Enviar consulta</button>
+            <button type="submit" class="btn btn--primary" style="width: 100%; margin-top: 1rem;">Enviar consulta</button>
+            <p style="font-size: 0.65rem; color: #94a3b8; text-align: center; margin-top: 1rem;"></p>
           </form>
         </div>
       </div>
