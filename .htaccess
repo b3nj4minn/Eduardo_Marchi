@@ -1,10 +1,14 @@
-# 1. Redirigir el enlace viejo de Google al nuevo archivo de equipo
-Redirect 301 /somos /equipo.html
+RewriteEngine On
 
-# 2. Asegurar que el sitio cargue correctamente en servidores Apache
+# 1. Redirigir /somos o /somos/ (con o sin slash) a equipo.html
+RewriteRule ^somos/?$ /equipo.html [R=301,L]
+
+# 2. Si alguien pone un slash / al final de un archivo que NO es una carpeta, quitarlo
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# 3. Regla estándar para asegurar que carguen los archivos
 <IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
