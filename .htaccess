@@ -1,0 +1,11 @@
+# 1. Redirigir el enlace viejo de Google al nuevo archivo de equipo
+Redirect 301 /somos /equipo.html
+
+# 2. Asegurar que el sitio cargue correctamente en servidores Apache
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
