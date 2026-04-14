@@ -1,7 +1,7 @@
 RewriteEngine On
 
-# 1. Redirigir /somos o /somos/ (con o sin slash) a equipo.html
-RewriteRule ^somos/?$ /equipo.html [R=301,L]
+# 1. Redirigir /somos o /somos/ (con o sin slash) a inicio.html
+RewriteRule ^somos/?$ /inicio.html [R=301,L]
 
 # 2. Si alguien pone un slash / al final de un archivo que NO es una carpeta, quitarlo
 RewriteCond %{REQUEST_FILENAME} !-d
